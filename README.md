@@ -1,0 +1,4 @@
+- [`[XeLaTeX HU]`](thesis-xelatex-hu.pdf) | [`[PDFLaTeX HU]`](thesis-pdflatex-hu.pdf) | [`[LuaLaTeX HU]`](thesis-lualatex-hu.pdf)
+- [`[XeLaTeX EN]`](thesis-xelatex-en.pdf) | [`[PDFLaTeX EN]`](thesis-pdflatex-en.pdf) | [`[LuaLaTeX EN]`](thesis-lualatex-en.pdf)
+- [`[XeLaTeX Duplex]`](thesis-xelatex-duplex.pdf) | [`[PDFLaTeX Duplex]`](thesis-pdflatex-duplex.pdf) | [`[LuaLaTeX Duplex]`](thesis-lualatex-duplex.pdf)
+- Commit: [3a2a6b1f1e01a33220c11c195deadbd523df0db4](https://github.com/ftsrg/thesis-template-latex/commit/3a2a6b1f1e01a33220c11c195deadbd523df0db4)
