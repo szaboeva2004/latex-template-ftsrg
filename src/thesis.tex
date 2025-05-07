@@ -30,9 +30,9 @@
 
 %TODO Language configuration -- choose one
 % Beállítások magyar nyelvű dolgozathoz
-\input{include/thesis-hu}
+%\input{include/thesis-hu}
 % Settings for English documents
-%\input{include/thesis-en}
+\input{include/thesis-en}
 
 \input{include/preamble}
 
@@ -45,8 +45,8 @@
 
 %TODO These includes define guidelines -- remove these
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-\include{include/guideline}
-\include{include/project}
+%\include{include/guideline}
+%\include{include/project}
 
 \selectthesislanguage
 
@@ -64,8 +64,8 @@
 
 % Declaration and Abstract
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-\include{include/declaration} %TODO Hallgatói nyilatkozat -- TDK és OTDK esetén törlendő!
-\include{content/abstract}    %TODO Összefoglaló -- TDK és OTDK esetén nem kötelező
+%\include{include/declaration} %TODO Hallgatói nyilatkozat -- TDK és OTDK esetén törlendő!
+%\include{content/abstract}    %TODO Összefoglaló -- TDK és OTDK esetén nem kötelező
 
 
 % The main part of the thesis
@@ -74,8 +74,11 @@
 
 %TODO import your own content
 \include{content/introduction}
-\include{content/latex-tools}
-\include{content/thesis-format}
+\include{content/background}
+\include{content/frontend}
+\include{content/evaluation}
+%\include{content/latex-tools}
+%\include{content/thesis-format}
 \include{content/template-usage}
 
 
