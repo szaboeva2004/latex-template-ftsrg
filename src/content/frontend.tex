@@ -1,1 +1,47 @@
 \chapter{BTOR2 Frontend in Theta}
+
+Megemlít BTOR2C
+Theta sok sok frontend ( ez inkább background )
+Közvetlenül BTOR2 leképezés mert mi dönthetjük mit akarunk csinálni, optimizálni, remény: Theta teljesítménye jobb lesz mint köztes nyelv pl C verifikálva
+Better performance, more precise analysis (ez így igazából a motivation)
+\section{Motivation}
+
+
+Kéne rajzolni egy általános CFA-t hogy hpgy képeződik le kódból. Draw io ban megrajzolni
+
+\section{BTOR2 to CFA transformation}
+(NAGGGGYOn nagy rész) miből lesz változó, mi hova kerül
+Rajz rajz yap yap magyaráz yap
+
+inites, bades, nextes, mindenes
+Btor2 különböző nodejai hova kerülnek
+Táblázatban vagy listában ahogy jól esik
+CFA figureon minden doboz egy subsectionben van elmagyarázva
+
+Section/subsection count2 btor2 kódja és mellérakjuk a CFAt de csak én rajzolgatva, aztán erről yapyapyap
+
+\section{Implementáció}
+Hogyan és mi kerül edgebe (végülis ez a trafónál már kiderül) 
+Visitor minta, ANTLR, unexpected challanges minusztt kellett implementálni, nincsen benne a dokumentációjukban hogy ezt szaba :'Ccc 
+
+\section{Current limitations}
+Vannak bennen olyan operátorok, amik a Thetában nincsenek, Overflow predikátumok, Arrayeket nem támogatjuk -> Future work hihihihih (sosem szabadulunk) 
+Csak a bad property van (safety) Something bad should never happen
+Experimental feature thetában a liveness : Something good should always happen leképezésmég bonyibb lesz so az nincsen
+ 
+\section{Prelimanary results}
+Minden szép és jó és benchmark és lesz ez még jobb is és gyakorlás és yipi és legyen meg
+Kicsike kis táblázatocska
+
+\section{Conclusion}
+Összefoglalás
+Mit csináltam
+mi sikerült
+
+\subsection{Future work}
+Overflow operators, kimaradt egy két dolgo, liveness in Theta, Nagyobb pontok: witness generation (kell a hwmcc részvételhez)
+Nagyobb kiértékelés, sok debug, lesz ez még jobb is, optimalizációk, CFAn optimalizációs passok
+
+Ha LateX csúnya: szólni Zsófinak
+
+Itt van, hogy én mit csináltam: 
