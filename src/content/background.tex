@@ -47,10 +47,8 @@ To define a property of interest, line 8 declares another constant: \verb|ones 1
 Line 10 defines a comparison between the current counter value and the maximum value \verb|111| using the eq operator. This operation returns a 1-bit result: true (1) if the counter is at maximum, false (0) otherwise. Finally, line 11 marks this equality result as a bad state, which is a property violation. Hence, the circuit asserts that reaching the value 111 is undesirable or erroneous.
 
 In summary, this BTOR2 circuit models a 3-bit counter that increments with each step and triggers a bad state when it reaches 111. This design could be used in formal verification to prove that the system avoids overflow, or alternatively, to find the point at which it does. The clear structure and modular nature of BTOR2 make it suitable for such sequential hardware modeling and property checking.
-%In Figure~\ref{fig:count2} we can see that every line starts with a positive unsigned integer that we call \textit{nid} which translates to \textit{node id}. We are working with bit-vectors which are initiated with the \verb|sort| keyword, if it is initated with \verb|one|, \verb|ones| or \verb|zero| then they respond to being the value 1, all 1, 0 bitvectors. 
 
-Btor2C is a tool that translates Btor2 hardware models into equivalent C programs. This allows software verification tools to analyze hardware designs, bridging the gap between hardware and software verification. It enables broader tool usage and can even detect more bugs than traditional hardware verifiers.~\cite{btor2c}
-\cite{btor2}
+Btor2C is a tool that translates Btor2 hardware models into equivalent C programs. This allows software verification tools to analyze hardware designs, bridging the gap between hardware and software verification. ~\cite{btor2c}
 In my implementation, I focused on bit-vectors and their related functions and definitions, leveraging the expressive power of BTOR2 to model and verify small, bit-precise sequential systems.
 
 \section{ANTLR}
@@ -59,9 +57,7 @@ ANTLR (ANother Tool for Language Recognition) is a powerful parser generator wid
 This makes ANTLR an excellent tool for writing a BTOR2 grammar, as its clear structure, support for complex syntax rules, and language flexibility make it easy to build robust parsers for BTOR2's line-based, sorted format.
 
 \section{Theta}
-My main goal was to achieve a BTOR2 frontend for the Theta model checker.
+My main goal was to achieve a BTOR2 frontend for the Theta model checker.\cite{theta}
 Theta is a modular and extensible model checking framework developed by the Critical Systems Research Group at the Budapest University of Technology and Economics. It is designed to support a wide range of verification techniques, particularly abstraction refinement-based reachability analysis, and is capable of analyzing various low-level formalisms such as Control Flow Automata (CFA), Symbolic Transition Systems (STS), and Timed Automata.
 One of Theta's major strengths is its support for high-level frontends, allowing users to model complex systems in languages like C or statecharts, which are then automatically translated into formal representations. This makes Theta highly accessible and adaptable for both research and practical applications.
 In my project, I used XCFA models, an extension of CFA that includes support for procedures and concurrency, but I focused specifically on the CFA parts, applying Theta's powerful CEGAR-based algorithms for reachability checking.
-\cite{theta}
-
