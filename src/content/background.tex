@@ -12,7 +12,7 @@ In my case, I focused mainly on reachability testing, which means we explore the
   \label{fig:cfa}
 \end{figure}
 
-To perform model checking, we first need to represent the program in a way that makes its control and data flow analyzable. This is where the concept of a \textbf{Control-Flow Automaton (CFA)} becomes useful. Figure~\ref{fig:cfa} illustrates a simplified CFA, which models how control moves between different parts of a program.
+To perform model checking, we first need to represent the program in a way that makes its control and data flow analyzable. This is where the concept of a \textbf{Control-Flow Automata (CFA)} becomes useful. Figure~\ref{fig:cfa} illustrates a simplified CFA, which models how control moves between different parts of a program.
 
 A CFA consists of:
 \begin{itemize}
@@ -21,7 +21,6 @@ A CFA consists of:
 \end{itemize}
 
 It helps in analyzing programs, especially for checking if errors (like reaching a bad state) can happen.~\cite{cfa}. In this documentation, I will describe how a BTOR2 program can be transformed into a CFA, and how this representation supports effective model checking.
-
 
 \section{BTOR2}
 % BTOR2C tool mire jó 
