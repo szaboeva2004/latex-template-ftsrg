@@ -1,14 +1,19 @@
 \chapter{Background}
 
-\section{Model Checking}
+This chapter introduces the necessary concepts... %
+\autoref{sec:mc} describes... %
+
+\todoZs{Summarize bg}
+
+\section{Model Checking}\label{sec:mc}
 
 \todoZs{So this is what I think you have to practice: structure first, sentences after; and set up the "scene" for the reader, with all of the elements, before adding thoughts on them (see comments, let's talk about this on dc)}
 
 % verification
 % model checking - what it "promises"
-% how does it do that
 % input model (examples)
 % specification or property (examples)
+% how does it do that (state space traversal)
 % how many executions, what generates these (examples - input is a good one)
 % what is the problem (state space explosion)
 % what is the state of the art (what are people researching - different techniques, etc. - or whatever you know about this)
@@ -16,7 +21,7 @@
 % each point is mostly at least a separate paragraph, at most it's own subsection
 % use % and go one by one
 
-Model checking.~\cite{modelChecking} is a crucial concept when it comes to hardware and software verification as it gives the basis for all possible solutions\todoZs{I don't understand this sentence}. % 
+Model checking~\cite{modelChecking} is a crucial concept when it comes to hardware and software verification as it gives the basis for all possible solutions\todoZs{I don't understand this sentence}. %
 It is a widely used method for formal software verification \todoZs{wrong grammar} which main aim is to provide a mathematically precise proof for the correctness of a program. %
 By exhaustively traversing through every possible execution of the program for every possible input, it checks whether a certain property was satisfied. %
 The main property during this paper was reachability, which means we explore the state space of a program to see if a certain bad state can be reached.
@@ -24,12 +29,13 @@ The main property during this paper was reachability, which means we explore the
 \begin{figure}
   \centering
   \includegraphics[width=0.5\textwidth]{figures/cfa_simple.pdf}
-  \caption{Simple representation of a Control-Flow Automata (CFA). \todoZs{text on fig is waay too small; if you switch the font to some kind of serif in draw io, it blends in better; also try to create a more wide layout, so it does not take up this much space; and I would put this after the first par about the CFA}}
+  \caption{Simple representation of a Control-Flow Automata (CFA). \todoZs{text on fig is waay too small; if you switch the font to some kind of serif in draw io, it blends in better; also try to create a more wide layout, so it does not take up this much space; empty edges?}}
   \label{fig:cfa}
 \end{figure}
 
 \todoZs{again, you can be more verbose and structured, see latex comments}
 % possible structure, as a continuation of the above structure:
+
 % input models have to be transformed to an unambiguous and simpler formal representation to reason on
 % few (high-level) examples (transition systems, automata)
 % common one, originally for software, but widely utilized: CFA
@@ -46,7 +52,7 @@ A CFA is a graph-based \todoZs{technically automata-based is more precise, and t
 
 It helps in analyzing programs\todoZs{what does "helps" mean? instead see above structure - formal representation part}, especially for checking if errors (like reaching a bad state\todoZs{no idea what a bad state is at this point - add a more trivial/everyday example}) can happen. In this documentation\todoZs{report}, I will describe how a BTOR2 program can be transformed into a CFA, and how this representation supports effective model checking\todoZs{I'd rather put a ref to the specific transformation chapter (or for now a placeholder ref)}.
 
-\section{\todo{The Hardware Model Checking Format} BTOR2 \todoZs{(or something like that - always go back to section title after section is more or less written and think about what else the title should specify)}}
+\section{\todoZs{The Hardware Model Checking Format} BTOR2 \todoZs{(or something like that - always go back to section title after section is more or less written and think about what else the title should specify)}}
 
 \todoZs{again, structure, see latex comments}
 % hardware model checking: what is this domain, what are we checking; it is a long existing application domain with many successes (cite BMC paper)
@@ -75,7 +81,7 @@ In Figure~\ref{fig:count2}\todoZs{use autoref? tell me to help with it} is a BTO
 
 \todoZs{specify that 1,2,... are not the lines, but the node ids (and be consistent with this later)}
 
-\todoZs{I would put this whole thing into a description (\url{https://www.overleaf.com/learn/latex/Lists#The_description_environment}), where each label is "Node x" or something like that - whatever looks good and makes sense}
+\todoZs{I would put this whole thing into a description (\url{https://www.overleaf.com/learn/latex/Lists\#The\_description\_environment}), where each label is "Node x" or something like that - whatever looks good and makes sense}
 
 At the beginning of the circuit, line 1 declares a bit-vector of width 3 \verb|sort bitvec 3|, which serves as the type for all 3-bit values used throughout the circuit. This will have a sort id or \verb|sid| of '1' which will be used to declare registers and operations.
 
@@ -107,7 +113,7 @@ Btor2C~\cite{btor2c} is a tool that translates Btor2 hardware models into equiva
 
 \section{Theta}
 
-Regarding the implementation\todo{the what? just introduce theta, this is not the place to talk about you using it :D}, I chose Theta~\cite{theta}, a modular and extensible model checking framework developed by the Critical Systems Research Group at the Budapest University of Technology and Economics, as the target platform for integrating a BTOR2 frontend.
+Regarding the implementation\todoZs{the what? just introduce theta, this is not the place to talk about you using it :D}, I chose Theta~\cite{theta}, a modular and extensible model checking framework developed by the Critical Systems Research Group at the Budapest University of Technology and Economics, as the target platform for integrating a BTOR2 frontend.
 
 \todoZs{What I'm missing from the introduction are the existing frontends}
 
