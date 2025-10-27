@@ -6,9 +6,6 @@ This chapter introduces the necessary concepts... %
 \todoZs{Summarize bg}
 
 \section{Model Checking}\label{sec:mc}
-
-\todoZs{So this is what I think you have to practice: structure first, sentences after; and set up the "scene" for the reader, with all of the elements, before adding thoughts on them (see comments, let's talk about this on dc)}
-
 % verification
 % model checking - what it "promises"
 % input model (examples)
@@ -21,6 +18,13 @@ This chapter introduces the necessary concepts... %
 % each point is mostly at least a separate paragraph, at most it's own subsection
 % use % and go one by one
 
+The challenge of verifying programs without executing or deploying them has been a central research topic since the late 20th century. One of the principal approaches addressing this problem is formal verification, which seeks to provide mathematically rigorous proofs of program correctness.~\cite{MC} %
+One of the most used method is model checking~\cite{modelChecking}\cite{modelChecking2} which systematically explores the possible states of a system to determine whether it satisfies a given property. Unlike testing, which examines only a subset of possible behaviors, model checking promises exhaustive verification. %
+The model checking problem is an instance of the verification problem. Model checking provides an automated method for verifying concurrent (nominally) finite state systems that uses an efficient and flexible graph search, to determine whether or not the ongoing behavior described by a temporal property holds of the system's state graph.
+
+
+
+
 Model checking~\cite{modelChecking} is a crucial concept when it comes to hardware and software verification as it gives the basis for all possible solutions\todoZs{I don't understand this sentence}. %
 It is a widely used method for formal software verification \todoZs{wrong grammar} which main aim is to provide a mathematically precise proof for the correctness of a program. %
 By exhaustively traversing through every possible execution of the program for every possible input, it checks whether a certain property was satisfied. %
@@ -28,7 +32,7 @@ The main property during this paper was reachability, which means we explore the
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.5\textwidth]{figures/cfa_simple.pdf}
+  \includegraphics[width=0.5\textwidth]{figures/cfa_simple.drawio.pdf}
   \caption{Simple representation of a Control-Flow Automata (CFA). \todoZs{text on fig is waay too small; if you switch the font to some kind of serif in draw io, it blends in better; also try to create a more wide layout, so it does not take up this much space; empty edges?}}
   \label{fig:cfa}
 \end{figure}
@@ -70,12 +74,41 @@ The BTOR2 language extends the previous bit-level AIGER~\cite{AIGER} format with
 
 \todoZs{use more subs(sub)sections - e.g., here you could add "Count2 Example" as a subsection or something - also, it is called count 2, but it is 3 bit, you should clarify why}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.2\textwidth]{figures/count2.png}
-  \caption{ Syntax of Btor2. count2.btor2 example. \todoZs{use lstlisting: \url{https://www.overleaf.com/learn/latex/Code_listing}, not a picture} }
-  \label{fig:count2}
-\end{figure}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour}, 
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,
+  numberstyle=\ttfamily\footnotesize, 
+  frame=none,                                       
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+\lstset{style=mystyle}
+\begin{lstlisting}[language=Verilog, caption=BTOR2 example]
+; source: https://github.com/Boolector/btor2tools/tree/b8456dda4780789e882f5791eb486f295ade4da4/examples/btorsim
+1 sort bitvec 3
+2 zero 1
+3 state 1
+4 init 1 3 2
+5 one 1
+6 add 1 3 5
+7 next 1 3 6
+8 ones 1
+9 sort bitvec 1
+10 eq 9 3 8
+11 bad 10
+\end{lstlisting}
+
 
 In Figure~\ref{fig:count2}\todoZs{use autoref? tell me to help with it} is a BTOR2 circuit that defines a simple finite state machine -- a 3-bit counter -- that starts from zero and increments by one at each time step. Each line defines a node in the circuit, such as a constant, state, operation, or property.
 

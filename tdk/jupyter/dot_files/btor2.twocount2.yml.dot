@@ -1,0 +1,35 @@
+digraph G {
+label="Btor2XCFA";
+subgraph cluster_0 {
+label="main";
+main_init[];
+l1[];
+l3[];
+l4[];
+l5[];
+l6[];
+l7[];
+l8[];
+l9[];
+l10[];
+l11[];
+main_error[];
+l12[];
+l13[];
+main_init -> l1 [label="[(assign const_4 #b00),(assign const_9 #b01),(assign const_16 #b11)] "];
+l3 -> l4 [label="[(havoc input_3)] "];
+l4 -> l5 [label="[(assign binary_10 (bvadd state_5 const_9))] "];
+l5 -> l6 [label="[(assign binary_11 (bvadd state_6 const_9))] "];
+l6 -> l7 [label="[(assign ternary_12 (ite (= input_3 #b1) state_5 binary_10))] "];
+l7 -> l8 [label="[(assign ternary_13 (ite (= (bvnot input_3) #b1) state_6 binary_11))] "];
+l8 -> l9 [label="[(assign comparison_17 (ite (= state_5 const_16) #b1 #b0))] "];
+l9 -> l10 [label="[(assign comparison_18 (ite (= state_6 const_16) #b1 #b0))] "];
+l10 -> l11 [label="[(assign binary_19 (bvand comparison_17 comparison_18))] "];
+l11 -> main_error [label="[(assume (= binary_19 #b1))] "];
+l11 -> l12 [label="[(assume (not (= binary_19 #b1)))] "];
+l12 -> l13 [label="[(assign state_5 ternary_12)] "];
+l13 -> l3 [label="[(assign state_6 ternary_13)] "];
+l1 -> l3 [label="[(assign state_5 #b00),(assign state_6 #b00)] "];
+
+}
+}

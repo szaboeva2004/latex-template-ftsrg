@@ -1,0 +1,27 @@
+digraph G {
+label="Btor2XCFA";
+subgraph cluster_0 {
+label="main";
+main_init[];
+l1[];
+l3[];
+l4[];
+l5[];
+l6[];
+l7[];
+l8[];
+main_error[];
+l9[];
+main_init -> l1 [label="[(assign const_5 #b0000),(assign const_8 #b0001),(assign const_13 #b1111)] "];
+l3 -> l4 [label="[(havoc input_2),(havoc input_3)] "];
+l4 -> l5 [label="[(assign binary_9 (bvadd state_6 const_8))] "];
+l5 -> l6 [label="[(assign ternary_10 (ite (= input_2 #b1) binary_9 state_6))] "];
+l6 -> l7 [label="[(assign ternary_11 (ite (= input_3 #b1) const_5 ternary_10))] "];
+l7 -> l8 [label="[(assign comparison_14 (ite (= state_6 const_13) #b1 #b0))] "];
+l8 -> main_error [label="[(assume (= comparison_14 #b1))] "];
+l8 -> l9 [label="[(assume (not (= comparison_14 #b1)))] "];
+l9 -> l3 [label="[(assign state_6 ternary_11)] "];
+l1 -> l3 [label="[(assign state_6 #b0000)] "];
+
+}
+}
