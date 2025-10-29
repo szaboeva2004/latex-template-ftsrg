@@ -6,38 +6,28 @@ This chapter introduces the necessary concepts... %
 \todoZs{Summarize bg}
 
 \section{Model Checking}\label{sec:mc}
-% verification
-% model checking - what it "promises"
-% input model (examples)
-% specification or property (examples)
-% how does it do that (state space traversal)
-% how many executions, what generates these (examples - input is a good one)
-% what is the problem (state space explosion)
-% what is the state of the art (what are people researching - different techniques, etc. - or whatever you know about this)
 
-% each point is mostly at least a separate paragraph, at most it's own subsection
-% use % and go one by one
+The challenge of verifying programs without executing or deploying them has been a central research topic since the late 20\textsuperscript{th} century~\cite{systemEngineering}. One of the principal approaches addressing this problem is \textit{formal verification}, which aims to provide mathematically rigorous proofs for the correct operation of computer programs~\cite{MC}.
 
-The challenge of verifying programs without executing or deploying them has been a central research topic since the late 20th century. One of the principal approaches addressing this problem is formal verification, which seeks to provide mathematically rigorous proofs of program correctness.~\cite{MC} %
-One of the most used method is model checking~\cite{modelChecking}\cite{modelChecking2} which systematically explores the possible states of a system to determine whether it satisfies a given property. Unlike testing, which examines only a subset of possible behaviors, model checking promises exhaustive verification. %
-The model checking problem is an instance of the verification problem. Model checking provides an automated method for verifying concurrent (nominally) finite state systems that uses an efficient and flexible graph search, to determine whether or not the ongoing behavior described by a temporal property holds of the system's state graph.
+Among formal verification techniques, \textit{model checking}~\cite{modelChecking, modelChecking2} has become one of the most widely used and practically applicable methods. Given a software or hardware system, model checking systematically and exhaustively explores all possible executions for every possible input to determine whether specified properties hold. %
+\todo{This could be better} Unlike testing, which inspects only a limited subset of behaviors, model checking offers \textbf{exhaustive verification}: if a property is satisfied, it holds for all possible executions of the model; if it is violated, the model checker produces a \textbf{counterexample} that reflects an actual execution leading to an error state.
 
+Model checking provides an automated means of verifying concurrent, finite-state systems by performing an efficient symbolic or explicit traversal of the system's \textbf{state space}. Each state represents a possible configuration of the system's variables, and transitions between states correspond to execution steps. The model checker evaluates whether temporal logic properties, such as safety and liveness constraints, hold over this state graph.
 
+Typical properties include detecting \textit{assertion violations}, \textit{out-of-bounds indexing}, and \textit{arithmetic overflows}. In this work, the focus is primarily on the \textbf{reachability property}, which concerns determining whether a given “bad” or error state is reachable from the initial configuration of the system. Demonstrating that no such state can be reached constitutes a proof of safety for the given model.
 
+While model checking is powerful, it suffers from the well-known \textbf{state-space explosion problem}~\cite{statespaceexplosionproblem}. The number of possible states grows exponentially with the number of variables in the system. For example, a program with three 32-bit input variables already has
+\[
+2^{32} \cdot 2^{32} \cdot 2^{32} = 2^{96}
+\]
+possible input combinations, making exhaustive exploration computationally infeasible for large-scale systems. This challenge has motivated extensive research into more scalable techniques, such as symbolic model checking~\cite{symbolicMC}, abstraction and refinement methods\cite{boundedMC}, and SAT-based~\cite{SMT-LIB} approaches like IC3~\cite{ic3}.
 
-Model checking~\cite{modelChecking} is a crucial concept when it comes to hardware and software verification as it gives the basis for all possible solutions\todoZs{I don't understand this sentence}. %
-It is a widely used method for formal software verification \todoZs{wrong grammar} which main aim is to provide a mathematically precise proof for the correctness of a program. %
-By exhaustively traversing through every possible execution of the program for every possible input, it checks whether a certain property was satisfied. %
-The main property during this paper was reachability, which means we explore the state space of a program to see if a certain bad state can be reached.
+\section{Control Flow Automata}\label{sec:cfa}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\textwidth]{figures/cfa_simple.drawio.pdf}
-  \caption{Simple representation of a Control-Flow Automata (CFA). \todoZs{text on fig is waay too small; if you switch the font to some kind of serif in draw io, it blends in better; also try to create a more wide layout, so it does not take up this much space; empty edges?}}
-  \label{fig:cfa}
-\end{figure}
+Many programming languages tend to have ambiguities and complex structures that may help the developers express themselves more concisely, but are hard to handle in a low-level algorithms. For this purpose input programs must be transformed into a simplified formal representation that accurately captures their behaviour. Common high-level forms of these models include transition systems, which describe states and their possible transitions, and automata, which represent system behavior through states and input-driven transitions.
 
-\todoZs{again, you can be more verbose and structured, see latex comments}
+To perform this transformation, software model checking toolchains typically employ specialized frontends that translate the source code into these formal models, so the so called "backend" can analyze it and apply mathematical and algorithmic reasoning to system properties in a precise and efficient way.
+
 % possible structure, as a continuation of the above structure:
 
 % input models have to be transformed to an unambiguous and simpler formal representation to reason on
@@ -46,7 +36,14 @@ The main property during this paper was reachability, which means we explore the
 % formal definition of CFA - see Ákos thesis, rephrase it a little, only add what you understand
 % and then explain the formal definition shortly, with your own words (similar to what you already did below)
 
-To perform model checking, the program code needs to be represented in a way that makes its control and data flow analyzable. A widely used formalism is the \textbf{Control-Flow Automata (CFA)}~\cite{cfa}. Figure~\ref{fig:cfa} illustrates a simplified CFA, which models how control moves between different parts of a program.
+ A widely used formalism is the \textbf{Control-Flow Automata (CFA)}~\cite{cfa}. Figure~\ref{fig:cfa} illustrates a simplified CFA, which models how control moves between different parts of a program.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{figures/cfa_simple.drawio.pdf}
+  \caption{Simple representation of a Control-Flow Automata (CFA).}
+  \label{fig:cfa}
+\end{figure}
 
 A CFA is a graph-based \todoZs{technically automata-based is more precise, and then I would say "A CFA is an automata, which", or something like that} representation of the program and consists of:
 \begin{itemize}
@@ -54,11 +51,11 @@ A CFA is a graph-based \todoZs{technically automata-based is more precise, and t
   \item \textbf{Edges} — These indicate transitions between locations and represent operations such as assignments or conditional checks. In the figure, they are visualized as arrows.
 \end{itemize}
 
-It helps in analyzing programs\todoZs{what does "helps" mean? instead see above structure - formal representation part}, especially for checking if errors (like reaching a bad state\todoZs{no idea what a bad state is at this point - add a more trivial/everyday example}) can happen. In this documentation\todoZs{report}, I will describe how a BTOR2 program can be transformed into a CFA, and how this representation supports effective model checking\todoZs{I'd rather put a ref to the specific transformation chapter (or for now a placeholder ref)}.
+It helps in analyzing programs, especially for checking if errors (like reaching a bad state) can happen. In this report, I will describe how a BTOR2 program can be transformed into a CFA, and how this representation supports effective model checking\todoZs{I'd rather put a ref to the specific transformation chapter (or for now a placeholder ref)}.
 
-\section{\todoZs{The Hardware Model Checking Format} BTOR2 \todoZs{(or something like that - always go back to section title after section is more or less written and think about what else the title should specify)}}
-
-\todoZs{again, structure, see latex comments}
+\section{The Hardware Model Checking Format BTOR2}
+%\todoZs{(or something like that - always go back to section title after section is more or less written and think about what else the title should specify)}
+% \todoZs{again, structure, see latex comments}
 % hardware model checking: what is this domain, what are we checking; it is a long existing application domain with many successes (cite BMC paper)
 % what is a sequential circuit in general terms 
 
@@ -143,15 +140,3 @@ Btor2C~\cite{btor2c} is a tool that translates Btor2 hardware models into equiva
 \todoZs{you don't need to talk about your work yet - the reader has no idea what your implementation is yet anyways - but that's for later} In my implementation, I focused on bit-vectors and their related functions and definitions, leveraging the expressive power of BTOR2 to model and verify small, bit-precise sequential systems.
 
 \todoZs{So far it was clear what we need to introduce - but jumping to Theta next seems to make a hole here to me - we will need to think about what else needs to be introduced - but maybe do that while starting to write the next chapter(s) - I think a lot of stuff will come up}
-
-\section{Theta}
-
-Regarding the implementation\todoZs{the what? just introduce theta, this is not the place to talk about you using it :D}, I chose Theta~\cite{theta}, a modular and extensible model checking framework developed by the Critical Systems Research Group at the Budapest University of Technology and Economics, as the target platform for integrating a BTOR2 frontend.
-
-\todoZs{What I'm missing from the introduction are the existing frontends}
-
-To begin, I defined an unofficial BTOR2 grammar using ANTLR4~\cite{antlr}, a powerful parser generator widely adopted in both academia and industry for constructing interpreters, compilers, and domain-specific languages.
-
-Theta supports abstraction-refinement based reachability analysis. In my project, I worked with XCFA models—an extension of Control Flow Automata (CFA) that incorporates procedures and concurrency - but focused primarily on the CFA subset. This allowed me to apply Theta's robust CEGAR-based algorithms for reachability checking.
-
-\todoZs{for now, after the above fixes, I would leave the bg a bit, but keep an open eye when writing the next things for any element that needs to be introduced and add todos here for each of them}
