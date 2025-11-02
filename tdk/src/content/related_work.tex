@@ -7,7 +7,7 @@
 
 \subsection{Btor2C and Translation-Based Workflows}
 
-Btor2C [5] represents the state-of-the-art in hardware-to-software translation for verification purposes. This tool systematically converts BTOR2 circuits into C programs, enabling software verification tools to analyze hardware designs indirectly. The translation workflow allows leverage of sophisticated software verification techniques—such as those in CPAChecker [3] and ESBMC [16]—on hardware circuits. Empirical results have demonstrated that this approach can uncover bugs that dedicated hardware verifiers like ABC [9] and AVR [17] miss under identical time constraints.
+Btor2C [5] represents the state-of-the-art in hardware-to-software translation for verification purposes. This tool systematically converts BTOR2 circuits into C programs, enabling software verification tools to analyze hardware designs indirectly. The translation workflow allows leverage of sophisticated software verification techniques -- such as those in CPAChecker [3] and ESBMC [16] -- on hardware circuits. Empirical results have demonstrated that this approach can uncover bugs that dedicated hardware verifiers like ABC [9] and AVR [17] miss under identical time constraints.
 
 However, the Btor2C approach introduces a multi-step translation process: BTOR2 → C → CFA → verification. Each transformation step potentially introduces semantic discrepancies and optimization barriers. Furthermore, the translation must bridge fundamental differences between hardware and software paradigms, particularly regarding arbitrary-width bit-vector types and cyclic behavior representation.
 
