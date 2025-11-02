@@ -13,20 +13,12 @@ However, the Btor2C approach introduces a multi-step translation process: BTOR2 
 
 \subsection{Comparative Analysis of Verification Workflows}
 
-Existing verification workflows can be categorized into two main approaches:
+Existing verification workflows for hardware systems can be broadly categorized into two principal approaches, each with distinct characteristics and trade-offs.
 
 \subsubsection{Direct Hardware Verification}
-\begin{itemize}
-    \item \textbf{Tools}: ABC, AVR
-    \item \textbf{Path}: BTOR2 $\rightarrow$ direct verification
-    \item \textbf{Advantages}: Native hardware semantics, optimized for circuit structures
-    \item \textbf{Limitations}: May not benefit from software verification advances
-\end{itemize}
+
+The direct hardware verification approach employs specialized tools such as \textbf{ABC} and \textbf{AVR} that operate directly on hardware description formats. These tools follow a streamlined verification path: \(\text{BTOR2} \rightarrow \text{direct verification}\). The primary advantage of this methodology lies in its preservation of native hardware semantics and its optimization for circuit-specific structures, enabling highly efficient analysis tailored to digital logic. However, this approach faces limitations in its ability to incorporate recent advances developed within the software verification community, potentially missing out on innovative analysis techniques that have emerged from that domain.
 
 \subsubsection{Translation-Based Verification}
-\begin{itemize}
-    \item \textbf{Tools}: Btor2C + software verifiers
-    \item \textbf{Path}: BTOR2 $\rightarrow$ C $\rightarrow$ CFA $\rightarrow$ verification
-    \item \textbf{Advantages}: Access to software verification techniques
-    \item \textbf{Limitations}: Additional translation layer, potential semantic gaps
-\end{itemize}
+
+Translation-based verification represents an alternative paradigm that bridges hardware and software verification through intermediate transformation. This approach utilizes tools like \textbf{Btor2C} combined with software verifiers, following a multi-step verification path: \(\text{BTOR2} \rightarrow \text{C} \rightarrow \text{CFA} \rightarrow \text{verification}\). The significant advantage of this workflow is its ability to leverage the extensive arsenal of software verification techniques, including sophisticated abstract interpretation, symbolic execution, and various model checking algorithms that may not be available in dedicated hardware verifiers. Nevertheless, this approach introduces an additional translation layer that can create potential semantic gaps between the original hardware design and the software representation, potentially affecting verification accuracy and performance due to the fundamental differences between hardware concurrency and software sequential execution models.

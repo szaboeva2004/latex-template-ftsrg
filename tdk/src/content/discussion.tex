@@ -1,22 +1,54 @@
-\chapter{Discussion}
+\chapter{Discussion}\label{chapter:discussion}
 
 \section{Summary of Results}
 
 This work presented BTOR2XCFA, a direct transformation from the BTOR2 hardware description format to Control-Flow Automata (CFA) within the Theta model checking framework. The primary goal was to eliminate the intermediate C translation step introduced by tools like Btor2C, thereby creating a more efficient and semantically precise verification workflow for hardware circuits.
 
-The comparative evaluation yielded clear and significant results across both structural and algorithmic dimensions. The direct BTOR2-to-CFA transformation consistently produced dramatically more compact and less complex models than the translation-based approach, with direct implications for verification performance. Key findings include:
+The comparative evaluation yielded clear and significant results. The direct BTOR2-to-CFA transformation consistently produced dramatically more compact and less complex models than the translation-based approach. Key findings include:
 
 \begin{itemize}
     \item \textbf{Structural Efficiency:} The generated CFA models were structurally far simpler, with C-Bit representations requiring \textbf{8.87$\times$ more storage} and containing \textbf{3.46$\times$ more} locations, edges, and variables on average.
-    
-    \item \textbf{Algorithm Performance:} The direct transformation enabled superior algorithm performance, with CEGAR\_EXPL achieving a \textbf{2.4$\times$ higher performance score} on BTOR2 inputs compared to C inputs. This demonstrates that structural efficiency directly translates to better verification outcomes.
-    
-    \item \textbf{Resource Implications:} BTOR2 inputs consistently resulted in lower CPU times across all algorithms, with CEGAR\_EXPL completing verification in \textbf{26.5 seconds} on average versus \textbf{95.4 seconds} for C inputs.
-    
-    \item \textbf{Semantic Fidelity:} By mapping BTOR2 constructs directly to CFA elements and leveraging the underlying SMT solver's native bit-vector semantics, the direct approach avoids the potential for semantic gaps and implementation errors that can arise from translating hardware-centric concepts into the software-oriented paradigm of C.
+    \item \textbf{Implications for Performance:} This reduction in complexity has direct positive implications for model checking performance. A smaller state space with fewer edges and variables suggests lower memory consumption, faster SMT solving times, and reduced overhead for state-space exploration algorithms, potentially leading to significant speedups in verification time.
+    \item \textbf{Semantic Fidelity:} By mapping BTOR2 constructs directly to CFA elements and leveraging the underlying SMT solver's native bit-vector semantics, the direct approach avoids the potential for semantic gaps and implementation errors that can arise from translating hardware-centric concepts (like arbitrary-width bit-vectors and cyclic behavior) into the software-oriented paradigm of C.
 \end{itemize}
 
-These results strongly affirm the central hypothesis: a dedicated BTOR2 frontend offers superior structural and algorithmic efficiency compared to translation-based workflows. The BTOR2XCFA approach successfully bridges the gap between hardware and software verification within a single, unified framework (Theta), enabling a fair comparison and paving the way for applying advanced software verification techniques directly to hardware models without an efficiency penalty.
+These results strongly affirm the central hypothesis: a dedicated BTOR2 frontend offers superior structural efficiency compared to translation-based workflows. The BTOR2XCFA approach successfully bridges the gap between hardware and software verification within a single, unified framework (Theta), enabling a fair comparison and paving the way for applying advanced software verification techniques directly to hardware models without an efficiency penalty.
+
+\subsection{Detailed Answers to Research Questions}
+
+This section provides a detailed discussion of the experimental results by directly answering the research questions that guided this evaluation.
+
+\subsubsection{RQ1: How does the structural complexity differ between direct BTOR2-to-CFA transformation and the Btor2C translation approach?}
+
+The structural complexity differs dramatically and consistently favors the direct BTOR2-to-CFA transformation. Our analysis reveals that the translation-based approach using Btor2C introduces significant overhead at every level of the model representation.
+
+The CFAs generated via the indirect Btor2C pipeline are \textbf{8.87 times larger} on average than those produced directly from BTOR2. This substantial difference directly impacts storage requirements and I/O operations during model loading and saving. The C-based CFAs exhibit a much more complex control flow structure, containing \textbf{3.55 times more locations} and \textbf{3.72 times more edges}. This ``control flow inflation'' is a critical finding, as the number of edges directly influences the branching factor and the size of the state space that the model checker must explore.
+
+The number of variables in the C-based models is \textbf{2.68 times higher}. This increase in dimensionality complicates data flow analysis, enlarges the state vector, and results in more complex and numerous SMT solver queries. Furthermore, the parsing and symbolic analysis are further burdened by \textbf{5.81 times more labels} in the C-based representation, with longer average label lengths.
+
+In summary, the indirect transformation fundamentally creates a larger, more complex, and more verbose intermediate model. This inflated structural complexity is not merely a cosmetic issue; it has direct and profound implications for the performance and resource consumption of the subsequent model checking algorithms.
+
+\subsubsection{RQ2: What are the resource implications (memory, processing) of each approach?}
+
+The resource implications strongly favor the direct transformation, primarily as a direct consequence of the structural differences outlined in RQ1.
+
+The \textbf{8.87x larger file sizes} of the C-based CFAs imply higher memory usage for storing the model itself. Furthermore, the increased number of variables and locations leads to larger working sets during state space exploration, increasing the risk of cache misses and placing a greater demand on memory bandwidth. The processing overhead for the indirect approach is significant. The \textbf{5.81x increase in labels} requires more time for parsing and symbolic processing.
+
+More importantly, the \textbf{3.72x increase in edges} exponentially increases the number of potential paths through the program, leading to a more complex state space for the model checker to traverse. This directly translates into longer CPU times, as the verification algorithms must process a much larger and more interconnected graph. The direct BTOR2-to-CFA approach, by producing a leaner and more semantically direct model, minimizes these resource demands, leading to more efficient use of both memory and processing time.
+
+\subsubsection{RQ3: How do the control flow characteristics compare between the two transformation methods?}
+
+The control flow characteristics reveal that the Btor2C translation maps the hardware circuit into a software-oriented control flow graph that is inherently less efficient for model checking.
+
+Hardware circuits are naturally parallel, with many operations occurring simultaneously within a single clock cycle. The translation to C sequentializes these operations, which is likely a primary cause for the dramatic increase in the number of locations and edges. The direct transformation preserves a more concurrent view of the circuit's state transitions. Hardware cycles are naturally represented as loops in the CFA. While both methods ultimately represent this, the direct transformation expresses this cyclic behavior more natively as a graph loop. The C translation may introduce additional control-flow machinery to simulate this behavior, contributing to the observed complexity.
+
+Our aggregated complexity score, which combines locations, edges, and variables, was \textbf{3.46 times higher} for the C-based CFAs. This quantifies the overall control flow disadvantage of the translation-based method, confirming that it creates a more challenging graph for model checking algorithms to analyze.
+
+\subsubsection{RQ4: Which model checking algorithms perform best for hardware verification, and how does input type (BTOR2 vs C) affect performance?}
+
+For hardware verification as conducted in this study, \textbf{CEGAR with explicit-value analysis (CEGAR\_EXPL)} emerged as the top-performing algorithm when using the direct BTOR2 input. It achieved a solid success rate (3.0\%) with the lowest average CPU time (26.5 seconds), resulting in the highest overall performance score (0.449). \textbf{CEGAR with predicate abstraction (CEGAR\_PRED)} achieved a slightly higher success rate (3.6\%) but at the cost of significantly more CPU time, making it less efficient overall.
+
+The input type has a profound impact on algorithmic performance. The same algorithms were consistently faster and more efficient when operating on the direct BTOR2-CFAs compared to the C-based CFAs. The performance score of \textbf{CEGAR\_EXPL dropped by 2.4x} (from 0.449 to 0.187) when switching from BTOR2 to C inputs. While CEGAR\_PRED on C inputs had the highest absolute success rate (8.8\%), it required such substantial resources (190.2s avg. CPU time) that its performance score was the lowest among the top algorithms. This demonstrates that the structural efficiency of the direct BTOR2 transformation \textbf{directly translates to algorithmic efficiency}. The simpler state space and more direct semantics allow the model checking algorithms to converge faster and with less computational effort.
 
 \section{Limitations and Their Impact}
 
@@ -24,12 +56,9 @@ Despite the promising results, the current implementation of the BTOR2 frontend 
 
 \begin{itemize}
     \item \textbf{Unsupported BTOR2 Constructs:} The frontend does not yet support all BTOR2 operators, notably overflow-detecting predicates and array operations. This restricts the range of hardware circuits that can be verified, excluding those that rely on these features. Consequently, the evaluation was necessarily conducted on a subset of HWMCC benchmarks that do not use these unsupported constructs.
-    
-    \item \textbf{Property Scope:} Currently, only safety properties (specified via bad states) are supported. While Theta is capable of verifying liveness properties, the translation from BTOR2's liveness specifications is not implemented. This limits the frontend's applicability to a core, yet incomplete, subset of hardware verification tasks.
-    
+    \item \textbf{Property Scope:} Currently, only safety properties (specified via \texttt{bad} states) are supported. While Theta is capable of verifying liveness properties, the translation from BTOR2's liveness specifications is not implemented. This limits the frontend's applicability to a core, yet incomplete, subset of hardware verification tasks.
     \item \textbf{Implementation Maturity:} As a new component, the frontend may lack the sophisticated optimization passes found in mature tools like Btor2C or Theta's C frontend. While the direct transformation is inherently more efficient, further tuning could unlock additional performance gains.
-    
-    \item \textbf{Algorithm Performance Variability:} The overall low success rates (2.4\%) across all benchmarks indicate that hardware verification remains challenging, and the advantages of direct transformation, while clear, operate within this difficult problem domain.
 \end{itemize}
 
 These limitations mean that the performance advantages demonstrated, while compelling, are currently applicable to a specific domain of safety verification for circuits without arrays or specialized arithmetic predicates. The full potential of the direct transformation will be realized only when the frontend achieves full BTOR2 compliance.
+

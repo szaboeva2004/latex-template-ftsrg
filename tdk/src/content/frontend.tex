@@ -1,4 +1,4 @@
-\chapter{BTOR2CFA: Implementation of a Direct BTOR2-to-CFA Translation for Verification}
+\chapter{BTOR2CFA: Implementation of a Direct BTOR2-to-CFA Translation for Verification}\label{chapter:btor2cfa}
 
 In~\autoref{sec:motivation}, I discuss the motivation behind this work. Next, ~\autoref{sec:implementation} describes in detail the transformation implemented within Theta and presents illustrative examples. Finally, ~\autoref{sec:cFrontend} explains the approach used to compare the direct and indirect transformations.
 
@@ -64,12 +64,19 @@ The resulting CFA naturally captures the cyclic behavior of the hardware circuit
 
 \section{Comparison between direct and indirect transformation}\label{sec:cFrontend}
 
-My work introduces a direct transformation methodology from \textsc{BTOR2} to Control-Flow Automata (CFA), as opposed to conventional indirect transformation workflows. This distinction has significant implications for both semantic fidelity and verification efficiency.
+Implementing both the direct and indirect transformation approaches within the same verification framework provides a solid foundation for a fair and consistent evaluation of their efficiency. By integrating both workflows into a single tool, differences in performance or accuracy can be attributed primarily to the transformation methodology itself, rather than to unrelated implementation factors.
 
-The direct transformation approach establishes a one-to-one mapping from hardware circuits to formal verification models, aiming to preserve the native semantics of the hardware description more faithfully. By eliminating intermediate translation steps, this method maintains the structural integrity of the original circuit design and enables the exploitation of hardware-specific patterns that might otherwise be lost in translation-based workflows.
+This unified setup ensures that both transformations share the same underlying model checking infrastructure, solver configurations, and optimization mechanisms. As a result, any observed variation in verification time, memory consumption, or precision directly reflects the impact of the transformation strategy, rather than tool-specific behavior.
 
-In contrast, indirect transformation approaches introduce additional abstraction layers that can obscure the original hardware semantics. Translating hardware into software-oriented representations may result in conceptual mismatches -- such as between hardware cycles and software loops, arbitrary-width bit-vectors and fixed-width data types, or synchronous hardware timing and sequential software execution. These discrepancies may accumulate through successive translation steps, introducing artifacts that complicate the verification process.
+In contrast, comparing two separate tools—each with distinct architectures, heuristics, and optimization strategies—introduces uncontrolled variables that may obscure the true effect of the transformation approach. Therefore, having both the direct and indirect transformations within the same environment enables a more reliable, controlled, and meaningful comparison of their respective trade-offs in verification performance and semantic fidelity.
 
-The choice of transformation pathway can also influence the resulting model's complexity and performance. A direct transformation tends to yield more compact and semantically accurate representations, closely reflecting the inherent structure of the hardware. In comparison, indirect approaches may produce more verbose models that require additional control-flow constructs to emulate hardware behavior within software paradigms.
 
-This comparative perspective forms the foundation for evaluating whether direct transformation methodologies can address the inefficiencies and semantic distortions of translation-based workflows, thereby providing deeper insight into how transformation strategies impact the accuracy and efficiency of hardware verification.
+% My work introduces a direct transformation methodology from \textsc{BTOR2} to Control-Flow Automata (CFA), as opposed to conventional indirect transformation workflows. This distinction has significant implications for both semantic fidelity and verification efficiency.
+
+% The direct transformation approach establishes a one-to-one mapping from hardware circuits to formal verification models, aiming to preserve the native semantics of the hardware description more faithfully. By eliminating intermediate translation steps, this method maintains the structural integrity of the original circuit design and enables the exploitation of hardware-specific patterns that might otherwise be lost in translation-based workflows.
+
+% In contrast, indirect transformation approaches introduce additional abstraction layers that can obscure the original hardware semantics. Translating hardware into software-oriented representations may result in conceptual mismatches -- such as between hardware cycles and software loops, arbitrary-width bit-vectors and fixed-width data types, or synchronous hardware timing and sequential software execution. These discrepancies may accumulate through successive translation steps, introducing artifacts that complicate the verification process.
+
+% The choice of transformation pathway can also influence the resulting model's complexity and performance. A direct transformation tends to yield more compact and semantically accurate representations, closely reflecting the inherent structure of the hardware. In comparison, indirect approaches may produce more verbose models that require additional control-flow constructs to emulate hardware behavior within software paradigms.
+
+% This comparative perspective forms the foundation for evaluating whether direct transformation methodologies can address the inefficiencies and semantic distortions of translation-based workflows, thereby providing deeper insight into how transformation strategies impact the accuracy and efficiency of hardware verification.

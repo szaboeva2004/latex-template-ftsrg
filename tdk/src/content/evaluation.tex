@@ -1,42 +1,67 @@
-\chapter{Evaluation}
+\chapter{Evaluation}\label{chapter:evaluation}
 
 \section{Experiment Design}
 
-This chapter presents a comprehensive evaluation of the BTOR2XCFA transformation approach compared to the traditional translation-based workflow using Btor2C. The evaluation focuses on structural complexity, resource requirements, algorithm performance, and potential performance implications across multiple dimensions.
+This chapter presents a comprehensive evaluation of the BTOR2CFA transformation approach compared to the traditional translation-based workflow using Btor2C. The evaluation focuses on structural complexity, resource requirements, algorithm performance, and potential performance implications across multiple dimensions.
+
+\subsection{Measurement Procedure} All experiments were conducted on virtual machines equipped with Intel Xeon (Skylake) processors, featuring between 2 and 32 cores operating at 2.2 GHz, and memory configurations ranging from 16 GB to 128 GB of RAM. The operating system used was Linux 6.8.0-60-generic, and all experiments were performed using \textsc{Theta} version 6.11.8. For SMT solving, I employed \textsc{MathSAT} version 5.6.10 \cite{Cimatti2013MathSAT5}.
+
+To ensure reliable and reproducible performance measurements, we utilized the \textsc{RunExec} tool from the \textsc{BenchExec} suite \cite{BLW19}, a state-of-the-art benchmarking framework also used in the \textsc{SV-COMP} competition. Each experiment was executed with a CPU time limit of 900 seconds, a memory limit of 15 GB, and restricted to two CPU cores.
 
 \subsection{Research Questions}
 
 The evaluation aims to answer the following research questions:
 
-\begin{enumerate}
-    \item \textbf{RQ1:} How does the structural complexity differ between direct BTOR2-to-CFA transformation and the Btor2C translation approach?
-    \item \textbf{RQ2:} What are the resource implications (memory, processing) of each approach?
-    \item \textbf{RQ3:} How do the control flow characteristics compare between the two transformation methods?
-    \item \textbf{RQ4:} Which model checking algorithms perform best for hardware verification, and how does input type (BTOR2 vs C) affect performance?
-\end{enumerate}
+\begin{description}
+   \item[RQ1:] How does the structural complexity differ between direct BTOR2-to-CFA transformation and the Btor2C translation approach?
+   \item[RQ2:] What are the resource implications (memory, processing) of each approach?
+   \item[RQ3:] How do the control flow characteristics compare between the two transformation methods?
+   \item[RQ4:] Which model checking algorithms perform best for hardware verification, and how does input type (BTOR2 vs C) affect performance?
+
+\end{description}
 
 \subsection{Benchmark Suite and Methodology}
 
-The evaluation was conducted using 277 benchmark circuits from the Hardware Model Checking Competition (HWMCC) suite, resulting in 8,316 total benchmark runs across 1,200 unique benchmarks. Each circuit was processed through both transformation workflows:
+The Hardware Model Checking Competition (HWMCC) provides a comprehensive suite of state-of-the-art benchmark models for evaluating hardware verification tools. In this work, I used a subset of these benchmarks selected according to the following criteria.
+
+First, since my implementation focuses exclusively on safety property verification, only benchmarks containing the \verb|bad| property were considered. Benchmarks featuring liveness-related properties -- such as \verb|justice|, \verb|fair|, \verb|output|, and \verb|constraint| -- were excluded from the evaluation.
+
+Second, several benchmarks in the suite define multiple \verb|bad| properties. To maintain consistency and simplify analysis, I restricted the selection to models containing exactly one safety property.
+
+After applying these filtering criteria, a total of 693 benchmarks remained. The evaluation utilized both the \textsc{BTOR2} and C benchmark subsets provided by HWMCC.
+
+\paragraph{CFA Analysis}
+For the complexity analysis, I first examined the Control-Flow Automata (CFAs) generated during the transformation process. It is important to note that the \textsc{c2XCFA} tool includes several optimizations, one of which is Large Block Encoding (LBE)~\cite{lbe}. For the purpose of a fair comparison, this optimization was disabled so that the directly transformed CFA would more closely align with the indirectly transformed one. Benchmarks that resulted in timeouts or memory exhaustion were excluded from the dataset. After filtering, 277 benchmarks remained, which provided a sufficiently representative basis for meaningful analysis.
+
+\paragraph{Performance Analysis}
+For the performance evaluation, I compared several verification algorithms supported by \textsc{Theta}. Specifically, I tested Counterexample-Guided Abstraction Refinement (CEGAR)~\cite{cegar} with both explicit-value and predicate abstraction, as well as Bounded Model Checking (BMC)~\cite{bmc}, k-Induction~\cite{kind}, Intrepolation-Based Model Checking (IMC)~\cite{imc}, and IC3~\cite{ic3}.
+Each circuit was processed through both transformation workflows:
 
 \begin{itemize}
     \item \textbf{Direct Approach}: BTOR2 $\rightarrow$ CFA (BTOR2XCFA)
-    \item \textbf{Translation Approach}: BTOR2 $\rightarrow$ C $\rightarrow$ CFA (Btor2C + Theta C frontend)
+    \item \textbf{Indirect Approach}: BTOR2 $\rightarrow$ C $\rightarrow$ CFA (Btor2C + Theta C frontend)
 \end{itemize}
 
-Multiple metrics were collected for comparative analysis, including file sizes, structural elements, label complexity, control flow characteristics, and algorithm performance across six different model checking algorithms.
+Multiple metrics were collected for comparative analysis, including file sizes, structural elements, label complexity, control flow characteristics, and algorithm performance across the different model checking algorithms.
 
 \section{Structural Complexity Analysis}
 
 \subsection{File Size and Storage Requirements}
 
-The analysis reveals significant differences in storage requirements between the two approaches:
+My first realization was that there were significant differences in file sizes as shown in~\autoref{fig:analysis}
 
-The C-Bit files generated through Btor2C translation are \textbf{8.87$\times$ larger} on average compared to direct BTOR2 representations. This substantial size difference has direct implications for storage requirements and I/O operations during verification.
+\begin{figure}
+  \centering
+  \includegraphics[width=1\textwidth]{figures/complete_cfa_analysis.png}
+  \caption{Detailed comparison plots between the resulting BTOR2CFA and c2XCFA CFAs}
+  \label{fig:analysis}
+\end{figure}
+
+The c2XCFA files generated through Btor2C translation are \textbf{8.87$\times$ larger} on average compared to direct BTOR2 representations. This substantial size difference has direct implications for storage requirements and I/O operations during verification.
 
 \subsection{Label Complexity Analysis}
 
-The C-Bit format exhibits significantly higher label complexity, with \textbf{5.81$\times$ more labels} and longer average label lengths. This increased complexity may impact parsing performance and memory usage during model checking operations.
+The C format exhibits significantly higher label complexity, with \textbf{5.81$\times$ more labels} and longer average label lengths. This increased complexity may impact parsing performance and memory usage during model checking operations.
 
 \section{Control Flow Analysis}
 
@@ -52,7 +77,7 @@ The analysis of main procedures reveals substantial differences in control flow 
  & Mean $\pm$ Std & Mean $\pm$ Std & Mean $\pm$ Std & Mean $\pm$ Std \\
 \hline
 BTOR2 & 2702 $\pm$ 946 & 1200 $\pm$ 416 & 1439 $\pm$ 500 & 1698 $\pm$ 591 \\
-C-Bit & 9593 $\pm$ 3358 & 4465 $\pm$ 1552 & 3856 $\pm$ 1363 & 5882 $\pm$ 2056 \\
+C & 9593 $\pm$ 3358 & 4465 $\pm$ 1552 & 3856 $\pm$ 1363 & 5882 $\pm$ 2056 \\
 \hline
 \end{tabular}
 \caption{Main Procedure Statistics}
@@ -79,7 +104,7 @@ Max & 9.55 & 6.77 & 6.64 \\
 
 \subsection{Complexity Ratios and Performance Implications}
 
-The C-Bit representation demonstrates significantly higher complexity across all measured dimensions:
+The C representation demonstrates significantly higher complexity across all measured dimensions:
 
 \begin{itemize}
     \item \textbf{Locations:} 3.55$\times$ more in C-Bit (9593 vs 2702)
@@ -87,9 +112,7 @@ The C-Bit representation demonstrates significantly higher complexity across all
     \item \textbf{Variables:} 2.68$\times$ more in C-Bit (3856 vs 1439)
     \item \textbf{Overall Complexity:} 3.46$\times$ higher in C-Bit
 \end{itemize}
-
 These differences have direct implications for model checking performance:
-
 \begin{itemize}
     \item \textbf{State Space Exploration:} The higher number of edges may exponentially increase the state space exploration complexity
     \item \textbf{Memory Usage:} Increased locations and variables directly impact memory requirements during analysis
@@ -100,6 +123,13 @@ These differences have direct implications for model checking performance:
 
 The comprehensive algorithm performance evaluation across 8,316 benchmark runs provides crucial insights into the practical implications of the transformation approach.
 
+\begin{figure}
+  \centering
+  \includegraphics[width=1\textwidth]{figures/performance_analysis.png}
+  \caption{Detailed comparison plots between BTOR2CFA and c2XCFA tools}
+  \label{fig:performance}
+\end{figure}
+
 \subsection{Overall Performance Landscape}
 
 The analysis reveals a challenging verification landscape with an overall success rate of only \textbf{2.4\%}, dominated by timeouts (76.4\%) and out-of-memory events (8.9\%). This underscores the difficulty of hardware verification and the importance of efficient transformation approaches.
@@ -107,7 +137,7 @@ The analysis reveals a challenging verification landscape with an overall succes
 \subsection{BTOR2 vs C Input Performance}
 
 \textbf{BTOR2 Input Type Performance:}
-CEGAR\_EXPL emerged as the top-performing algorithm with 3.0\% success rate and significantly lower average CPU time (26.5s) compared to other approaches. CEGAR\_PRED followed with 3.6\% success rate but higher CPU time (65.8s). The direct BTOR2 transformation consistently enabled faster verification across all algorithms.
+ CEGAR\_EXPL emerged as the top-performing algorithm with 3.0\% success rate and significantly lower average CPU time (26.5s) compared to other approaches. CEGAR\_PRED followed with 3.6\% success rate but higher CPU time (65.8s). The direct BTOR2 transformation consistently enabled faster verification across all algorithms.
 
 \textbf{C Input Type Performance:}
 While CEGAR\_PRED achieved the highest success rate (8.8\%) for C inputs, it required substantially more computational resources (190.2s CPU time). CEGAR\_EXPL maintained good performance (2.7\% success) but with increased CPU time (95.4s) compared to BTOR2 inputs.
@@ -146,19 +176,14 @@ IC3 & Both & 0.0\% & 0.0 & 0.000 \\
 \end{table}
 
 \section{Performance Impact Analysis}
-
 \subsection{Resource Requirements}
-
 Based on the structural and algorithmic analysis, the translation-based approach through Btor2C introduces significant overhead:
-
 \textbf{Memory and Storage Impact}
-
 \begin{itemize}
     \item C-Bit files require \textbf{8.87$\times$ more storage} than direct BTOR2 representations
     \item The increased file sizes may impact I/O performance and memory mapping efficiency
     \item Larger working sets could lead to more cache misses and higher memory bandwidth requirements
 \end{itemize}
-
 \textbf{Processing Overhead}
 
 \begin{itemize}
@@ -168,11 +193,8 @@ Based on the structural and algorithmic analysis, the translation-based approach
 \end{itemize}
 
 \subsection{Control Flow Complexity Impact}
-
 The analysis of main procedures reveals several performance concerns for the translation-based approach:
-
 \textbf{State Space Exploration}
-
 \begin{itemize}
     \item \textbf{3.72$\times$ more edges} significantly increase branching complexity
     \item Larger state transition systems may lead to exponential growth in state space
@@ -180,13 +202,11 @@ The analysis of main procedures reveals several performance concerns for the tra
 \end{itemize}
 
 \textbf{Data Flow Analysis}
-
 \begin{itemize}
     \item \textbf{2.68$\times$ more variables} increase the dimensionality of data flow analysis
     \item Larger variable sets require more complex abstract domains and larger SMT queries
     \item Increased memory requirements for storing variable states and relationships
 \end{itemize}
-
 \subsection{Algorithmic Efficiency Impact}
 
 The performance results demonstrate that:
@@ -202,31 +222,17 @@ The performance results demonstrate that:
 \subsection{Internal Validity}
 
 \begin{itemize}
-    \item \textbf{Benchmark Selection:} The 277 circuits from HWMCC represent a comprehensive set, but may not cover all hardware verification scenarios
-    \item \textbf{Metric Selection:} The chosen metrics focus on structural complexity; runtime performance may show different patterns
-    \item \textbf{Implementation Maturity:} The BTOR2XCFA implementation may have optimization opportunities not yet explored
-    \item \textbf{Algorithm Configuration:} Default parameters were used for all algorithms; fine-tuning might alter relative performance
-\end{itemize}
+     \item \textbf{Benchmark Selection:} The 277 circuits from HWMCC represent a comprehensive set, but may not cover all hardware verification scenarios
+     \item \textbf{Metric Selection:} The chosen metrics focus on structural complexity; runtime performance may show different patterns
+     \item \textbf{Implementation Maturity:} The BTOR2XCFA implementation may have optimization opportunities not yet explored
+     \item \textbf{Algorithm Configuration:} Default parameters were used for all algorithms; fine-tuning might alter relative performance
+ \end{itemize}
 
 \subsection{External Validity}
 
-\begin{itemize}
+ \begin{itemize}
     \item \textbf{Generalizability:} Results are specific to hardware verification; software verification may show different characteristics
-    \item \textbf{Toolchain Dependencies:} Findings may be influenced by specific versions of Theta, Btor2C, and associated libraries
-    \item \textbf{Scale Considerations:} The analysis focuses on medium to large circuits; very small or extremely large circuits may behave differently
-    \item \textbf{Algorithm Selection:} The six algorithms tested represent common approaches but not exhaustive coverage of model checking techniques
+     \item \textbf{Toolchain Dependencies:} Findings may be influenced by specific versions of Theta, Btor2C, and associated libraries
+     \item \textbf{Scale Considerations:} The analysis focuses on medium to large circuits; very small or extremely large circuits may behave differently
+     \item \textbf{Algorithm Selection:} The six algorithms tested represent common approaches but not exhaustive coverage of model checking techniques
 \end{itemize}
-
-\section{Summary of Findings}
-
-The evaluation demonstrates clear advantages for the direct BTOR2-to-CFA transformation approach:
-
-\begin{itemize}
-    \item \textbf{Structural Efficiency:} BTOR2XCFA produces significantly more compact representations (8.87$\times$ smaller files)
-    \item \textbf{Reduced Complexity:} Direct transformation maintains simpler control flow structures (3.46$\times$ lower complexity score)
-    \item \textbf{Algorithmic Superiority:} BTOR2 inputs enable better algorithm performance, with CEGAR\_EXPL achieving 2.4$\times$ higher performance score
-    \item \textbf{Better Scalability:} Lower resource requirements suggest better scalability for large verification tasks
-    \item \textbf{Semantic Preservation:} Direct mapping to CFA avoids potential semantic gaps introduced by C translation
-\end{itemize}
-
-These findings strongly support the hypothesis that direct transformation approaches can provide significant efficiency advantages over translation-based workflows for hardware model checking, both structurally and algorithmically.
