@@ -3,25 +3,23 @@
 %----------------------------------------------------------------------------
 Over the past decade, our understanding of and techniques for hardware verification have evolved significantly. Traditionally, hardware verification relied on simulation, where system behavior is tested against expected outcomes. While effective for small designs, simulation cannot guarantee full coverage and often fails to expose corner cases in complex circuits.
 
-To overcome these limitations, \textbf{formal verification} uses mathematical and logical techniques to prove or disprove the correctness of hardware designs. The main approaches are \emph{theorem proving}, \emph{equivalence checking}, and \emph{model checking}, I will focus on the latter, because it is the most widely applied for sequential hardware. Model checking automatically determines whether a design satisfies its formal specification or produces a counterexample. Typically, the design is represented as a \emph{transition system}, and \emph{invariant verification} ensures that given properties hold in all reachable states.
+To overcome these limitations, \textbf{formal verification} uses mathematical and logical techniques to prove or disprove the correctness of hardware designs. 
+The main approaches are \emph{theorem proving}, \emph{equivalence checking}, and \emph{model checking}. I will focus on model checking, which is widely adopted for sequential hardware. Model checking automatically determines whether a design satisfies its formal specification or produces a counterexample. 
+Typically, the design is represented by a formal model (e.g., a transition system), and invariant verification ensures that the given properties hold in all reachable states.
 
-Recent research has shown that translating hardware models into software and verifying them with software model checkers can reveal more bugs than even state-of-the-art hardware analyzers such as ABC or AVR~\cite{ABC-hardware, AVR, hw_verification_using_sw}. The creators of the original idea peformed a transformation from $Verilog$ to $C$. Their experimental results showed that by using software analyzers the model checking process could be more than an order of magnitude faster. 
+Recent research has shown that translating hardware models into software and verifying them with software model checkers can reveal bugs not found by even state-of-the-art hardware analyzers such as ABC or AVR~\cite{ABC-hardware, AVR, hw_verification_using_sw}. The creators of the original idea peformed a transformation from $Verilog$ to $C$. Their experimental results showed that by using software analyzers the model checking process could be more than an order of magnitude faster. 
 
-Ever since then, several approaches have aimed to translate hardware description languages into higher-level software representations, allowing existing software verifiers—such as \textsc{CPAChecker}~\cite{cpachecker} and \textsc{ESBMC}~\cite{esbmc}—to perform model checking indirectly. One notable effort is \textsc{Btor2C}~\cite{btor2c}, which converts \textsc{Btor2} circuits into C programs, enabling a wide range of software verification tools to analyze them.
-\textsc{Btor2} has become the de facto standard intermediate representation for hardware model checking, officially adopted as the input format of the Hardware Model Checking Competition (HWMCC). It provides fixed, unambiguous semantics and aligns closely with SMT-LIB~\cite{SMT-LIB}, making it a robust intermediate format for bit-level languages such as AIGER and Verilog.
+Ever since then, several approaches have aimed to translate hardware description languages into higher-level software representations, allowing existing software verifiers, such as \textsc{CPAChecker}~\cite{cpachecker} and \textsc{ESBMC}~\cite{esbmc}, to perform model checking indirectly. One notable effort is \textsc{Btor2C}~\cite{btor2c}, which converts \textsc{Btor2} circuits into C programs, enabling a wide range of software verification tools to analyze them.
+\textsc{Btor2} has become the de facto standard intermediate representation for hardware model checking, officially adopted as the input format of the Hardware Model Checking Competition (HWMCC). It provides fixed, unambiguous semantics and aligns closely with SMT-LIB~\cite{SMT-LIB}, also making it a robust intermediate format for bit-level languages such as AIGER and Verilog.
 
-\section{Motivation}
+\paragraph{Motivation} While \textsc{Btor2C} enables indirect verification, it introduces an additional translation step into C, which can reduce efficiency and increase the risk of transformation errors. Each intermediate step adds complexity and may hinder analysis performance due to redundant optimizations or semantic mismatches.
+Moreover, hardware and software differ fundamentally. For instance, \textsc{Btor2} supports arbitrary-width bit-vector types that have no direct C equivalent. Although empirically validated, \textsc{Btor2C}’s translation remains nontrivial and potentially error-prone.
 
-While \textsc{Btor2C} enables indirect verification, it introduces an additional translation step into C, which can reduce efficiency and increase the risk of transformation errors. Each intermediate step adds complexity and may hinder analysis performance due to redundant optimizations or semantic mismatches.
-Moreover, hardware and software differ fundamentally—for instance, \textsc{Btor2} supports arbitrary-width bit-vector types that have no direct C equivalent. Although empirically validated, \textsc{Btor2C}’s translation remains nontrivial and potentially error-prone.
-
-To address these issues, this work implements a direct transformation from \textsc{Btor2} to control-flow automata (CFA) within the Theta model checking framework. This approach preserves the exact semantics of bit-vectors through the SMT solver, naturally represents cyclic hardware behavior as graph loops, and enables \textsc{Btor2}-specific optimizations directly on the CFA—eliminating the need for intermediate C code and improving overall analysis efficiency.
+To address these issues, this work implements a direct transformation from \textsc{Btor2} to control-flow automata (CFA) within the Theta model checking framework. This approach preserves the exact semantics of bit-vectors through the SMT solver, naturally represents cyclic hardware behavior as graph loops, and enables \textsc{Btor2}-specific optimizations directly on the CFA, thus eliminating the need for intermediate C code and improving overall analysis efficiency.
 
 The objective of this report is to conduct a comparative analysis and assess whether a dedicated \textsc{Btor2} frontend offers superior efficiency compared to translation-based verification workflows.
 
-\section{Contributions}
-
-My work is structured as follows:
+\paragraph{Contributions} My work is structured as follows:
 
 \begin{itemize}
 \item I propose

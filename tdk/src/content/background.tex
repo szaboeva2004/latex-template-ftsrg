@@ -3,7 +3,7 @@
 This chapter provides an overview of the fundamental concepts relevant to this report.
 First, \autoref{sec:mc} introduces model checking, the central verification technique underlying this work.
 Next, \autoref{sec:cfa} presents control-flow automata, the modeling formalism employed throughout the project.
-Finally, \autoref{sec:btor2} describes the essential components of the BTOR2 language used in the implementation. For a complete description of the BTOR2 syntax, the reader is referred to the original publication~\cite{btor2}.
+Finally, \autoref{sec:btor2} describes the essential components of the \textsc{Btor2} language used in the implementation. For a complete description of the \textsc{Btor2} syntax, the reader is referred to the original publication~\cite{btor2}.
 
 \section{Model Checking}\label{sec:mc}
 
@@ -53,10 +53,7 @@ Figure~\ref{fig:cfa} illustrates a simple control-flow automaton (CFA). The blue
 
 The red location represents the \textit{error location}, which corresponds to an unsafe program state. A \textit{counterexample} demonstrates a feasible path from an initial state to such an unsafe state, whereas a proof of safety ensures that no unsafe state is ever reachable. Although reachability queries can, in principle, treat any state as unsafe, it is common to restrict these to specific \textit{unsafe locations}, since program specifications are often expressed as assertions in the code.
 
-An execution of the program corresponds to a \textit{concrete trace} -- a sequence of concrete states and transitions within the CFA's state space. These traces can be projected onto the graph defined by the CFA's locations and edges to form directed paths, which correspond to specific executions of the program.
-
-In contrast, an \textit{abstract trace} consists of abstract states and transitions within an abstraction of the state space. Abstract traces do not always correspond to real program executions. An abstract trace is considered \textit{feasible} if, when applying the transition effects to each abstract state, the resulting states remain consistent with the target abstract states. Otherwise, the trace is \textit{infeasible}. Feasibility thus depends on whether there exists a corresponding concrete trace that follows the same path and satisfies all the constraints of the abstract states.
-
+An execution of the program corresponds to a \textit{concrete trace}: a sequence of concrete states and transitions within the CFA's state space. These traces can be projected onto the graph defined by the CFA's locations and edges to form directed paths, which correspond to specific executions of the program. A trace that leads to an error location represents a counterexample, demonstrating how the property violation can occur.
 
 \section{The Hardware Model Checking Format BTOR2}\label{sec:btor2}
 
@@ -65,18 +62,18 @@ Hardware model checking is a verification technique used to ensure that digital 
 In this domain, the goal is to check whether a hardware model -- typically represented as a sequential circuit -- satisfies certain logical properties. A sequential circuit is a digital system composed of combinational logic (which determines outputs based solely on current inputs) and memory elements such as flip-flops or registers (which store the system's state across clock cycles). Verification then involves exploring the circuit's possible state transitions over time to ensure that unsafe or undesired (\verb|bad|) states are never reachable. In the context of model-checking that is called \textit{reachability safety}.
 
 
-The Hardware Model Checking Competition (HWMCC)~\cite{hwmcc} serves as a benchmark for evaluating formal verification tools for hardware systems. A key innovation supporting this effort is BTOR2~\cite{btor2}, a word-level model checking format designed for bit-precise modeling of word-level sequential circuits.
-The BTOR2 language extends the previous bit-level AIGER~\cite{AIGER} format with higher-level abstractions, making it ideal for various verification techniques. It introduces a simple, sorted, line-based syntax that is easy to parse and aligns with SMT-LIB~\cite{SMT-LIB} semantics for bit-vectors and arrays.
+The Hardware Model Checking Competition (HWMCC)~\cite{hwmcc} serves as a benchmark for evaluating formal verification tools for hardware systems. A key innovation supporting this effort is \textsc{Btor2}~\cite{btor2}, a word-level model checking format designed for bit-precise modeling of word-level sequential circuits.
+The \textsc{Btor2} language extends the previous bit-level AIGER~\cite{AIGER} format with higher-level abstractions, making it ideal for various verification techniques. It introduces a simple, sorted, line-based syntax that is easy to parse and aligns with SMT-LIB~\cite{SMT-LIB} semantics for bit-vectors and arrays.
 
 \subsection{Syntax of BTOR2}
 
-The BTOR2 language identifies 2 entities called \textit{sort} and \textit{node}. Each line of code starts with a number, respectively \verb|sid| (sort id) and \verb|nid| (node id) which can be referenced in the subsequent lines.  
+The \textsc{Btor2} language identifies 2 entities called \textit{sort} and \textit{node}. Each line of code starts with a number, respectively \verb|sid| (sort id) and \verb|nid| (node id) which can be referenced in the subsequent lines.  
 
 A \emph{sort} can be one of two types: a bit-vector of arbitrary width~$w$, denoted by~$\mathcal{B}^w$, or an array type. An array type is expressed as~$\mathcal{A}^{I \to E}$, where~$I$ and~$E$ are bit-vector types representing the index and element sorts, respectively.
 
-A \emph{node} may correspond to an \emph{input}, a \emph{state}, or the \emph{result} of applying an operator to other nodes. Inputs represent external signals provided to the BTOR2 circuit, while states correspond to the circuit's memory elements. Typically, inputs have bit-vector types, whereas states may be either bit-vector or array types. In this report I will only focus on the bit-vector cases.
+A \emph{node} may correspond to an \emph{input}, a \emph{state}, or the \emph{result} of applying an operator to other nodes. Inputs represent external signals provided to the \textsc{Btor2} circuit, while states correspond to the circuit's memory elements. Typically, inputs have bit-vector types, whereas states may be either bit-vector or array types. In this report I will only focus on the bit-vector cases.
 
-Operators serve as the fundamental building blocks of a BTOR2 circuit. Each operator takes arguments of specific types and produces a result of a well-defined type. The general syntax for defining a BTOR2 operator is:
+Operators serve as the fundamental building blocks of a \textsc{Btor2} circuit. Each operator takes arguments of specific types and produces a result of a well-defined type. The general syntax for defining a BTOR2 operator is:
 
 \[
 \langle \text{nid} \rangle\ \langle \text{op} \rangle\ \langle \text{sid} \rangle\ \langle \text{nid}_1 \rangle\ [\langle \text{nid}_2 \rangle\ [\langle \text{nid}_3 \rangle]]
@@ -88,7 +85,7 @@ This notation specifies that the node identified by \verb|nid| stores the result
 
 \subsubsection{Count2 Example}
 
-In \autoref{list:btor2} is a BTOR2 circuit that defines a simple finite state machine -- a 3-bit counter -- that starts from zero and increments by one at each time step. \footnote{The example is taken from the official BTOR2 repository. The file is named count2 to distinguish it from the corresponding count.btor example used in the previous BTOR format.} Each line defines a node in the circuit, such as a constant, state, operation, or property.
+In \autoref{list:btor2} is a \textsc{Btor2} circuit that defines a simple finite state machine -- a 3-bit counter -- that starts from zero and increments by one at each time step. \footnote{The example is taken from the official \textsc{Btor2} repository. The file is named count2 to distinguish it from the corresponding count.btor example used in the previous BTOR format.} Each line defines a node in the circuit, such as a constant, state, operation, or property.
 
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
@@ -134,9 +131,12 @@ The example circuit in~\autoref{list:btor2} has the following elements:
   \item[Constants.] Node 2 defines a constant zero \verb|zero 1|, which produces the bit-vector \verb|000|. Following this, node 3 introduces a state variable of sort 1 (3 bits), representing the main state of the circuit.
   \item[States.] The initial value of state '3' is specified in node 4, which uses the \verb|init| keyword to bind state 3 to start at constant 2, which is the \verb|000| bit-vector. The next input is defined in node 5 using \verb|one 1|, which denotes the constant \verb|001|.
   \item[Operations.] Node 6 defines an addition operation that adds 1 to the main state, resulting in node 6, the next value of the counter. This operation wraps around on overflow due to the fixed 3-bit width. Line 7 then uses the \verb|next| keyword to specify that in the next state, the counter should take the value of node 6, i.e., the incremented result.
-  \item[Safety Properties.] To define a property of interest, node 8 declares another constant: \verb|ones 1|, which represents the maximum value a 3-bit counter can hold—namely \verb|111|. Node 9 introduces a new sort of width 1, which is used for boolean-like signals such as equality checks.
+  \item[Safety Properties.] To define a property of interest, node 8 declares another constant: \verb|ones 1|, which represents the maximum value a 3-bit counter can hold, in this case \verb|111|. Node 9 introduces a new sort of width 1, which is used for boolean-like signals such as equality checks.
   \item[Comparison.] Node 10 defines a comparison between the current counter value and the maximum value \verb|111| using the \verb|eq| operator. This operation returns a 1-bit result: true (1) if the counter is at maximum, false (0) otherwise. Finally, node 11 marks this equality result as a bad state, which is a safety property violation. Hence, the circuit asserts that reaching the value 111 is undesirable or erroneous. 
 \end{description}
 
-In summary, this BTOR2 circuit models a 3-bit counter that increments with each step and triggers a bad state when it reaches 111. This design could be used in formal verification to prove that the system avoids overflow, or alternatively, to find the point at which it does. The clear structure and modular nature of BTOR2 make it suitable for such sequential hardware modeling and property checking.
+In summary, this \textsc{Btor2} circuit models a 3-bit counter that increments with each step and triggers a bad state when it reaches 111. This design could be used in formal verification to prove that the system avoids overflow, or alternatively, to find the point at which it does. The clear structure and modular nature of \textsc{Btor2} make it suitable for such sequential hardware modeling and property checking.
 
+\section{The Theta Framework and C Verification} 
+
+The Theta framework~\cite{theta,cTheta} serves as the foundation for this work, providing a modular, extensible platform for model checking. Theta employs abstraction-refinement-based reachability analysis and supports multiple formalisms through its frontend architecture. The framework's existing C frontend (c2XCFA) transforms C programs into an eXtended Control-Flow Automaton (XCFA), which extends the traditional CFA model with additional constructs such as function calls, thread creation, and synchronization primitives. This richer representation enables the analysis of more complex program behaviors while preserving a unified intermediate form on which different verification algorithms can operate. Theta’s support for CEGAR (Counterexample-Guided Abstraction Refinement)~\cite{cegar} and configurable abstract domains makes it particularly suitable for adapting to various verification domains.

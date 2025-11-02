@@ -5,9 +5,6 @@
 % State Space-Based Methods for Validating Model Transformations in Model Checkers
 \section{Related work}
 
-\subsection{The Theta Framework and C Verification} 
-The Theta framework [22] serves as the foundation for this work, providing a modular, extensible platform for model checking developed at the Budapest University of Technology and Economics. Theta employs abstraction-refinement-based reachability analysis and supports multiple formalisms through its frontend architecture. The framework's existing C frontend (c2CFA) transforms C programs into Control-Flow Automata (CFA), enabling various verification algorithms to operate on a unified intermediate representation. Theta's support for CEGAR (Counterexample-Guided Abstraction Refinement) and configurable abstract domains makes it particularly suitable for adapting to different verification domains.
-
 \subsection{Btor2C and Translation-Based Workflows}
 
 Btor2C [5] represents the state-of-the-art in hardware-to-software translation for verification purposes. This tool systematically converts BTOR2 circuits into C programs, enabling software verification tools to analyze hardware designs indirectly. The translation workflow allows leverage of sophisticated software verification techniques—such as those in CPAChecker [3] and ESBMC [16]—on hardware circuits. Empirical results have demonstrated that this approach can uncover bugs that dedicated hardware verifiers like ABC [9] and AVR [17] miss under identical time constraints.
