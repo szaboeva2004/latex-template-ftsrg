@@ -7,7 +7,7 @@ In~\autoref{sec:motivation}, I discuss the motivation behind this work. Next, ~\
 \paragraph{Btor2C.} As discussed in previous chapters, numerous approaches have been proposed to verify hardware circuits using software analyzers. One notable example is \textit{Btor2C}~\cite{btor2c}, a tool that translates hardware descriptions into equivalent C programs. This translation bridges the gap between hardware and software verification by enabling the use of existing C verification tools.
 In contrast, my work focuses on implementing a dedicated hardware frontend directly within an existing software model checker, eliminating the need for translation into C.
 
-\paragraph{Problem statement.} Using C as an intermediate representation between \textsc{BTOR2} and a formal model (in this case, a Control Flow Automaton, CFA) can introduce semantic discrepancies and reduce verification efficiency. This additional transformation layer may obscure the original hardware semantics and complicate the verification process.
+\paragraph{Problem statement.} Using C as an intermediate representation between \textsc{Btor2} and a formal model (in this case, a Control Flow Automaton, CFA) can introduce semantic discrepancies and reduce verification efficiency. This additional transformation layer may obscure the original hardware semantics and complicate the verification process.
 
 \paragraph{Proposed solution.} By implementing a \textsc{Btor2} frontend in \textsc{Theta}, a modular and extensible model checking framework, I aim to:
 \begin{itemize}

@@ -73,7 +73,7 @@ A \emph{sort} can be one of two types: a bit-vector of arbitrary width~$w$, deno
 
 A \emph{node} may correspond to an \emph{input}, a \emph{state}, or the \emph{result} of applying an operator to other nodes. Inputs represent external signals provided to the \textsc{Btor2} circuit, while states correspond to the circuit's memory elements. Typically, inputs have bit-vector types, whereas states may be either bit-vector or array types. In this report I will only focus on the bit-vector cases.
 
-Operators serve as the fundamental building blocks of a \textsc{Btor2} circuit. Each operator takes arguments of specific types and produces a result of a well-defined type. The general syntax for defining a BTOR2 operator is:
+Operators serve as the fundamental building blocks of a \textsc{Btor2} circuit. Each operator takes arguments of specific types and produces a result of a well-defined type. The general syntax for defining a \textsc{Btor2} operator is:
 
 \[
 \langle \text{nid} \rangle\ \langle \text{op} \rangle\ \langle \text{sid} \rangle\ \langle \text{nid}_1 \rangle\ [\langle \text{nid}_2 \rangle\ [\langle \text{nid}_3 \rangle]]
