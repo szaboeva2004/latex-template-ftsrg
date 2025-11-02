@@ -1,7 +1,6 @@
 \chapter{BTOR2CFA: Implementation of a Direct BTOR2-to-CFA Translation for Verification}
 
-In~\autoref{sec:motivation}, I discuss the motivation behind this work. Next, ~\autoref{sec:implementation} describes in detail the transformation implemented within Theta and presents illustrative examples. 
-%Finally, ~\autoref{sec:cFrontend} explains the approach used to compare the direct and indirect transformations.
+In~\autoref{sec:motivation}, I discuss the motivation behind this work. Next, ~\autoref{sec:implementation} describes in detail the transformation implemented within Theta and presents illustrative examples. Finally, ~\autoref{sec:cFrontend} explains the approach used to compare the direct and indirect transformations.
 
 \section{Motivation}\label{sec:motivation}
 
@@ -63,17 +62,14 @@ The transformation process maps:
 
 The resulting CFA naturally captures the cyclic behavior of the hardware circuit as a graph loop, enabling efficient reachability analysis using Theta's verification algorithms.
 
-% \section{Comparison between direct and indirect transformation}\label{sec:cFrontend}
+\section{Comparison between direct and indirect transformation}\label{sec:cFrontend}
 
-% Theta's existing C frontend (c2CFA) provides a reference point for evaluating the BTOR2XCFA approach. The C frontend transforms C programs into CFAs through a multi-step process that handles C-specific constructs like pointers, dynamic memory, and function calls.
+My work introduces a direct transformation methodology from \textsc{BTOR2} to Control-Flow Automata (CFA), as opposed to conventional indirect transformation workflows. This distinction has significant implications for both semantic fidelity and verification efficiency.
 
-% \paragraph{Comparison with BTOR2XCFA}
-% While both frontends produce CFAs for verification, key differences include:
-% \begin{itemize}
-%     \item \textbf{Semantic preservation}: BTOR2XCFA maintains precise bit-vector semantics, while c2CFA must handle C's implementation-defined behaviors
-%     \item \textbf{Cycle representation}: BTOR2XCFA naturally expresses hardware cycles as graph loops, whereas c2CFA must model software loops
-%     \item \textbf{Type system}: BTOR2XCFA directly supports arbitrary-width bit-vectors, while c2CFA works with C's fixed-width types
-%     \item \textbf{Optimization opportunities}: BTOR2XCFA enables circuit-specific optimizations not applicable to general C programs
-% \end{itemize}
+The direct transformation approach establishes a one-to-one mapping from hardware circuits to formal verification models, aiming to preserve the native semantics of the hardware description more faithfully. By eliminating intermediate translation steps, this method maintains the structural integrity of the original circuit design and enables the exploitation of hardware-specific patterns that might otherwise be lost in translation-based workflows.
 
-% This comparative foundation enables the evaluation presented in Chapter 4, where we assess the efficiency differences between direct BTOR2 transformation and translation-based approaches.
+In contrast, indirect transformation approaches introduce additional abstraction layers that can obscure the original hardware semantics. Translating hardware into software-oriented representations may result in conceptual mismatches -- such as between hardware cycles and software loops, arbitrary-width bit-vectors and fixed-width data types, or synchronous hardware timing and sequential software execution. These discrepancies may accumulate through successive translation steps, introducing artifacts that complicate the verification process.
+
+The choice of transformation pathway can also influence the resulting model's complexity and performance. A direct transformation tends to yield more compact and semantically accurate representations, closely reflecting the inherent structure of the hardware. In comparison, indirect approaches may produce more verbose models that require additional control-flow constructs to emulate hardware behavior within software paradigms.
+
+This comparative perspective forms the foundation for evaluating whether direct transformation methodologies can address the inefficiencies and semantic distortions of translation-based workflows, thereby providing deeper insight into how transformation strategies impact the accuracy and efficiency of hardware verification.
