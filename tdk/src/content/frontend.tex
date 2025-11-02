@@ -1,35 +1,84 @@
-\chapter{The transformation from BTOR2 to (X)CFAs \todo{Or just simply Implementation?}}
+\chapter{BTOR2XCFA: Direct Transformation to Verification}
 
 \section{Overview}
-\todo{Csak hogy ne legyen elfelejtve}
+
+This chapter presents the design and implementation of BTOR2XCFA, a direct transformation from BTOR2 circuits to Control-Flow Automata (CFA) within the Theta model checking framework. The approach eliminates intermediate translation steps, enabling more efficient verification of hardware designs while preserving precise bit-vector semantics.
 
 \section{Motivation}\label{sec:motivation}
 
-\section{Theta}\label{sec:theta}
+As discussed in previous chapters, existing translation-based approaches like Btor2C introduce additional transformation layers that may impact verification efficiency and introduce semantic discrepancies. The direct BTOR2-to-CFA transformation proposed in this work addresses these limitations by:
+\begin{itemize}
+    \item Eliminating the intermediate C translation step
+    \item Preserving native BTOR2 semantics through direct mapping to SMT solver types
+    \item Enabling BTOR2-specific optimizations directly on the CFA representation
+    \item Providing a unified framework for both hardware and software verification
+\end{itemize}
 
-Regarding the implementation, I chose Theta~\cite{theta}, a modular and extensible model checking framework developed by the Critical Systems Research Group at the Budapest University of Technology and Economics, as the target platform for integrating a BTOR2 frontend.
+\section{Theta Framework}\label{sec:theta}
 
-The main advantage of Theta is its support for the combination of various abstract domains, interpreters, and strategies for abstraction and refinement, applied to models of various formalisms with higher level language front-ends (e.g. for C programs, or in my case BTOR2 circuits).
+The implementation is built upon Theta~\cite{theta}, a modular and extensible model checking framework developed by the Critical Systems Research Group at the Budapest University of Technology and Economics. Theta's architecture provides several key advantages for this work:
 
-To begin, I defined an unofficial BTOR2 grammar using ANTLR4~\cite{antlr}, a powerful parser generator widely adopted in both academia and industry for constructing interpreters, compilers, and domain-specific languages.
+\begin{itemize}
+    \item Support for multiple abstract domains and refinement strategies
+    \item Configurable interpreters and analysis algorithms
+    \item Extensible frontend architecture for different input languages
+    \item Robust CEGAR-based reachability analysis capabilities
+\end{itemize}
 
-Theta supports abstraction-refinement based reachability analysis. In my project, I worked with XCFA models—an extension of Control Flow Automata (CFA) that incorporates procedures and concurrency - but focused primarily on the CFA subset. This allowed me to apply Theta's robust CEGAR-based algorithms for reachability checking.
+Theta's existing support for C programs through its c2CFA frontend provided a solid foundation for implementing the BTOR2 frontend, allowing comparative evaluation of different transformation workflows.
 
+\paragraph{Implementation Approach} 
+The implementation began with defining an unofficial BTOR2 grammar using ANTLR4~\cite{antlr}, a widely-adopted parser generator for constructing domain-specific languages. This grammar enables systematic parsing of BTOR2 circuits and extraction of circuit elements for transformation.
 
+In this project, I primarily worked with the CFA subset of Theta's extended XCFA models, which incorporate procedures and concurrency. This focus allowed leveraging Theta's CEGAR-based algorithms for reachability checking while maintaining compatibility with existing analysis components.
 
-\section{BTOR2 frontend in Theta}
-\todo{Yap what is Theta and how wondeful the many fronetnds are}
+\section{Design and Implementation of the BTOR2 Frontend in Theta}
 
+Control-Flow Automata provide a natural representation for sequential circuits through their directed graph structure. The transformation from BTOR2 to CFA follows a systematic mapping where:
 
-\subsection{Walkthrough of transformation to CFA}
-% What elemnts does BTOR2 have
-% Which locations are what
-% What are on edges
-% reachability testing
-% Bad properties
+\begin{itemize}
+    \item \textbf{BTOR2 states} become CFA locations representing circuit control points
+    \item \textbf{BTOR2 operations} define edges between locations, encoding state transitions
+    \item \textbf{BTOR2 inputs} map to non-deterministic value assignments
+    \item \texttt{init} operations define initial states and values
+    \item \texttt{next} operations specify state transitions between clock cycles
+    \item \texttt{bad} properties mark error locations for reachability analysis
+\end{itemize}
 
-\subsubsection{Example BTOR2 to CFA}
+This mapping enables Theta to perform exhaustive reachability analysis, exploring all possible execution paths to determine whether error states are reachable from initial configurations.
 
-\section{C frontend in Theta}
+\subsection{Example BTOR2 to CFA Transformation}
 
-\todo{Comparison between a c2CFA and BTOR2XCFA}
+Figure~\ref{fig:btor2xcfa} illustrates the direct transformation from the count2.btor2 example to a simplified CFA. The BTOR2 circuit implements a 3-bit counter that increments each cycle and triggers a bad state when reaching the value 111.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/btor2xcfa.drawio.pdf}
+    \caption{Simplified CFA from the count2.btor2 example}
+    \label{fig:btor2xcfa}
+\end{figure}
+
+The transformation process maps:
+\begin{itemize}
+    \item The initial state assignment ($s_3 := 000$) from the \texttt{init} operation
+    \item The increment operation ($n_6 := s_3 + 001$) as a computation edge
+    \item The state update ($s_3 := n_6$) from the \texttt{next} operation
+    \item The safety condition ($[s_3 == 111]$) from the \texttt{bad} property
+\end{itemize}
+
+The resulting CFA naturally captures the cyclic behavior of the hardware circuit as a graph loop, enabling efficient reachability analysis using Theta's verification algorithms.
+
+\section{C Frontend in Theta}
+
+Theta's existing C frontend (c2CFA) provides a reference point for evaluating the BTOR2XCFA approach. The C frontend transforms C programs into CFAs through a multi-step process that handles C-specific constructs like pointers, dynamic memory, and function calls.
+
+\paragraph{Comparison with BTOR2XCFA}
+While both frontends produce CFAs for verification, key differences include:
+\begin{itemize}
+    \item \textbf{Semantic preservation}: BTOR2XCFA maintains precise bit-vector semantics, while c2CFA must handle C's implementation-defined behaviors
+    \item \textbf{Cycle representation}: BTOR2XCFA naturally expresses hardware cycles as graph loops, whereas c2CFA must model software loops
+    \item \textbf{Type system}: BTOR2XCFA directly supports arbitrary-width bit-vectors, while c2CFA works with C's fixed-width types
+    \item \textbf{Optimization opportunities}: BTOR2XCFA enables circuit-specific optimizations not applicable to general C programs
+\end{itemize}
+
+This comparative foundation enables the evaluation presented in Chapter 4, where we assess the efficiency differences between direct BTOR2 transformation and translation-based approaches.

@@ -1,11 +1,9 @@
-\chapter{Background}
+\chapter{Background}\label{chapter:bg}
 
 This chapter provides an overview of the fundamental concepts relevant to this report.
 First, \autoref{sec:mc} introduces model checking, the central verification technique underlying this work.
 Next, \autoref{sec:cfa} presents control-flow automata, the modeling formalism employed throughout the project.
 Finally, \autoref{sec:btor2} describes the essential components of the BTOR2 language used in the implementation. For a complete description of the BTOR2 syntax, the reader is referred to the original publication~\cite{btor2}.
-
-\todoZs{Summarize bg}
 
 \section{Model Checking}\label{sec:mc}
 
@@ -46,7 +44,7 @@ where
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.5\textwidth]{figures/cfa_simple.drawio.pdf}
+  \includegraphics[width=0.75\textwidth]{figures/cfa_simple.drawio.pdf}
   \caption{Simple representation of a Control-Flow Automata (CFA).}
   \label{fig:cfa}
 \end{figure}
@@ -66,12 +64,6 @@ Hardware model checking is a verification technique used to ensure that digital 
 
 In this domain, the goal is to check whether a hardware model -- typically represented as a sequential circuit -- satisfies certain logical properties. A sequential circuit is a digital system composed of combinational logic (which determines outputs based solely on current inputs) and memory elements such as flip-flops or registers (which store the system's state across clock cycles). Verification then involves exploring the circuit's possible state transitions over time to ensure that unsafe or undesired (\verb|bad|) states are never reachable. In the context of model-checking that is called \textit{reachability safety}.
 
-% Btor2: 
-% what is it (and maybe try to explain in 1-2 sentences what all the words in it's description mean)
-% AIGER successor
-% HWMCC: what is HWMCC; it uses btor2 as official format
-% btor2 example
-% add a subsection on sorts, and maybe mention that we will focus on bitvectors only in this work
 
 The Hardware Model Checking Competition (HWMCC)~\cite{hwmcc} serves as a benchmark for evaluating formal verification tools for hardware systems. A key innovation supporting this effort is BTOR2~\cite{btor2}, a word-level model checking format designed for bit-precise modeling of word-level sequential circuits.
 The BTOR2 language extends the previous bit-level AIGER~\cite{AIGER} format with higher-level abstractions, making it ideal for various verification techniques. It introduces a simple, sorted, line-based syntax that is easy to parse and aligns with SMT-LIB~\cite{SMT-LIB} semantics for bit-vectors and arrays.
@@ -137,8 +129,6 @@ The example is taken from the official BTOR2 repository. The file is named count
 11 bad 10
 \end{lstlisting}
 
-% \todoZs{I would put this whole thing into a description (\url{https://www.overleaf.com/learn/latex/Lists\#The\_description\_environment}), where each label is "Node x" or something like that - whatever looks good and makes sense}
-
 At the beginning of the circuit, node 1 declares a bit-vector of width 3 \verb|sort bitvec 3|, which serves as the type for all 3-bit values used throughout the circuit. This will have a sort id or \verb|sid| of '1' which will be used to declare registers and operations.
 
 Node 2 defines a constant zero \verb|zero 1|, which produces the bit-vector \verb|000|. Following this, node 3 introduces a state variable of sort 1 (3 bits), representing the main state of the circuit.
@@ -153,14 +143,33 @@ Node 10 defines a comparison between the current counter value and the maximum v
 
 In summary, this BTOR2 circuit models a 3-bit counter that increments with each step and triggers a bad state when it reaches 111. This design could be used in formal verification to prove that the system avoids overflow, or alternatively, to find the point at which it does. The clear structure and modular nature of BTOR2 make it suitable for such sequential hardware modeling and property checking.
 
-% \subsection{Btor2C}
+\section{Related work}
 
-% \todoZs{structure in latex comments}
-% % what is Btor2C, what does it do
-% % why is it useful (in a bit more detail? see abstract, I think we talked about this more there, maybe not in the final version, idk)
-% % an example of a C program from a btor2 circuit (C can be simplified, just mention that)
+\subsection{The Theta Framework and C Verification} 
+The Theta framework [22] serves as the foundation for this work, providing a modular, extensible platform for model checking developed at the Budapest University of Technology and Economics. Theta employs abstraction-refinement-based reachability analysis and supports multiple formalisms through its frontend architecture. The framework's existing C frontend (c2CFA) transforms C programs into Control-Flow Automata (CFA), enabling various verification algorithms to operate on a unified intermediate representation. Theta's support for CEGAR (Counterexample-Guided Abstraction Refinement) and configurable abstract domains makes it particularly suitable for adapting to different verification domains.
 
-% Btor2C~\cite{btor2c} is a tool that translates Btor2 hardware models into equivalent C programs. This allows software verification tools to analyze hardware designs, bridging the gap between hardware and software verification.
-% \todoZs{you don't need to talk about your work yet - the reader has no idea what your implementation is yet anyways - but that's for later} In my implementation, I focused on bit-vectors and their related functions and definitions, leveraging the expressive power of BTOR2 to model and verify small, bit-precise sequential systems.
+\subsection{Btor2C and Translation-Based Workflows}
 
-% \todoZs{So far it was clear what we need to introduce - but jumping to Theta next seems to make a hole here to me - we will need to think about what else needs to be introduced - but maybe do that while starting to write the next chapter(s) - I think a lot of stuff will come up}
+Btor2C [5] represents the state-of-the-art in hardware-to-software translation for verification purposes. This tool systematically converts BTOR2 circuits into C programs, enabling software verification tools to analyze hardware designs indirectly. The translation workflow allows leverage of sophisticated software verification techniques—such as those in CPAChecker [3] and ESBMC [16]—on hardware circuits. Empirical results have demonstrated that this approach can uncover bugs that dedicated hardware verifiers like ABC [9] and AVR [17] miss under identical time constraints.
+
+However, the Btor2C approach introduces a multi-step translation process: BTOR2 → C → CFA → verification. Each transformation step potentially introduces semantic discrepancies and optimization barriers. Furthermore, the translation must bridge fundamental differences between hardware and software paradigms, particularly regarding arbitrary-width bit-vector types and cyclic behavior representation.
+
+\subsection{Comparative Analysis of Verification Workflows}
+
+Existing verification workflows can be categorized into two main approaches:
+
+\subsubsection{Direct Hardware Verification}
+\begin{itemize}
+    \item \textbf{Tools}: ABC, AVR
+    \item \textbf{Path}: BTOR2 $\rightarrow$ direct verification
+    \item \textbf{Advantages}: Native hardware semantics, optimized for circuit structures
+    \item \textbf{Limitations}: May not benefit from software verification advances
+\end{itemize}
+
+\subsubsection{Translation-Based Verification}
+\begin{itemize}
+    \item \textbf{Tools}: Btor2C + software verifiers
+    \item \textbf{Path}: BTOR2 $\rightarrow$ C $\rightarrow$ CFA $\rightarrow$ verification
+    \item \textbf{Advantages}: Access to software verification techniques
+    \item \textbf{Limitations}: Additional translation layer, potential semantic gaps
+\end{itemize}

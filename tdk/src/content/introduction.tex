@@ -1,21 +1,33 @@
 %----------------------------------------------------------------------------
 \chapter{\bevezetes}
 %----------------------------------------------------------------------------
+Over the past decade, our understanding of and techniques for hardware verification have evolved significantly. Traditionally, hardware verification relied on simulation, where system behavior is tested against expected outcomes. While effective for small designs, simulation cannot guarantee full coverage and often fails to expose corner cases in complex circuits.
 
-In recent years, the \textit{verification and validation of safety-critical and reliable systems} have gained increasing importance. Ensuring the correctness of both software and hardware components has become a central challenge in modern system development. At the foundation of these efforts lies \textbf{formal verification}, a field that provides mathematically rigorous methods for proving system correctness. Among its various techniques, \textbf{model checking}~\cite{modelChecking}\cite{systemEngineering} has emerged as one of the most prominent and widely used approaches.
+To overcome these limitations, \textbf{formal verification} uses mathematical and logical techniques to prove or disprove the correctness of hardware designs. The main approaches are \emph{theorem proving}, \emph{equivalence checking}, and \emph{model checking}, I will focus on the latter, because it is the most widely applied for sequential hardware. Model checking automatically determines whether a design satisfies its formal specification or produces a counterexample. Typically, the design is represented as a \emph{transition system}, and \emph{invariant verification} ensures that given properties hold in all reachable states.
 
-There exists a wide range of \textbf{software and hardware verification tools}, many of which rely on transforming source languages into \textit{intermediate representations (IRs)} to enable analysis by different model checkers. This approach enhances interoperability and allows existing verification tools to be applied across multiple domains.
+Recent research has shown that translating hardware models into software and verifying them with software model checkers can reveal more bugs than even state-of-the-art hardware analyzers such as ABC or AVR~\cite{ABC-hardware, AVR, hw_verification_using_sw}. The creators of the original idea peformed a transformation from $Verilog$ to $C$. Their experimental results showed that by using software analyzers the model checking process could be more than an order of magnitude faster. 
 
-In the context of \textbf{hardware verification}, a well-known benchmark and competition is the \textit{Hardware Model Checking Competition (HWMCC)}~\cite{hwmcc}. Within this community, the \textbf{AIGER}~\cite{AIGER} format was introduced as a bit-level representation for hardware circuits. Although AIGER remains widely used, it has been largely superseded by \textbf{BTOR2}, a \textit{word-level model checking format} that describes circuits in a bit-precise yet higher-level manner. BTOR2 has gained popularity due to its \textbf{fixed and unambiguous semantics}, which allow tool developers to concentrate more on analysis techniques rather than dealing with ambiguous interpretations of the input format.
+Ever since then, several approaches have aimed to translate hardware description languages into higher-level software representations, allowing existing software verifiers—such as \textsc{CPAChecker}~\cite{cpachecker} and \textsc{ESBMC}~\cite{esbmc}—to perform model checking indirectly. One notable effort is \textsc{Btor2C}~\cite{btor2c}, which converts \textsc{Btor2} circuits into C programs, enabling a wide range of software verification tools to analyze them.
+\textsc{Btor2} has become the de facto standard intermediate representation for hardware model checking, officially adopted as the input format of the Hardware Model Checking Competition (HWMCC). It provides fixed, unambiguous semantics and aligns closely with SMT-LIB~\cite{SMT-LIB}, making it a robust intermediate format for bit-level languages such as AIGER and Verilog.
 
-While several \textbf{hardware model checkers} natively support BTOR2, research has shown that \textit{translating BTOR2 models into software-oriented languages}, such as C, can sometimes reveal additional errors. One such tool, \textbf{Btor2C}~\cite{btor2c}, enables this cross-domain analysis by bridging hardware and software verification, allowing hardware circuits to be analyzed by \textbf{software model checkers}. Further translation pipelines also exist, for example converting \textit{Verilog~$\rightarrow$~BTOR2~$\rightarrow$~C}, making it possible to verify hardware descriptions using software analysis tools.
+\section{Motivation}
 
-However, introducing Btor2C into the verification workflow adds \textbf{an additional translation step}, which may impact both performance and correctness. Each transformation introduces the possibility of semantic mismatches or implementation errors, and excessive conversion may reduce efficiency due to format-specific optimizations. Moreover, \textit{fundamental differences between hardware and software representations} -- such as arbitrary-width bit-vector types in BTOR2 -- make these translations nontrivial. Although Btor2C has been empirically validated, the transformation process remains prone to subtle semantic discrepancies.
+While \textsc{Btor2C} enables indirect verification, it introduces an additional translation step into C, which can reduce efficiency and increase the risk of transformation errors. Each intermediate step adds complexity and may hinder analysis performance due to redundant optimizations or semantic mismatches.
+Moreover, hardware and software differ fundamentally—for instance, \textsc{Btor2} supports arbitrary-width bit-vector types that have no direct C equivalent. Although empirically validated, \textsc{Btor2C}’s translation remains nontrivial and potentially error-prone.
 
-\paragraph{Motivation} Currently, \textbf{no unified tool} exists that can directly perform model checking on both C programs and BTOR2 circuits. As mentioned above, repeated translations can introduce inefficiencies and semantic inconsistencies. To better understand the impact of such transformations, I conducted a \textbf{comparative analysis} focusing on the \textbf{Btor2C translation} and my own \textbf{direct transformation} from BTOR2 to a widely used formalism in software model checking -- \textbf{Control Flow Automata (CFA)}~\cite{cfa}. 
+To address these issues, this work implements a direct transformation from \textsc{Btor2} to control-flow automata (CFA) within the Theta model checking framework. This approach preserves the exact semantics of bit-vectors through the SMT solver, naturally represents cyclic hardware behavior as graph loops, and enables \textsc{Btor2}-specific optimizations directly on the CFA—eliminating the need for intermediate C code and improving overall analysis efficiency.
 
-The goal of this analysis is to evaluate whether verifying hardware descriptions through software-oriented analyzers provides practical benefits, and to what extent the additional translation steps affect verification performance and accuracy.
+The objective of this report is to conduct a comparative analysis and assess whether a dedicated \textsc{Btor2} frontend offers superior efficiency compared to translation-based verification workflows.
 
-\paragraph{Contribution} As part of this work, I \textbf{implemented a BTOR2 frontend} for the \textbf{abstraction-based model checking framework Theta}. My contribution includes a \textbf{BTOR2-to-XCFA parser pipeline} fully integrated into Theta. This parser reads BTOR2 files and constructs an \textbf{Extended Control Flow Automaton (XCFA)}, enabling Theta's reachability analysis to verify \textbf{hardware-like systems} expressed in BTOR2.
+\section{Contributions}
 
-The implementation focuses on supporting \textbf{bit-vector operations} and modeling \textbf{simple sequential systems}, such as counters and state machines. With this integration, the Theta framework can now verify BTOR2 models using the same \textbf{formal reasoning techniques} that were previously applicable only to software systems.
+My work is structured as follows:
+
+\begin{itemize}
+\item I propose
+\item i
+\item L
+\item o
+\item V
+\item E
+\end{itemize}

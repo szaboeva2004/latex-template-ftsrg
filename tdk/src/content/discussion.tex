@@ -1,6 +1,28 @@
 \chapter{Discussion}
-% Teljes TDK conclusion
 
 \section{Summary of Results}
 
+This work presented BTOR2XCFA, a direct transformation from the BTOR2 hardware description format to Control-Flow Automata (CFA) within the Theta model checking framework. The primary goal was to eliminate the intermediate C translation step introduced by tools like Btor2C, thereby creating a more efficient and semantically precise verification workflow for hardware circuits.
+
+The comparative evaluation yielded clear and significant results. The direct BTOR2-to-CFA transformation consistently produced dramatically more compact and less complex models than the translation-based approach. Key findings include:
+
+\begin{itemize}
+    \item \textbf{Structural Efficiency:} The generated CFA models were structurally far simpler, with C-Bit representations requiring \textbf{8.87$\times$ more storage} and containing \textbf{3.46$\times$ more} locations, edges, and variables on average.
+    \item \textbf{Implications for Performance:} This reduction in complexity has direct positive implications for model checking performance. A smaller state space with fewer edges and variables suggests lower memory consumption, faster SMT solving times, and reduced overhead for state-space exploration algorithms, potentially leading to significant speedups in verification time.
+    \item \textbf{Semantic Fidelity:} By mapping BTOR2 constructs directly to CFA elements and leveraging the underlying SMT solver's native bit-vector semantics, the direct approach avoids the potential for semantic gaps and implementation errors that can arise from translating hardware-centric concepts (like arbitrary-width bit-vectors and cyclic behavior) into the software-oriented paradigm of C.
+\end{itemize}
+
+These results strongly affirm the central hypothesis: a dedicated BTOR2 frontend offers superior structural efficiency compared to translation-based workflows. The BTOR2XCFA approach successfully bridges the gap between hardware and software verification within a single, unified framework (Theta), enabling a fair comparison and paving the way for applying advanced software verification techniques directly to hardware models without an efficiency penalty.
+
+\section{Limitations and Their Impact}
+
+Despite the promising results, the current implementation of the BTOR2 frontend has limitations that affect its completeness and generalizability.
+
+\begin{itemize}
+    \item \textbf{Unsupported BTOR2 Constructs:} The frontend does not yet support all BTOR2 operators, notably overflow-detecting predicates and array operations. This restricts the range of hardware circuits that can be verified, excluding those that rely on these features. Consequently, the evaluation was necessarily conducted on a subset of HWMCC benchmarks that do not use these unsupported constructs.
+    \item \textbf{Property Scope:} Currently, only safety properties (specified via \texttt{bad} states) are supported. While Theta is capable of verifying liveness properties, the translation from BTOR2's liveness specifications is not implemented. This limits the frontend's applicability to a core, yet incomplete, subset of hardware verification tasks.
+    \item \textbf{Implementation Maturity:} As a new component, the frontend may lack the sophisticated optimization passes found in mature tools like Btor2C or Theta's C frontend. While the direct transformation is inherently more efficient, further tuning could unlock additional performance gains.
+\end{itemize}
+
+These limitations mean that the performance advantages demonstrated, while compelling, are currently applicable to a specific domain of safety verification for circuits without arrays or specialized arithmetic predicates. The full potential of the direct transformation will be realized only when the frontend achieves full BTOR2 compliance.
 

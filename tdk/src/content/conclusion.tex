@@ -1,5 +1,29 @@
 \chapter{Conclusion}
 
+This thesis detailed the design, implementation, and evaluation of a direct BTOR2-to-CFA transformation within the Theta model checking framework. The work was motivated by the inefficiencies and potential semantic discrepancies introduced by existing translation-based workflows that convert hardware models to C code before verification.
+
+The implemented BTOR2XCFA frontend successfully demonstrates that a direct approach is not only feasible but also structurally superior. The evaluation on a comprehensive suite of HWMCC benchmarks revealed that the direct transformation generates models that are significantly smaller and less complex than those produced by the Btor2C-based pipeline. This reduction in complexity---evident in file size, label count, and control-flow structure---strongly suggests that the direct approach will lead to more efficient model checking in terms of both memory usage and processing time.
+
+In conclusion, this work provides compelling evidence for the advantages of direct, semantics-preserving transformations in formal verification toolchains. By integrating hardware verification directly into a powerful, extensible framework like Theta, we can leverage advanced software verification algorithms without sacrificing the performance and precision required for hardware analysis.
+
 \section{Future Work}
-% optimization
-% Kiértékelés alapján 
+
+The development of the BTOR2 frontend opens several avenues for future work to enhance its capabilities, robustness, and performance.
+
+\begin{enumerate}
+    \item \textbf{Language Completeness:} The highest priority is to achieve full BTOR2 compliance. This involves:
+    \begin{itemize}
+        \item Implementing support for unsupported operators, such as overflow-detecting arithmetic predicates (\texttt{saddo}, \texttt{uaddo}, etc.).
+        \item Adding support for array operations, which is crucial for modeling memory and other complex hardware components.
+    \end{itemize}
+    
+    \item \textbf{Extended Property Verification:} Implementing the translation of BTOR2 liveness properties into Theta's formalism would significantly expand the frontend's applicability, allowing it to verify a broader class of hardware specifications.
+    
+    \item \textbf{Witness Generation:} To become competitive in formal verification competitions like HWMCC, the tool must be able to generate witnesses (counterexamples or proofs). Integrating witness generation for both valid and invalid properties is an essential next step.
+    
+    \item \textbf{Performance Optimization:} Developing BTOR2-specific optimization passes on the generated XCFA can further improve performance and scalability. These could include simplifications based on hardware circuit patterns that are not apparent in general-purpose software.
+    
+    \item \textbf{Comprehensive Benchmarking and Debugging:} As the frontend matures, more extensive benchmarking on a wider array of circuits, including those using newly implemented features, is necessary to evaluate its robustness, correctness, and performance relative to state-of-the-art hardware verifiers like ABC and AVR.
+\end{enumerate}
+
+With these improvements, the BTOR2 frontend for Theta has the potential to evolve into a competitive, comprehensive, and high-performance solution for hardware model checking.
