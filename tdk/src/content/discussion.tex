@@ -78,7 +78,7 @@ This streamlined approach is particularly well-suited for hardware verification 
 
 An important observation from this comparison is the \textbf{optimization paradox}: the extensive optimization pipeline in the C frontend, while beneficial for native software verification, becomes counterproductive when processing hardware circuits. The additional transformations intended to improve performance actually contribute to the structural complexity that hinders verification efficiency.
 
-The success of the \textsc{Btor2} frontend demonstrates that for hardware verification, \textbf{semantic directness often outweighs optimization sophistication}. By avoiding the translation through C and its associated optimization overhead, the direct approach achieves better performance through structural simplicity rather than complex transformations.
+The success of the \textsc{Btor2} frontend demonstrates that for hardware verification, \textbf{semantic directness often outweighs optimization}. By avoiding the translation through C and its associated optimization overhead, the direct approach achieves better performance through structural simplicity rather than complex transformations.
 
 \section{Limitations and Their Impact}
 
