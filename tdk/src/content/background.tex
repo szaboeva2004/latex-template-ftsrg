@@ -88,9 +88,7 @@ This notation specifies that the node identified by \verb|nid| stores the result
 
 \subsubsection{Count2 Example}
 
-In \autoref{list:btor2} is a BTOR2 circuit that defines a simple finite state machine -- a 3-bit counter -- that starts from zero and increments by one at each time step. Each line defines a node in the circuit, such as a constant, state, operation, or property.
-
-The example is taken from the official BTOR2 repository. The file is named count2 to distinguish it from the corresponding count.btor example used in the previous BTOR format.
+In \autoref{list:btor2} is a BTOR2 circuit that defines a simple finite state machine -- a 3-bit counter -- that starts from zero and increments by one at each time step. \footnote{The example is taken from the official BTOR2 repository. The file is named count2 to distinguish it from the corresponding count.btor example used in the previous BTOR format.} Each line defines a node in the circuit, such as a constant, state, operation, or property.
 
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
@@ -129,17 +127,16 @@ The example is taken from the official BTOR2 repository. The file is named count
 11 bad 10
 \end{lstlisting}
 
-At the beginning of the circuit, node 1 declares a bit-vector of width 3 \verb|sort bitvec 3|, which serves as the type for all 3-bit values used throughout the circuit. This will have a sort id or \verb|sid| of '1' which will be used to declare registers and operations.
+The example circuit in~\autoref{list:btor2} has the following elements:
 
-Node 2 defines a constant zero \verb|zero 1|, which produces the bit-vector \verb|000|. Following this, node 3 introduces a state variable of sort 1 (3 bits), representing the main state of the circuit.
-
-The initial value of state '3' is specified in node 4, which uses the \verb|init| keyword to bind state 3 to start at constant 2, which is the \verb|000| bit-vector. The next input is defined in node 5 using \verb|one 1|, which denotes the constant \verb|001|.
-
-Node 6 defines an addition operation that adds 1 to the main state, resulting in node 6, the next value of the counter. This operation wraps around on overflow due to the fixed 3-bit width. Line 7 then uses the \verb|next| keyword to specify that in the next state, the counter should take the value of node 6, i.e., the incremented result.
-
-To define a property of interest, node 8 declares another constant: \verb|ones 1|, which represents the maximum value a 3-bit counter can hold—namely \verb|111|. Node 9 introduces a new sort of width 1, which is used for boolean-like signals such as equality checks.
-
-Node 10 defines a comparison between the current counter value and the maximum value \verb|111| using the \verb|eq| operator. This operation returns a 1-bit result: true (1) if the counter is at maximum, false (0) otherwise. Finally, node 11 marks this equality result as a bad state, which is a safety property violation. Hence, the circuit asserts that reaching the value 111 is undesirable or erroneous.
+\begin{description}
+  \item[Sorts (Types).] At the beginning of the circuit, node 1 declares a bit-vector of width 3 \verb|sort bitvec 3|, which serves as the type for all 3-bit values used throughout the circuit. This will have a sort id or \verb|sid| of '1' which will be used to declare registers and operations.
+  \item[Constants.] Node 2 defines a constant zero \verb|zero 1|, which produces the bit-vector \verb|000|. Following this, node 3 introduces a state variable of sort 1 (3 bits), representing the main state of the circuit.
+  \item[States.] The initial value of state '3' is specified in node 4, which uses the \verb|init| keyword to bind state 3 to start at constant 2, which is the \verb|000| bit-vector. The next input is defined in node 5 using \verb|one 1|, which denotes the constant \verb|001|.
+  \item[Operations.] Node 6 defines an addition operation that adds 1 to the main state, resulting in node 6, the next value of the counter. This operation wraps around on overflow due to the fixed 3-bit width. Line 7 then uses the \verb|next| keyword to specify that in the next state, the counter should take the value of node 6, i.e., the incremented result.
+  \item[Safety Properties.] To define a property of interest, node 8 declares another constant: \verb|ones 1|, which represents the maximum value a 3-bit counter can hold—namely \verb|111|. Node 9 introduces a new sort of width 1, which is used for boolean-like signals such as equality checks.
+  \item[Comparison.] Node 10 defines a comparison between the current counter value and the maximum value \verb|111| using the \verb|eq| operator. This operation returns a 1-bit result: true (1) if the counter is at maximum, false (0) otherwise. Finally, node 11 marks this equality result as a bad state, which is a safety property violation. Hence, the circuit asserts that reaching the value 111 is undesirable or erroneous. 
+\end{description}
 
 In summary, this BTOR2 circuit models a 3-bit counter that increments with each step and triggers a bad state when it reaches 111. This design could be used in formal verification to prove that the system avoids overflow, or alternatively, to find the point at which it does. The clear structure and modular nature of BTOR2 make it suitable for such sequential hardware modeling and property checking.
 
