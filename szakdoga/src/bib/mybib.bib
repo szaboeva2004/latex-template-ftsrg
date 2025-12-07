@@ -1,0 +1,360 @@
+@InProceedings{btor2,
+author="Niemetz, Aina
+and Preiner, Mathias
+and Wolf, Clifford
+and Biere, Armin",
+editor="Chockler, Hana
+and Weissenbacher, Georg",
+title="Btor2 , BtorMC and Boolector 3.0",
+booktitle="Computer Aided Verification",
+year="2018",
+publisher="Springer International Publishing",
+address="Cham",
+pages="587--595",
+abstract="We describe Btor2, a word-level model checking format for capturing models of hardware and potentially software in a bit-precise manner. This simple, line-based and easy to parse format can be seen as a sorted extension of the word-level format Btor. It uses design principles from the bit-level format Aiger and follows semantics of the Smt-Lib logics of bit-vectors with arrays. This intermediate format can be used in various verification flows and is perfectly suited to establish a word-level model checking competition. It is supported by our new open source model checker BtorMC, which is built on top of version 3.0 of our SMT solver Boolector. We further provide new word-level benchmarks on which these open source tools are evaluated.",
+isbn="978-3-319-96145-3"
+}
+
+@misc{antlr,
+  title={What's ANTLR},
+  author={Parr, Terence and Wells, Peter and Klaren, Ric and Craymer, Loring and Coker, Jim and Stanchfield, Scott and Mitchell, John and Flack, Chapman},
+  year={2004}
+}
+
+@inproceedings{theta,
+    author     = {T\'oth, Tam\'as and Hajdu, \'{A}kos and V\"or\"os, Andr\'as and Micskei, Zolt\'an and Majzik, Istv\'an},
+    year       = {2017},
+    title      = {Theta: a Framework for Abstraction Refinement-Based Model Checking},
+    booktitle  = {Proceedings of the 17th Conference on Formal Methods in Computer-Aided Design},
+    isbn       = {978-0-9835678-7-5},
+    editor     = {Stewart, Daryl and Weissenbacher, Georg},
+    pages      = {176--179},
+    doi        = {10.23919/FMCAD.2017.8102257},
+}
+
+@InProceedings{cfa,
+author="Beyer, Dirk
+and L{\"o}we, Stefan",
+editor="Cortellessa, Vittorio
+and Varr{\'o}, D{\'a}niel",
+title="Explicit-State Software Model Checking Based on CEGAR and Interpolation",
+booktitle="Fundamental Approaches to Software Engineering",
+year="2013",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="146--162",
+abstract="Abstraction, counterexample-guided refinement, and interpolation are techniques that are essential to the success of predicate-based program analysis. These techniques have not yet been applied together to explicit-value program analysis. We present an approach that integrates abstraction and interpolationbased refinement into an explicit-value analysis, i.e., a program analysis that tracks explicit values for a specified set of variables (the precision). The algorithm uses an abstract reachability graph as central data structure and a path-sensitive dynamic approach for precision adjustment. We evaluate our algorithm on the benchmark set of the Competition on Software Verification 2012 (SV-COMP'12) to show that our new approach is highly competitive. We also show that combining our new approach with an auxiliary predicate analysis scores significantly higher than the SV-COMP'12 winner.",
+isbn="978-3-642-37057-1"
+}
+
+@book{modelChecking,
+  title={Principles of model checking},
+  author={Baier, Christel and Katoen, Joost-Pieter},
+  year={2008},
+  publisher={MIT press}
+}
+
+@article{systemEngineering,
+  title={Model-based systems engineering: Motivation, current status, and research opportunities},
+  author={Madni, Azad M and Sievers, Michael},
+  journal={Systems Engineering},
+  volume={21},
+  number={3},
+  pages={172--190},
+  year={2018},
+  publisher={Wiley Online Library}
+}
+
+@inproceedings{btor2c,
+  title={Bridging hardware and software analysis with Btor2C: A word-level-circuit-to-C translator},
+  author={Beyer, Dirk and Chien, Po-Chun and Lee, Nian-Ze},
+  booktitle={International Conference on Tools and Algorithms for the Construction and Analysis of Systems},
+  pages={152--172},
+  year={2023},
+  organization={Springer}
+}
+
+@inproceedings{SMT-LIB,
+  title={The smt-lib standard: Version 2.0},
+  author={Barrett, Clark and Stump, Aaron and Tinelli, Cesare and others},
+  booktitle={Proceedings of the 8th international workshop on satisfiability modulo theories (Edinburgh, UK)},
+  volume={13},
+  pages={14},
+  year={2010}
+}
+
+@article{AIGER,
+  title={AIGER 1.9 and beyond},
+  author={Biere, Armin and Heljanko, Keijo and Wieringa, Siert},
+  year={2011}
+}
+
+@misc{Btor2MLIR,
+      title={Btor2MLIR: A Format and Toolchain for Hardware Verification}, 
+      author={Joseph Tafese and Isabel Garcia-Contreras and Arie Gurfinkel},
+      year={2023},
+      eprint={2309.09100},
+      archivePrefix={arXiv},
+      primaryClass={cs.LO},
+      url={https://arxiv.org/abs/2309.09100}, 
+}
+
+% BTOR2 semantic definitions
+@inproceedings{LPAR2024:Efficient_Simulation_Hardware_Model,
+  author    = {Joseph Tafese and Arie Gurfinkel},
+  title     = {Efficient Simulation for Hardware Model Checking},
+  booktitle = {Proceedings of 25th Conference on Logic for Programming, Artificial Intelligence and Reasoning},
+  editor    = {Nikolaj Bjørner and Marijn Heule and Andrei Voronkov},
+  series    = {EPiC Series in Computing},
+  volume    = {100},
+  publisher = {EasyChair},
+  bibsource = {EasyChair, https://easychair.org},
+  issn      = {2398-7340},
+  url       = {/publications/paper/FDRF},
+  doi       = {10.29007/rdbb},
+  pages     = {136-146},
+  year      = {2024}}
+
+  @inproceedings{ABC-hardware,
+  title={ABC: An academic industrial-strength verification tool},
+  author={Brayton, Robert and Mishchenko, Alan},
+  booktitle={International Conference on Computer Aided Verification},
+  pages={24--40},
+  year={2010},
+  organization={Springer}
+}
+
+@online{hwmcc,
+  author    = {Armin Biere and Norbert Froleyks and Mathias Preiner},
+  title     = {{HWMCC'25: Hardware Model Checking Competition 2025}},
+  year      = {2025},
+  url       = {https://hwmcc.github.io/2025/},
+  note      = {Accessed: 2025-10-17}
+}
+
+@incollection{bmc,
+  title={Bounded model checking},
+  author={Biere, Armin},
+  booktitle={Handbook of satisfiability},
+  pages={739--764},
+  year={2021},
+  publisher={IOS press}
+}
+
+@Inbook{MC,
+author="Emerson, E. Allen",
+editor="Grumberg, Orna
+and Veith, Helmut",
+title="The Beginning of Model Checking: A Personal Perspective ",
+bookTitle="25 Years of Model Checking: History, Achievements, Perspectives",
+year="2008",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="27--45",
+abstract="Model checking provides an automated method for verifying concurrent systems. Correctness specifications are given in temporal logic. The method hinges on an efficient and flexible graph-theoretic reachability algorithm. At the time of its introduction in the early 1980's, the prevailing paradigm for verification was a manual one of proof-theoretic reasoning using formal axioms and inference rules oriented towards sequential programs. The need to encompass concurrent programs, the desire to avoid the difficulties with manual deductive proofs, and the small model theorem for temporal logic motivated the development of model checking.",
+isbn="978-3-540-69850-0",
+doi="10.1007/978-3-540-69850-0_2",
+url="https://doi.org/10.1007/978-3-540-69850-0_2"
+}
+
+@inproceedings{modelChecking2,
+  title={Model checking},
+  author={Clarke, Edmund M},
+  booktitle={International conference on foundations of software technology and theoretical computer science},
+  pages={54--56},
+  year={1997},
+  organization={Springer}
+}
+
+@article{symbolicMC,
+  title={Symbolic model checking: 1020 states and beyond},
+  author={Burch, Jerry R and Clarke, Edmund M and McMillan, Kenneth L and Dill, David L and Hwang, Lain-Jinn},
+  journal={Information and computation},
+  volume={98},
+  number={2},
+  pages={142--170},
+  year={1992},
+  publisher={Elsevier}
+}
+
+@inproceedings{boundedMC,
+  title={Symbolic model checking without BDDs},
+  author={Biere, Armin and Cimatti, Alessandro and Clarke, Edmund and Zhu, Yunshan},
+  booktitle={International conference on tools and algorithms for the construction and analysis of systems},
+  pages={193--207},
+  year={1999},
+  organization={Springer}
+}
+
+@Inbook{statespaceexplosionproblem,
+author="Clarke, Edmund M.
+and Klieber, William
+and Nov{\'a}{\v{c}}ek, Milo{\v{s}}
+and Zuliani, Paolo",
+editor="Meyer, Bertrand
+and Nordio, Martin",
+title="Model Checking and the State Explosion Problem",
+bookTitle="Tools for Practical Software Verification: LASER, International Summer School 2011, Elba Island, Italy, Revised Tutorial Lectures",
+year="2012",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="1--30",
+abstract="Model checking is an automatic verification technique for hardware and software systems that are finite state or have finite state abstractions. It has been used successfully to verify computer hardware, and it is beginning to be used to verify computer software as well. As the number of state variables in the system increases, the size of the system state space grows exponentially. This is called the ``state explosion problem''. Much of the research in model checking over the past 30 years has involved developing techniques for dealing with this problem. In these lecture notes, we will explain how the basic model checking algorithms work and describe some recent approaches to the state explosion problem, with an emphasis on Bounded Model Checking.",
+isbn="978-3-642-35746-6",
+doi="10.1007/978-3-642-35746-6_1",
+url="https://doi.org/10.1007/978-3-642-35746-6_1"
+}
+
+@inproceedings{cTheta,
+  title={C for yourself: comparison of front-end techniques for formal verification},
+  author={Bajczi, Levente and {\'A}d{\'a}m, Zs{\'o}fia and Moln{\'a}r, Vince},
+  booktitle={Proceedings of the IEEE/ACM 10th International Conference on Formal Methods in Software Engineering},
+  pages={1--11},
+  year={2022}
+}
+
+
+@Article{hardware_MC,
+AUTHOR = {Cabodi, Gianpiero and Camurati, Paolo Enrico and Palena, Marco and Pasini, Paolo},
+TITLE = {Hardware Model Checking Algorithms and Techniques},
+JOURNAL = {Algorithms},
+VOLUME = {17},
+YEAR = {2024},
+NUMBER = {6},
+ARTICLE-NUMBER = {253},
+URL = {https://www.mdpi.com/1999-4893/17/6/253},
+ISSN = {1999-4893},
+ABSTRACT = {Digital systems are nowadays ubiquitous and often comprise an extremely high level of complexity. Guaranteeing the correct behavior of such systems has become an ever more pressing need for manufacturers. The correctness of digital systems can be addressed resorting to formal verification techniques, such as model checking. Currently, it is usually impossible to determine a priori the best algorithm to use given a verification task and, thus, portfolio approaches have become the de facto standard in model checking verification suites. This paper describes the most relevant algorithms and techniques, at the foundations of bit-level SAT-based model checking itself.},
+DOI = {10.3390/a17060253}
+}
+
+@INPROCEEDINGS{hw_verification_using_sw,
+  author={Mukherjee, Rajdeep and Kroening, Daniel and Melham, Tom},
+  booktitle={2015 IEEE Computer Society Annual Symposium on VLSI}, 
+  title={Hardware Verification Using Software Analyzers}, 
+  year={2015},
+  volume={},
+  number={},
+  pages={7-12},
+  keywords={Software;Hardware;Hardware design languages;Engines;Benchmark testing;Semantics;Cognition;Bounded Model Checking;Formal Verification;Netlist;RTL;Verilog;ANSI-C;Property Verification;Symbolic Simulation;SAT/SMT;Abstract Interpretation;Scalability},
+  doi={10.1109/ISVLSI.2015.107}}
+
+@InProceedings{AVR,
+author="Goel, Aman
+and Sakallah, Karem",
+editor="Biere, Armin
+and Parker, David",
+title="AVR: Abstractly Verifying Reachability",
+booktitle="Tools and Algorithms for the Construction and Analysis of Systems",
+year="2020",
+publisher="Springer International Publishing",
+address="Cham",
+pages="413--422",
+abstract="We present AVR, a push-button model checker for verifying state transition systems directly at the source-code level. AVR uses information embedded in the word-level syntax of the design representation to automatically perform scalable model checking by combining a novel syntax-guided abstraction-refinement technique with a word-level implementation of the IC3 algorithm. AVR provides independently-verifiable certificates that offer provable assurance and are easy to relate to the word-level system. Moreover, proof certificates can be further used in innovative ways to extract key design information and are useful in a growing number of applications.",
+isbn="978-3-030-45190-5"
+}
+
+@InProceedings{cpachecker,
+author="Beyer, Dirk
+and Keremoglu, M. Erkan",
+editor="Gopalakrishnan, Ganesh
+and Qadeer, Shaz",
+title="CPAchecker: A Tool for Configurable Software Verification",
+booktitle="Computer Aided Verification",
+year="2011",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="184--190",
+abstract="Configurable software verification is a recent concept for expressing different program analysis and model checking approaches in one single formalism. This paper presents CPAchecker, a tool and framework that aims at easy integration of new verification components. Every abstract domain, together with the corresponding operations, implements the interface of configurable program analysis (CPA). The main algorithm is configurable to perform a reachability analysis on arbitrary combinations of existing CPAs. In software verification, it takes a considerable amount of effort to convert a verification idea into actual experimental results --- we aim at accelerating this process. We hope that researchers find it convenient and productive to implement new verification ideas and algorithms using this flexible and easy-to-extend platform, and that it advances the field by making it easier to perform practical experiments. The tool is implemented in Java and runs as command-line tool or as eclipse plug-in. CPAchecker implements CPAs for several abstract domains. We evaluate the efficiency of the current version of our tool on software-verification benchmarks from the literature, and compare it with other state-of-the-art model checkers. CPAchecker is an open-source toolkit and publicly available.",
+isbn="978-3-642-22110-1"
+}
+
+@inproceedings{esbmc,
+author = {Gadelha, Mikhail R. and Monteiro, Felipe R. and Morse, Jeremy and Cordeiro, Lucas C. and Fischer, Bernd and Nicole, Denis A.},
+title = {ESBMC 5.0: an industrial-strength C model checker},
+year = {2018},
+isbn = {9781450359375},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3238147.3240481},
+doi = {10.1145/3238147.3240481},
+abstract = {ESBMC is a mature, permissively licensed open-source context-bounded model checker for the verification of single- and multi-threaded C programs. It can verify both predefined safety properties (e.g., bounds check, pointer safety, overflow) and user-defined program assertions automatically. ESBMC provides C++ and Python APIs to access internal data structures, allowing inspection and extension at any stage of the verification process. We discuss improvements over previous versions of ESBMC, including the description of new front- and back-ends, IEEE floating-point support, and an improved k-induction algorithm. A demonstration is available at <pre>https://www.youtube.com/watch?v=YcJjXHlN1v8</pre>.},
+booktitle = {Proceedings of the 33rd ACM/IEEE International Conference on Automated Software Engineering},
+pages = {888–891},
+numpages = {4},
+keywords = {{it k}-induction, Software model checking, Bug detection},
+location = {Montpellier, France},
+series = {ASE '18}
+}
+
+@inproceedings{cegar,
+  title={Counterexample-guided Cartesian abstraction refinement},
+  author={Seipp, Jendrik and Helmert, Malte},
+  booktitle={Proceedings of the International Conference on Automated Planning and Scheduling},
+  volume={23},
+  pages={347--351},
+  year={2013}
+}
+
+@inproceedings{imc,
+  title={Interpolation and SAT-based model checking},
+  author={McMillan, Kenneth L},
+  booktitle={International Conference on Computer Aided Verification},
+  pages={1--13},
+  year={2003},
+  organization={Springer}
+}
+
+@inproceedings{kind,
+  title={Checking safety properties using induction and a SAT-solver},
+  author={Sheeran, Mary and Singh, Satnam and St{\aa}lmarck, Gunnar},
+  booktitle={International conference on formal methods in computer-aided design},
+  pages={127--144},
+  year={2000},
+  organization={Springer}
+}
+
+@inproceedings{lbe,
+  title={Software model checking via large-block encoding},
+  author={Beyer, Dirk and Cimatti, Alessandro and Griggio, Alberto and Keremoglu, M Erkan and Sebastiani, Roberto},
+  booktitle={2009 Formal Methods in Computer-Aided Design},
+  pages={25--32},
+  year={2009},
+  organization={IEEE}
+}
+
+@inproceedings{Cimatti2013MathSAT5,
+  author    = {Alessandro Cimatti and Alberto Griggio and Bastiaan Joost Schaafsma and Roberto Sebastiani},
+  title     = {The MathSAT5 SMT Solver},
+  booktitle = {Tools and Algorithms for the Construction and Analysis of Systems (TACAS)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {7795},
+  pages     = {93--107},
+  publisher = {Springer},
+  year      = {2013},
+  doi       = {10.1007/978-3-642-36742-7_7}
+}
+
+@inproceedings{BLW19,
+  author    = {Dirk Beyer and Stefan L{\"o}we and Philipp Wendler},
+  title     = {Benchmarking and Resource Measurement for Software Verification},
+  booktitle = {Tools and Algorithms for the Construction and Analysis of Systems (TACAS)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {10806},
+  pages     = {160--177},
+  publisher = {Springer},
+  year      = {2018},
+  doi       = {10.1007/978-3-319-89963-3_10}
+}
+
+@inproceedings{VMCAI,
+  author    = {Dirk Beyer and Holger Schmidt and Markus Wehrheim},
+  title     = {Refinement Selection},
+  booktitle = {Verification, Model Checking, and Abstract Interpretation (VMCAI)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {5403},
+  pages     = {20--34},
+  publisher = {Springer},
+  year      = {2009},
+  doi       = {10.1007/978-3-540-93900-9_3}
+}

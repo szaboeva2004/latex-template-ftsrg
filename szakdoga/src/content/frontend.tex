@@ -1,0 +1,82 @@
+\chapter{BTOR2CFA: Implementation of a Direct BTOR2-to-CFA Translation for Verification}\label{chapter:btor2cfa}
+
+In~\autoref{sec:motivation}, I discuss the motivation behind this work. Next, ~\autoref{sec:implementation} describes in detail the transformation implemented within Theta and presents illustrative examples. Finally, ~\autoref{sec:cFrontend} explains the approach used to compare the direct and indirect transformations.
+
+\section{Motivation}\label{sec:motivation}
+
+\paragraph{Btor2C.} As discussed in previous chapters, numerous approaches have been proposed to verify hardware circuits using software analyzers. One notable example is \textit{Btor2C}~\cite{btor2c}, a tool that translates hardware descriptions into equivalent C programs. This translation bridges the gap between hardware and software verification by enabling the use of existing C verification tools.
+In contrast, my work focuses on implementing a dedicated hardware frontend directly within an existing software model checker, eliminating the need for translation into C.
+
+\paragraph{Problem statement.} Using C as an intermediate representation between \textsc{Btor2} and a formal model (in this case, a Control Flow Automaton, CFA) can introduce semantic discrepancies and reduce verification efficiency. This additional transformation layer may obscure the original hardware semantics and complicate the verification process.
+
+\paragraph{Proposed solution.} By implementing a \textsc{Btor2} frontend in \textsc{Theta}, a modular and extensible model checking framework, I aim to:
+\begin{itemize}
+    \item Eliminate the intermediate C translation step
+    \item Preserve native \textsc{BTOR2} semantics through direct mapping to SMT solver types
+    \item Enable \textsc{BTOR2}-specific optimizations directly on the CFA representation
+    \item Provide a unified framework for both hardware and software verification
+\end{itemize}
+
+\section{Design and Implementation of the BTOR2 Frontend in Theta}\label{sec:implementation}
+
+The implementation began with defining an unofficial \textsc{Btor2} grammar using ANTLR4~\cite{antlr}, a widely-adopted parser generator for constructing domain-specific languages. This grammar enables systematic parsing of BTOR2 circuits and extraction of circuit elements for transformation.
+
+Control-Flow Automata (CFA) naturally represent sequential circuits through their directed graph structure. In~\autoref{fig:basicCFA}, I present a schematic overview of this representation and explain how each step corresponds to a specific node. The transformation from \textsc{BTOR2} to CFA follows a systematic mapping, where:
+
+\begin{description}
+  \item[Constants.] The transformation begins by adding all constant nodes defined in the \textsc{BTOR2} model (e.g., \verb|const|, \verb|zero|, \verb|one|, \verb|ones|, \verb|max|) to the initial CFA edge. These constants serve as fixed symbolic values throughout the verification process.
+  \item[Initial states.] The \verb|init| keyword in \textsc{BTOR2} specifies initialization functions for state variables. In the CFA representation, these are defined on the subsequent edge, establishing the initial state configuration of the system.
+  \item[Havoc assignments] Nodes declared with the \verb|input| keyword, or state variables without an associated \verb|next| definition, are introduced after the initial state. These represent unconstrained inputs whose values may vary across different execution iterations.
+  \item[Operations.] Next, the transformation processes all operation nodes (\verb|add|, \verb|and|, \verb|eq|, etc.) in topological order, sequentially creating corresponding CFA edges and locations for each operation to preserve the computational dependencies of the circuit.
+  \item[Safety Properties.] After constructing all operations, the safety property is encoded. In this work, the \verb|bad| keyword is used to represent the reachability property under verification. If the \verb|bad| condition is satisfied, the CFA transitions to an error location; otherwise, execution continues.
+  \item[Next states.] Finally, if the safety property is not violated, all state variables defined with the \verb|next| keyword are updated accordingly, completing one iteration of the transition system.
+\end{description}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.75\textwidth]{figures/sematikus_cfa.drawio.pdf}
+  \caption{Schematic overview of the BTOR2CFA transformation process.}
+  \label{fig:basicCFA}
+\end{figure}
+
+This mapping enables Theta to perform exhaustive reachability analysis, exploring all possible execution paths to determine whether error states are reachable from initial configurations.
+
+\subsection{Example BTOR2 to CFA Transformation}
+
+Figure~\ref{fig:btor2xcfa} illustrates the direct transformation from the count2.btor2 example to a simplified CFA. The \textsc{Btor2} circuit implements a 3-bit counter that increments each cycle and triggers a bad state when reaching the value 111.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/btor2xcfa.drawio.pdf}
+    \caption{Simplified CFA from the count2.btor2 example}
+    \label{fig:btor2xcfa}
+\end{figure}
+
+The transformation process maps:
+\begin{itemize}
+    \item The initial state assignment ($s_3 := 000$) from the \texttt{init} operation
+    \item The increment operation ($n_6 := s_3 + 001$) as a computation edge
+    \item The state update ($s_3 := n_6$) from the \texttt{next} operation
+    \item The safety condition ($[s_3 == 111]$) from the \texttt{bad} property
+\end{itemize}
+
+The resulting CFA naturally captures the cyclic behavior of the hardware circuit as a graph loop, enabling efficient reachability analysis using Theta's verification algorithms.
+
+\section{Comparison between direct and indirect transformation}\label{sec:cFrontend}
+
+Implementing both the direct and indirect transformation approaches within the same verification framework provides a solid foundation for a fair and consistent evaluation of their efficiency. By integrating both workflows into a single tool, differences in performance or accuracy can be attributed primarily to the transformation methodology itself, rather than to unrelated implementation factors.
+
+This unified setup ensures that both transformations share the same underlying model checking infrastructure, solver configurations, and optimization mechanisms. As a result, any observed variation in verification time, memory consumption, or precision directly reflects the impact of the transformation strategy, rather than tool-specific behavior.
+
+In contrast, comparing two separate tools -- each with distinct architectures, heuristics, and optimization strategies -- introduces uncontrolled variables that may obscure the true effect of the transformation approach. Therefore, having both the direct and indirect transformations within the same environment enables a more reliable, controlled, and meaningful comparison of their respective trade-offs in verification performance and semantic fidelity.
+
+
+% My work introduces a direct transformation methodology from \textsc{BTOR2} to Control-Flow Automata (CFA), as opposed to conventional indirect transformation workflows. This distinction has significant implications for both semantic fidelity and verification efficiency.
+
+% The direct transformation approach establishes a one-to-one mapping from hardware circuits to formal verification models, aiming to preserve the native semantics of the hardware description more faithfully. By eliminating intermediate translation steps, this method maintains the structural integrity of the original circuit design and enables the exploitation of hardware-specific patterns that might otherwise be lost in translation-based workflows.
+
+% In contrast, indirect transformation approaches introduce additional abstraction layers that can obscure the original hardware semantics. Translating hardware into software-oriented representations may result in conceptual mismatches -- such as between hardware cycles and software loops, arbitrary-width bit-vectors and fixed-width data types, or synchronous hardware timing and sequential software execution. These discrepancies may accumulate through successive translation steps, introducing artifacts that complicate the verification process.
+
+% The choice of transformation pathway can also influence the resulting model's complexity and performance. A direct transformation tends to yield more compact and semantically accurate representations, closely reflecting the inherent structure of the hardware. In comparison, indirect approaches may produce more verbose models that require additional control-flow constructs to emulate hardware behavior within software paradigms.
+
+% This comparative perspective forms the foundation for evaluating whether direct transformation methodologies can address the inefficiencies and semantic distortions of translation-based workflows, thereby providing deeper insight into how transformation strategies impact the accuracy and efficiency of hardware verification.

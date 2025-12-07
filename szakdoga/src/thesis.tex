@@ -19,10 +19,10 @@
 % \newcommand{\vikkonzulensCVezeteknev}{}
 % \newcommand{\vikkonzulensCKeresztnev}{}
 
-\newcommand{\vikcim}{Impact of Hardware Circuit Transformations on Model Checking: A Comparative Analysis} % Cím
+\newcommand{\vikcim}{Direct Hardware Circuit Transformation for Model Checking: Implementation and Impact Evaluation} % Cím
 \newcommand{\viktanszek}{\bmemit} % Tanszék
-\newcommand{\vikdoktipus}{\tdk} % Dokumentum típusa (\bsc vagy \msc)
-\newcommand{\vikmunkatipusat}{TDK-t} % a "hallgató nyilatkozat" részhez: szakdolgozatot vagy diplomatervet
+\newcommand{\vikdoktipus}{\bsc} % Dokumentum típusa (\bsc vagy \msc)
+\newcommand{\vikmunkatipusat}{szakdolgozatot} % a "hallgató nyilatkozat" részhez: szakdolgozatot vagy diplomatervet
 
 \input{include/tdk-variables}
 \newcommand{\szerzoMeta}{\vikszerzoVezeteknev{} \vikszerzoKeresztnev} % egy szerző esetén
@@ -52,8 +52,8 @@
 
 %TODO Titlepage -- choose one from below
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%\include{include/titlepage}		   % Szakdolgozat/Diplomaterv címlap
-\include{include/titlepage-tdk}	% TDK címlap
+\include{include/titlepage}		   % Szakdolgozat/Diplomaterv címlap
+%\include{include/titlepage-tdk}	% TDK címlap
 %\include{include/titlepage-otdk}   % OTDK címlap
 
 
@@ -64,29 +64,13 @@
 
 % Declaration and Abstract
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%\include{include/declaration} %TODO Hallgatói nyilatkozat -- TDK és OTDK esetén törlendő!
+\include{include/declaration} %TODO Hallgatói nyilatkozat -- TDK és OTDK esetén törlendő!
 \include{content/abstract}    %TODO Összefoglaló -- TDK és OTDK esetén nem kötelező
 
 
 % The main part of the thesis
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 \pagenumbering{arabic}
-
-% 30-35 pages:
-% intro - 2 pg
-% bg - 5 pg
-% "content":
-% btor2 to cfa *transformation* - 10 pg
-% (not implementation/technology specific)
-  % - systematic description of what btor2 elements are transformed to what CFA elements (and what parts of the CFA) 
-  % - example 
-  % - example CFA vs Btor2C - compare
-% evaluation - 10 pg
-  % - comparing xcfas
-  % - comparing performance
-  % - cross-checking the two above 
-% related work - 2 pg
-% discussion and summary + future work - 2 pg
 
 %\include{content/abstract}
 \include{content/introduction}
