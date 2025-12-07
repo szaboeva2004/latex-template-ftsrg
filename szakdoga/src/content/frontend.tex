@@ -9,6 +9,13 @@ In contrast, my work focuses on implementing a dedicated hardware frontend direc
 
 \paragraph{Problem statement.} Using C as an intermediate representation between \textsc{Btor2} and a formal model (in this case, a Control Flow Automaton, CFA) can introduce semantic discrepancies and reduce verification efficiency. This additional transformation layer may obscure the original hardware semantics and complicate the verification process.
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.75\textwidth]{figures/my_contribution.drawio.pdf}
+  \caption{Workflow of direct and indirect transformation in software verification.}
+  \label{fig:indirect}
+\end{figure}
+
 \paragraph{Proposed solution.} By implementing a \textsc{Btor2} frontend in \textsc{Theta}, a modular and extensible model checking framework, I aim to:
 \begin{itemize}
     \item Eliminate the intermediate C translation step

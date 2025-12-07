@@ -1,9 +1,11 @@
 \chapter{Background}\label{chapter:bg}
 
-This chapter provides an overview of the fundamental concepts relevant to this report.
-First, \autoref{sec:mc} introduces model checking, the central verification technique underlying this work.
-Next, \autoref{sec:cfa} presents control-flow automata, the modeling formalism employed throughout the project.
-Finally, \autoref{sec:btor2} describes the essential components of the \textsc{Btor2} language used in the implementation. For a complete description of the \textsc{Btor2} syntax, the reader is referred to the original publication~\cite{btor2}.
+This chapter provides an overview of the fundamental concepts and tools relevant to my thesis.
+First,~\autoref{sec:mc} introduces model checking, the central verification technique underlying this work.
+Next,~\autoref{sec:cfa} presents control-flow automata, the modeling formalism employed throughout the project.
+\autoref{sec:btor2} describes the essential components of the \textsc{Btor2} language used in the implementation; for a complete description of the \textsc{Btor2} syntax, please refer to the original publication~\cite{btor2}.
+Subsequently,~\autoref{sec:bridge} discusses the motivation for applying software verification algorithms to hardware flows, highlighting the distinction between direct and indirect transformation approaches.
+Finally,~\autoref{sec:theta} introduces the \textsc{Theta} framework, which serves as the foundation for the implementation presented in this thesis.
 
 \section{Model Checking}\label{sec:mc}
 
@@ -19,7 +21,7 @@ While model checking is powerful, it suffers from the well-known \textbf{state-s
 \[
 2^{32} \cdot 2^{32} \cdot 2^{32} = 2^{96}
 \]
-possible input combinations, making exhaustive exploration computationally infeasible for large-scale systems. This challenge has motivated extensive research into more scalable techniques, such as symbolic model checking~\cite{symbolicMC}, abstraction and refinement methods\cite{boundedMC}, and SAT-based~\cite{SMT-LIB} approaches like IC3~\cite{ic3}.
+possible input combinations, making exhaustive exploration computationally infeasible for large-scale systems. This challenge has motivated extensive research into more scalable techniques, such as symbolic model checking~\cite{symbolicMC}, abstraction and refinement methods\cite{boundedMC}, and SAT-based~\cite{SMT-LIB} approaches.
 
 \section{Control-Flow Automata}\label{sec:cfa}
 
@@ -135,8 +137,29 @@ The example circuit in~\autoref{list:btor2} has the following elements:
   \item[Comparison.] Node 10 defines a comparison between the current counter value and the maximum value \verb|111| using the \verb|eq| operator. This operation returns a 1-bit result: true (1) if the counter is at maximum, false (0) otherwise. Finally, node 11 marks this equality result as a bad state, which is a safety property violation. Hence, the circuit asserts that reaching the value 111 is undesirable or erroneous. 
 \end{description}
 
-In summary, this \textsc{Btor2} circuit models a 3-bit counter that increments with each step and triggers a bad state when it reaches 111. This design could be used in formal verification to prove that the system avoids overflow, or alternatively, to find the point at which it does. The clear structure and modular nature of \textsc{Btor2} make it suitable for such sequential hardware modeling and property checking.
+In summary, this \textsc{Btor2} circuit models a 3-bit counter that increments with each step and triggers a bad state when it reaches \verb|111|. This design could be used in formal verification to prove that the system avoids overflow, or alternatively, to find the point at which it does. The clear structure and modular nature of \textsc{Btor2} make it suitable for such sequential hardware modeling and property checking.
 
-\section{The Theta Framework and C Verification} 
+\section{Bridging the Gap: Software Verification Algorithms in Hardware Flows}\label{sec:bridge}
 
-The Theta framework~\cite{theta,cTheta} serves as the foundation for this work, providing a modular, extensible platform for model checking. Theta employs abstraction-refinement-based reachability analysis and supports multiple formalisms through its frontend architecture. The framework's existing C frontend (c2XCFA) transforms C programs into an eXtended Control-Flow Automaton (XCFA), which extends the traditional CFA model with additional constructs such as function calls, thread creation, and synchronization primitives. This richer representation enables the analysis of more complex program behaviors while preserving a unified intermediate form on which different verification algorithms can operate. Theta’s support for CEGAR (Counterexample-Guided Abstraction Refinement)~\cite{cegar} and configurable abstract domains makes it particularly suitable for adapting to various verification domains.
+To leverage the advanced capabilities of modern software verification tools, hardware verification often employs an \emph{indirect transformation} strategy. In this workflow, hardware descriptions (such as \textsc{Btor2}) are translated into a software language, typically C, enabling the use of a wide array of software analyzers~\cite{btor2c}. The primary motivation for this approach is that the software verification domain has evolved techniques not always available in hardware solvers. Research has demonstrated that by translating hardware models to software, software model checkers can reveal bugs that elude even state-of-the-art hardware analyzers (such as ABC or AVR) and, in some instances, perform more than an order of magnitude faster.~\cite{hw_verification_using_sw}
+
+\autoref{fig:hw_sw} illustrates the distinction between these verification toolchains. In traditional hardware flows (left), high-level hardware description languages like Verilog -- which can contain ambiguities -- are lowered into precise, bit-level intermediate representations (IRs) such as AIGER or \textsc{Btor2}. These IRs are then fed into specialized hardware analyzers. 
+
+In contrast, the software-centric approach (right) introduces an additional translation step to C. This creates a dichotomy in verification methodologies:
+\begin{description}
+  \item[Direct Transformations:] The analyzer natively accepts the input model (e.g., a hardware analyzer reading AIGER, or a software analyzer reading C source code).
+  \item[Indirect Transformations:] The model undergoes a domain translation (e.g., \textsc{Btor2} to C) to bridge the gap between hardware semantics and software verification algorithms.
+\end{description}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.75\textwidth]{figures/hw_sw_analyzers.drawio.pdf}
+  \caption{Comparison of hardware and software model checking toolchains, distinguishing between direct hardware analysis and indirect translation to C.}
+  \label{fig:hw_sw}
+\end{figure}
+
+
+
+\section{The Theta Framework and C Verification}\label{sec:theta}
+
+The Theta framework~\cite{theta,cTheta} serves as the foundation for this work, providing a modular, extensible platform for model checking. Theta employs abstraction-refinement-based reachability analysis and supports multiple formalisms through its frontend architecture. The framework's existing C frontend (c2CFA) transforms C programs into a Control-Flow Automaton (CFA), which extends the traditional CFA model with additional constructs such as function calls, thread creation, and synchronization primitives. This richer representation enables the analysis of more complex program behaviors while preserving a unified intermediate form on which different verification algorithms can operate. Theta’s support for CEGAR (Counterexample-Guided Abstraction Refinement)~\cite{cegar} and configurable abstract domains makes it particularly suitable for adapting to various verification domains.
