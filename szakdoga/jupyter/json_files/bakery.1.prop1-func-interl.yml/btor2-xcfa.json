@@ -1,0 +1,3824 @@
+{
+  "name": "Btor2XCFA",
+  "unsafeUnrollUsed": false,
+  "vars": [],
+  "procedures": [
+    {
+      "name": "main",
+      "params": [],
+      "vars": [
+        {
+          "name": "state_6",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "state_8",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "state_10",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "state_12",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "state_14",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "state_16",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "state_18",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "state_20",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "state_23",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "state_25",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "state_27",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "state_29",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "state_31",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "state_33",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "state_35",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "state_37",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "state_39",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "state_41",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "state_43",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "ternary_47",
+          "type": "(Bv 32)"
+        },
+        {
+          "name": "ternary_48",
+          "type": "(Bv 32)"
+        },
+        {
+          "name": "binary_49",
+          "type": "(Bv 32)"
+        },
+        {
+          "name": "comparison_50",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_51",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "input_53",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "input_55",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "ternary_57",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "ternary_58",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "input_60",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "input_61",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "ternary_62",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "ternary_63",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "input_65",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_67",
+          "type": "(Bv 32)"
+        },
+        {
+          "name": "binary_68",
+          "type": "(Bv 32)"
+        },
+        {
+          "name": "slice_69",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "ternary_70",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "ternary_71",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "input_73",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_74",
+          "type": "(Bv 32)"
+        },
+        {
+          "name": "binary_75",
+          "type": "(Bv 32)"
+        },
+        {
+          "name": "slice_76",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "ternary_77",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "ternary_78",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "input_80",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_81",
+          "type": "(Bv 32)"
+        },
+        {
+          "name": "binary_82",
+          "type": "(Bv 32)"
+        },
+        {
+          "name": "slice_83",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "input_84",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "input_85",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "ternary_86",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "ternary_87",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "ternary_88",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "ternary_89",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "ternary_90",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "comparison_92",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "ternary_93",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "ternary_94",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "ternary_95",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "input_97",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_98",
+          "type": "(Bv 32)"
+        },
+        {
+          "name": "binary_99",
+          "type": "(Bv 32)"
+        },
+        {
+          "name": "slice_100",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "input_101",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "input_102",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "ternary_103",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "ternary_104",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "ternary_105",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "ternary_106",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "ternary_107",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "comparison_109",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "ternary_110",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "ternary_111",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "ternary_112",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "binary_114",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_115",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_117",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_118",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_120",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "input_121",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_122",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_123",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "input_124",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_125",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_127",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_128",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_130",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_131",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_133",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_134",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_136",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_137",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_139",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "input_140",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_141",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_142",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "input_143",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_144",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_146",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_147",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_149",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_150",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_152",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "comparison_154",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_155",
+          "type": "(Bv 32)"
+        },
+        {
+          "name": "comparison_156",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_157",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_158",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_159",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_160",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_161",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_162",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_163",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_164",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "comparison_166",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "comparison_168",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_169",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_170",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_171",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_172",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "ternary_173",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "comparison_174",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_175",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_176",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_177",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_178",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "comparison_179",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_180",
+          "type": "(Bv 32)"
+        },
+        {
+          "name": "comparison_181",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_182",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "comparison_183",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "comparison_184",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_185",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_186",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_187",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_188",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_189",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_190",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_191",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_192",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_193",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_194",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_195",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_196",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "comparison_197",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_198",
+          "type": "(Bv 32)"
+        },
+        {
+          "name": "comparison_199",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_200",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_201",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_202",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_203",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_204",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_205",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_206",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_207",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "comparison_208",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "comparison_209",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_210",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_211",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_212",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_213",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "ternary_214",
+          "type": "(Bv 8)"
+        },
+        {
+          "name": "comparison_215",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_216",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_217",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_218",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_219",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "comparison_220",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_221",
+          "type": "(Bv 32)"
+        },
+        {
+          "name": "comparison_222",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_223",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "comparison_224",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "comparison_225",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_226",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_227",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_228",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_229",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_230",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_231",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_232",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_233",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_234",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_235",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_236",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_237",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_238",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_239",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_240",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_241",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_242",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_243",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_244",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_245",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_246",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_247",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_248",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_249",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_250",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_251",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_252",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_253",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_254",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_255",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_256",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_257",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_258",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_259",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_260",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_261",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_262",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_263",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_264",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_265",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_266",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_267",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_268",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_269",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_270",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_271",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_272",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_273",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_274",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_275",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_276",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_277",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_278",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_279",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_280",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_281",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_282",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_283",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_284",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_285",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_286",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_287",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_288",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_289",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_290",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_291",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_292",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_293",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_294",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_295",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_296",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_297",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_298",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_299",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_300",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_301",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_302",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_303",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_304",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_305",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_306",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_307",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_308",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_309",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_310",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_311",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_312",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_313",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_314",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_315",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_316",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_317",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_318",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_319",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_320",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_321",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_322",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_323",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_324",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_325",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_326",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_327",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_328",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_329",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_330",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_331",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_332",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_333",
+          "type": "(Bv 1)"
+        },
+        {
+          "name": "binary_334",
+          "type": "(Bv 1)"
+        }
+      ],
+      "locs": [
+        {
+          "name": "main_init",
+          "initial": true,
+          "final": false,
+          "error": false,
+          "metadata": {
+            "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+            "content": {}
+          }
+        },
+        {
+          "name": "l9",
+          "initial": false,
+          "final": false,
+          "error": false,
+          "metadata": {
+            "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+            "content": {}
+          }
+        },
+        {
+          "name": "main_error",
+          "initial": false,
+          "final": false,
+          "error": true,
+          "metadata": {
+            "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+            "content": {}
+          }
+        }
+      ],
+      "edges": [
+        {
+          "source": "l9",
+          "target": "main_error",
+          "label": {
+            "type": "hu.bme.mit.theta.xcfa.model.SequenceLabel",
+            "metadata": {
+              "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+              "content": {}
+            },
+            "labels": [
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assume (\u003d binary_51 #b1))"
+              }
+            ]
+          },
+          "metadata": {
+            "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+            "content": {}
+          }
+        },
+        {
+          "source": "l9",
+          "target": "l9",
+          "label": {
+            "type": "hu.bme.mit.theta.xcfa.model.SequenceLabel",
+            "metadata": {
+              "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+              "content": {}
+            },
+            "labels": [
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assume (not (\u003d binary_51 #b1)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_57 (ite (\u003d input_55 #b1) #b00000001 state_6))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_58 (ite (\u003d input_53 #b1) #b00000000 ternary_57))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_62 (ite (\u003d input_61 #b1) #b00000001 state_8))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_63 (ite (\u003d input_60 #b1) #b00000000 ternary_62))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_67 (++ #b000000000000000000000000 state_16))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_68 (bvadd binary_67 #b00000000000000000000000000000001))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign slice_69 (extract binary_68 0 8))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_70 (ite (\u003d input_53 #b1) slice_69 state_10))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_71 (ite (\u003d input_65 #b1) #b00000000 ternary_70))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_74 (++ #b000000000000000000000000 state_20))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_75 (bvadd binary_74 #b00000000000000000000000000000001))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign slice_76 (extract binary_75 0 8))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_77 (ite (\u003d input_60 #b1) slice_76 state_12))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_78 (ite (\u003d input_73 #b1) #b00000000 ternary_77))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_81 (++ #b000000000000000000000000 state_14))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_82 (bvadd binary_81 #b00000000000000000000000000000001))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign slice_83 (extract binary_82 0 8))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_86 (ite (\u003d input_55 #b1) #b00000000 state_14))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_87 (ite (\u003d input_85 #b1) slice_83 ternary_86))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_88 (ite (\u003d input_84 #b1) slice_83 ternary_87))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_89 (ite (\u003d input_53 #b1) #b00000000 ternary_88))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_90 (ite (\u003d input_80 #b1) slice_83 ternary_89))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_92 (ite (\u003d #b00000000 state_14) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_93 (ite (\u003d comparison_92 #b1) state_10 state_12))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_94 (ite (\u003d input_55 #b1) #b00000000 state_16))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_95 (ite (\u003d input_85 #b1) ternary_93 ternary_94))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_98 (++ #b000000000000000000000000 state_18))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_99 (bvadd binary_98 #b00000000000000000000000000000001))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign slice_100 (extract binary_99 0 8))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_103 (ite (\u003d input_61 #b1) #b00000000 state_18))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_104 (ite (\u003d input_102 #b1) slice_100 ternary_103))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_105 (ite (\u003d input_101 #b1) slice_100 ternary_104))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_106 (ite (\u003d input_60 #b1) #b00000000 ternary_105))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_107 (ite (\u003d input_97 #b1) slice_100 ternary_106))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_109 (ite (\u003d #b00000000 state_18) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_110 (ite (\u003d comparison_109 #b1) state_10 state_12))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_111 (ite (\u003d input_61 #b1) #b00000000 state_20))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_112 (ite (\u003d input_102 #b1) ternary_110 ternary_111))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_114 (bvand (bvnot state_23) (bvnot input_55)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_115 (bvor binary_114 input_65))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_117 (bvor state_25 input_55))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_118 (bvand binary_117 (bvnot input_53)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_120 (bvor state_27 input_53))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_122 (bvand binary_120 (bvnot input_121)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_123 (bvor binary_122 input_80))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_125 (bvand binary_123 (bvnot input_124)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_127 (bvor state_29 input_121))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_128 (bvand binary_127 (bvnot input_80)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_130 (bvor state_31 input_124))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_131 (bvand binary_130 (bvnot input_65)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_133 (bvand (bvnot state_33) (bvnot input_61)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_134 (bvor binary_133 input_73))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_136 (bvor state_35 input_61))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_137 (bvand binary_136 (bvnot input_60)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_139 (bvor state_37 input_60))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_141 (bvand binary_139 (bvnot input_140)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_142 (bvor binary_141 input_97))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_144 (bvand binary_142 (bvnot input_143)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_146 (bvor state_39 input_140))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_147 (bvand binary_146 (bvnot input_97)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_149 (bvor state_41 input_143))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_150 (bvand binary_149 (bvnot input_73)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_152 (bvor (bvnot state_23) (bvnot input_55)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_154 (ite (bvule #b00000000000000000000000000000010 binary_81) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_155 (++ #b000000000000000000000000 ternary_93))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_156 (ite (bvule binary_155 binary_67) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_157 (bvand (bvnot comparison_154) (bvnot comparison_156)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_158 (bvand state_25 binary_157))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_159 (bvor (bvnot input_85) binary_158))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_160 (bvand binary_152 binary_159))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_161 (bvand (bvnot comparison_154) comparison_156))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_162 (bvand state_25 binary_161))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_163 (bvor (bvnot input_84) binary_162))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_164 (bvand binary_160 binary_163))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_166 (ite (\u003d #b00000010 state_14) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_168 (ite (bvule #b00000000000000000000000000001001 binary_67) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_169 (bvand comparison_166 (bvnot comparison_168)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_170 (bvand state_25 binary_169))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_171 (bvor (bvnot input_53) binary_170))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_172 (bvand binary_164 binary_171))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_173 (ite (\u003d comparison_92 #b1) state_6 state_8))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_174 (ite (\u003d #b00000000 ternary_173) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_175 (bvand (bvnot comparison_154) comparison_174))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_176 (bvand state_27 binary_175))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_177 (bvor (bvnot input_121) binary_176))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_178 (bvand binary_172 binary_177))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_179 (ite (\u003d #b00000000 ternary_93) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_180 (++ #b000000000000000000000000 state_10))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_181 (ite (bvule binary_155 binary_180) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_182 (bvor comparison_179 (bvnot comparison_181)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_183 (ite (\u003d ternary_93 state_10) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_184 (ite (bvule #b00000000000000000000000000000000 binary_81) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_185 (bvand comparison_183 comparison_184))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_186 (bvor binary_182 binary_185))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_187 (bvand state_29 binary_186))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_188 (bvor (bvnot input_80) binary_187))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_189 (bvand binary_178 binary_188))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_190 (bvand state_27 comparison_166))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_191 (bvor (bvnot input_124) binary_190))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_192 (bvand binary_189 binary_191))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_193 (bvor state_31 (bvnot input_65)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_194 (bvand binary_192 binary_193))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_195 (bvor (bvnot state_33) (bvnot input_61)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_196 (bvand binary_194 binary_195))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_197 (ite (bvule #b00000000000000000000000000000010 binary_98) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_198 (++ #b000000000000000000000000 ternary_110))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_199 (ite (bvule binary_198 binary_74) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_200 (bvand (bvnot comparison_197) (bvnot comparison_199)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_201 (bvand state_35 binary_200))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_202 (bvor (bvnot input_102) binary_201))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_203 (bvand binary_196 binary_202))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_204 (bvand (bvnot comparison_197) comparison_199))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_205 (bvand state_35 binary_204))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_206 (bvor (bvnot input_101) binary_205))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_207 (bvand binary_203 binary_206))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_208 (ite (\u003d #b00000010 state_18) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_209 (ite (bvule #b00000000000000000000000000001001 binary_74) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_210 (bvand comparison_208 (bvnot comparison_209)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_211 (bvand state_35 binary_210))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_212 (bvor (bvnot input_60) binary_211))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_213 (bvand binary_207 binary_212))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_214 (ite (\u003d comparison_109 #b1) state_6 state_8))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_215 (ite (\u003d #b00000000 ternary_214) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_216 (bvand (bvnot comparison_197) comparison_215))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_217 (bvand state_37 binary_216))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_218 (bvor (bvnot input_140) binary_217))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_219 (bvand binary_213 binary_218))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_220 (ite (\u003d #b00000000 ternary_110) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_221 (++ #b000000000000000000000000 state_12))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_222 (ite (bvule binary_198 binary_221) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_223 (bvor comparison_220 (bvnot comparison_222)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_224 (ite (\u003d ternary_110 state_12) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_225 (ite (bvule #b00000000000000000000000000000001 binary_98) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_226 (bvand comparison_224 comparison_225))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_227 (bvor binary_223 binary_226))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_228 (bvand state_39 binary_227))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_229 (bvor (bvnot input_97) binary_228))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_230 (bvand binary_219 binary_229))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_231 (bvand state_37 comparison_208))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_232 (bvor (bvnot input_143) binary_231))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_233 (bvand binary_230 binary_232))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_234 (bvor state_41 (bvnot input_73)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_235 (bvand binary_233 binary_234))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_236 (bvor input_55 input_85))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_237 (bvor input_84 binary_236))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_238 (bvor input_53 binary_237))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_239 (bvor input_121 binary_238))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_240 (bvor input_80 binary_239))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_241 (bvor input_124 binary_240))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_242 (bvor input_65 binary_241))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_243 (bvor input_61 binary_242))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_244 (bvor input_102 binary_243))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_245 (bvor input_101 binary_244))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_246 (bvor input_60 binary_245))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_247 (bvor input_140 binary_246))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_248 (bvor input_97 binary_247))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_249 (bvor input_143 binary_248))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_250 (bvor input_73 binary_249))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_251 (bvand binary_235 binary_250))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_252 (bvand input_55 input_85))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_253 (bvand input_84 binary_236))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_254 (bvor binary_252 binary_253))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_255 (bvand input_53 binary_237))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_256 (bvor binary_254 binary_255))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_257 (bvand input_121 binary_238))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_258 (bvor binary_256 binary_257))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_259 (bvand input_80 binary_239))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_260 (bvor binary_258 binary_259))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_261 (bvand input_124 binary_240))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_262 (bvor binary_260 binary_261))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_263 (bvand input_65 binary_241))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_264 (bvor binary_262 binary_263))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_265 (bvand input_61 binary_242))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_266 (bvor binary_264 binary_265))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_267 (bvand input_102 binary_243))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_268 (bvor binary_266 binary_267))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_269 (bvand input_101 binary_244))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_270 (bvor binary_268 binary_269))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_271 (bvand input_60 binary_245))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_272 (bvor binary_270 binary_271))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_273 (bvand input_140 binary_246))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_274 (bvor binary_272 binary_273))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_275 (bvand input_97 binary_247))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_276 (bvor binary_274 binary_275))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_277 (bvand input_143 binary_248))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_278 (bvor binary_276 binary_277))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_279 (bvand input_73 binary_249))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_280 (bvor binary_278 binary_279))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_281 (bvand binary_251 (bvnot binary_280)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_282 (bvand (bvnot state_23) state_25))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_283 (bvor (bvnot state_23) state_25))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_284 (bvand state_27 binary_283))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_285 (bvor binary_282 binary_284))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_286 (bvor state_27 binary_283))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_287 (bvand state_29 binary_286))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_288 (bvor binary_285 binary_287))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_289 (bvor state_29 binary_286))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_290 (bvand state_31 binary_289))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_291 (bvor binary_288 binary_290))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_292 (bvor state_31 binary_289))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_293 (bvand (bvnot binary_291) binary_292))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_294 (bvand (bvnot state_33) state_35))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_295 (bvor (bvnot state_33) state_35))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_296 (bvand state_37 binary_295))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_297 (bvor binary_294 binary_296))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_298 (bvor state_37 binary_295))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_299 (bvand state_39 binary_298))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_300 (bvor binary_297 binary_299))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_301 (bvor state_39 binary_298))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_302 (bvand state_41 binary_301))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_303 (bvor binary_300 binary_302))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_304 (bvand binary_293 (bvnot binary_303)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_305 (bvor state_41 binary_301))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_306 (bvand binary_304 binary_305))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_307 (bvand binary_281 binary_306))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_308 (bvand binary_118 binary_115))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_309 (bvor binary_118 binary_115))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_310 (bvand binary_125 binary_309))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_311 (bvor binary_308 binary_310))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_312 (bvor binary_125 binary_309))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_313 (bvand binary_128 binary_312))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_314 (bvor binary_311 binary_313))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_315 (bvor binary_128 binary_312))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_316 (bvand binary_131 binary_315))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_317 (bvor binary_314 binary_316))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_318 (bvor binary_131 binary_315))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_319 (bvand (bvnot binary_317) binary_318))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_320 (bvand binary_137 binary_134))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_321 (bvor binary_137 binary_134))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_322 (bvand binary_144 binary_321))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_323 (bvor binary_320 binary_322))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_324 (bvor binary_144 binary_321))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_325 (bvand binary_147 binary_324))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_326 (bvor binary_323 binary_325))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_327 (bvor binary_147 binary_324))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_328 (bvand binary_150 binary_327))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_329 (bvor binary_326 binary_328))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_330 (bvand binary_319 (bvnot binary_329)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_331 (bvor binary_150 binary_327))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_332 (bvand binary_330 binary_331))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_333 (bvand binary_307 binary_332))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_334 (bvand binary_333 (bvnot state_43)))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_6 ternary_58)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_8 ternary_63)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_10 ternary_71)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_12 ternary_78)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_14 ternary_90)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_16 ternary_95)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_18 ternary_107)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_20 ternary_112)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_23 (bvnot binary_115))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_25 binary_118)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_27 binary_125)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_29 binary_128)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_31 binary_131)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_33 (bvnot binary_134))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_35 binary_137)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_37 binary_144)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_39 binary_147)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_41 binary_150)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_43 (bvnot binary_334))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_53)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_55)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_60)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_61)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_65)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_73)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_80)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_84)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_85)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_97)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_101)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_102)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_121)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_124)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_140)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_143)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_47 (ite (\u003d state_31 #b1) #b00000000000000000000000000000001 #b00000000000000000000000000000000))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_48 (ite (\u003d state_41 #b1) #b00000000000000000000000000000001 #b00000000000000000000000000000000))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_49 (bvadd ternary_47 ternary_48))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_50 (ite (bvule binary_49 #b00000000000000000000000000000001) #b1 #b0))"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_51 (bvand (bvnot state_43) (bvnot comparison_50)))"
+              }
+            ]
+          },
+          "metadata": {
+            "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+            "content": {}
+          }
+        },
+        {
+          "source": "main_init",
+          "target": "l9",
+          "label": {
+            "type": "hu.bme.mit.theta.xcfa.model.SequenceLabel",
+            "metadata": {
+              "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+              "content": {}
+            },
+            "labels": [
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_6 #b00000000)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_8 #b00000000)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_10 #b00000000)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_12 #b00000000)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_14 #b00000000)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_16 #b00000000)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_18 #b00000000)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_20 #b00000000)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_23 #b0)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_25 #b0)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_27 #b0)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_29 #b0)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_31 #b0)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_33 #b0)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_35 #b0)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_37 #b0)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_39 #b0)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_41 #b0)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign state_43 #b0)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_53)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_55)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_60)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_61)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_65)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_73)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_80)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_84)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_85)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_97)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_101)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_102)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_121)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_124)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_140)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(havoc input_143)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_47 #b00000000000000000000000000000000)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign ternary_48 #b00000000000000000000000000000000)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_49 #b00000000000000000000000000000000)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign comparison_50 #b1)"
+              },
+              {
+                "type": "hu.bme.mit.theta.xcfa.model.StmtLabel",
+                "metadata": {
+                  "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+                  "content": {}
+                },
+                "content": "(assign binary_51 #b0)"
+              }
+            ]
+          },
+          "metadata": {
+            "type": "hu.bme.mit.theta.xcfa.model.EmptyMetaData",
+            "content": {}
+          }
+        }
+      ]
+    }
+  ],
+  "initProcedures": [
+    {
+      "params": [],
+      "procedure": "main"
+    }
+  ]
+}
