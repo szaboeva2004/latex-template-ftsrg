@@ -13,11 +13,13 @@ To ensure reliable and reproducible performance measurements, we utilized the \t
 The evaluation aims to answer the following research questions:
 
 \begin{description}
-   \item[RQ1:] How does the structural complexity differ between direct \textsc{Btor2}-to-CFA transformation and the Btor2C translation approach?
+   \item[RQ1:] How does the structural complexity of the CFAs differ between direct \textsc{Btor2}-to-CFA transformation and the Btor2C translation approach?
    \item[RQ2:] Which model checking algorithms perform best for hardware verification, and how does input type (\textsc{Btor2} vs C) affect performance?
-   \item[RQ3:] How does optimization of BTOR2CFA transformations impact verification efficiency?
+   \item[RQ3:] How does the structural complexity of the CFAs impact verification efficiency?
+   \item[RQ4:] How does optimization of BTOR2CFA transformations impact verification efficiency?
 \end{description}
-
+% kevés iteráció alatt kijöna ahiba ha van mert a bad node az op után jön
+% az hogy átírtam hibás vagy helyes eredményeknél segít jobban és melyik algoritmusnál?
 \subsection{Benchmark Suite and Methodology}
 
 The Hardware Model Checking Competition (HWMCC) provides a comprehensive suite of state-of-the-art benchmark models for evaluating hardware verification tools. In this work, I used a subset of these benchmarks selected according to the following criteria.
@@ -42,78 +44,170 @@ Each circuit was processed through both transformation workflows:
 
 \section{Structural Complexity Analysis}\label{sec:structural}
 
-The comparative analysis of the Control Flow Automata (CFA) derived from C sources versus those derived from BTOR2 descriptions reveals a counter-intuitive structural divergence, as illustrated in Figures \ref{fig:analysis1} and \ref{fig:analysis2}.
+The comparative analysis of the Control Flow Automata (CFA) derived from C sources versus those derived from BTOR2 descriptions reveals a counter-intuitive structural divergence, as illustrated in Figures \ref{fig:structural_comp} .
 
-Complexity Overhead in C ParsingFigure \ref{fig:analysis1} highlights the correlation between the atomic instruction counts of the two formats. Contrary to the expectation that low-level bit-vector logic would be more verbose, the data reveals that the C representation is significantly more complex. The data points cluster well below the $x=y$ diagonal (where $x$ is C), indicating that the high-level C parsing generates a substantially larger number of atomic instructions. This is likely due to the introduction of intermediate auxiliary variables and the explicit unrolling of high-level constructs during the translation from C to the CFA intermediate language.
+Complexity Overhead in C ParsingFigure \ref{fig:structural_comp} highlights the correlation between the atomic instruction counts of the two formats. Contrary to the expectation that low-level bit-vector logic would be more verbose, the data reveals that the C representation is significantly more complex. The data points cluster well below the $x=y$ diagonal (where $x$ is C), indicating that the high-level C parsing generates a substantially larger number of atomic instructions. This is likely due to the introduction of intermediate auxiliary variables and the explicit unrolling of high-level constructs during the translation from C to the CFA intermediate language.
 
-Structural Inflation: Variables and Control FlowFigure \ref{fig:analysis2} breaks down the structural overhead, confirming that the C-XCFA transformation imposes a heavy tax on graph size. We observe that the C representation requires, on average, significantly more variables and locations than its BTOR2 counterpart.
+Structural Inflation: Variables and Control Flow Figure xx breaks down the structural overhead, confirming that the C-XCFA transformation imposes a heavy tax on graph size. We observe that the C representation requires, on average, significantly more variables and locations than its BTOR2 counterpart.
 
 This "inflation" in the C format can be attributed to the frontend's handling of memory and scope. While BTOR2 effectively encodes state using compact bit-vector arrays, the C frontend appears to instantiate distinct variables for intermediate calculation steps and memory addressing. Consequently, the BTOR2 format serves as a much more concise representation for verification tasks in this context.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=1\textwidth]{figures/cfa_anal1.png}
-  \caption{Comparison of instruction counts showing the scale of complexity expansion between C2CFA and BTOR2CFA transformations.}
-  \label{fig:analysis1}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=1\textwidth]{figures/cfa_anal2.png}
-  \caption{A side-by-side comparison of key graph metrics (Variables, Locations, Edges), illustrating the increased graph size of the C format.}
-  \label{fig:analysis2}
-\end{figure}
-
-\begin{table}[]
+\begin{table}[h]
+\centering
 \begin{tabular}{@{}llll@{}}
 \toprule
-         & Avg CPU Time (s) & Avg Memory (MB) & Success Rate (Non-Crash \%)                                                                   \\ \midrule
-C2CFA    & 141.02           & 1878.00         & 75.43\%                                                                                       \\
-BTOR2CFA & 22.42            & 461.02          & 98.71\%
+Metric     & Average & Median & Std.\ Deviation \\ \midrule
+Variables  & 0.3578  & 0.3569 & 0.0138          \\
+Locations  & 0.6004  & 0.6000 & 0.0085          \\
+Edges      & 0.7505  & 0.7500 & 0.0107          \\
+Statements & 0.1782  & 0.1757 & 0.0153          \\ \bottomrule
 \end{tabular}
-\caption{\todo{Hihi}}
-\label{tab:cfa_performance}
+\caption{Ratios of the generated CFAs for BTOR2\textbackslash C benchmarks.}
 \end{table}
 
 
-\textbf{3$\times$ more variables} 
+\begin{figure}
+  \centering
+  \includegraphics[width=1\textwidth]{figures/structural_comparison.png}
+  \caption{Comparison of instruction counts showing the scale of complexity expansion between C2CFA and BTOR2CFA transformations.}
+  \label{fig:structural_comp}
+\end{figure}
 
 
-These differences have direct implications for model checking performance:
-\begin{itemize}
-    \item \textbf{State Space Exploration:} The higher number of edges may exponentially increase the state space exploration complexity
-    \item \textbf{Memory Usage:} Increased locations and variables directly impact memory requirements during analysis
-    \item \textbf{Analysis Time:} More complex control flow structures may lead to longer verification times
-\end{itemize}
+\begin{table}
+\centering
+\small
+\begin{tabular}{@{}lrrrrrrr@{}}
+\toprule
+Dataset &
+\multicolumn{3}{c}{CPU Time (s)} &
+\multicolumn{3}{c}{Memory (MB)} &
+Success \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+ & Avg & Median & SD & Avg & Median & SD & (\%) \\
+\midrule
+C2CFA     & 141.02 & 54.89 & 148.83 & 1878.00 & 984.34 & 2120.07 & 75.43 \\
+BTOR2CFA  & 22.42  & 10.46 & 48.93  & 461.02  & 316.43 & 338.16  & 98.71 \\
+\bottomrule
+\end{tabular}
+\caption{Summary of CPU time, memory usage, and success rate for the C2CFA and BTOR2CFA datasets.}
+\label{tab:performance_summary}
+\end{table}
+
+
+
+
+%\textbf{3$\times$ more variables} 
+
+
 
 \section{Algorithm Performance Analysis}\label{sec:algorithm}
 
-\subsection{Algorithmic Efficiency Impact}
+%\subsection{Algorithmic Efficiency Impact}
 
-The performance results in \autoref{tab:algorithm_performance} demonstrate that:
+\begin{figure}
+  \centering
+  \includegraphics[width=1.1\textwidth]{figures/comparison_fig_quantile_c_btor2.png}
+  \caption{Quantile plots comparing the CPU time (left) and memory usage (right) of different model checking algorithms. The plots display the cumulative number of solved instances (x-axis) against the resources consumed (logarithmic y-axis) for both BTOR2 and C benchmark sets. Algorithms include CEGAR (Predictive and Explicit), BMC, IMC, and K-Induction.}
+  \label{fig:performance_btor2_c}
+\end{figure}
 
-\begin{itemize}
-    \item \textbf{\textsc{Btor2} inputs enable faster convergence} across all algorithms, with CEGAR\_EXPL achieving 2.4$\times$ better performance score
-    \item \textbf{Reduced structural complexity directly translates to lower CPU times}, particularly for explicit-state methods
-    \item \textbf{The direct transformation preserves semantic patterns} that algorithms can exploit more effectively
-\end{itemize}
+\begin{table}
+\centering
+\small
+\begin{tabular}{@{}lrrrrrrr@{}}
+\toprule
+Algorithm &
+\multicolumn{3}{c}{CPU Time (s)} &
+\multicolumn{3}{c}{Memory (MB)} &
+Success \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+  & Avg & Median & SD & Avg & Median & SD & (\%) \\
+\midrule
+BMC         & 182.13 & 61.60 & 252.35 & 696.40  & 649.18 &  384.88    & 7.16 \\
+CEGAR\_EXPL & \textbf{19.92}  & \textbf{14.47} & \textbf{13.43}  & \textbf{480.98}  & \textbf{405.40} &  \textbf{295.37}    & 3.58 \\
+CEGAR\_PRED & 134.67 & 51.99 & 172.61 & 1717.04 & 859.59 &  1859.61    & \textbf{16.62} \\
+IMC         & 159.21 & 52.98 & 216.72 & 1060.91 & 750.75 &  890.43    & 7.31 \\
+K-Induction & 178.39 & 56.57 & 256.25 & 777.55  & 673.83 &  502.48    & 8.74 \\
+\bottomrule
+\end{tabular}
+\caption{Summary of CPU time, memory usage, and success rate for algorithms using BTOR2 as input.}
+\label{tab:btor2_input_summary}
+\end{table}
 
-The relationship between structural complexity and algorithm performance is clearly demonstrated by the correlation between the 3.46$\times$ higher complexity score for C representations (from \autoref{tab:main_proc_stats}) and the 2.4$\times$ worse performance score for C inputs (from \autoref{tab:algorithm_performance}).
+
+\begin{table}
+\centering
+\small
+\begin{tabular}{@{}lrrrrrrr@{}}
+\toprule
+Algorithm &
+\multicolumn{3}{c}{CPU Time (s)} &
+\multicolumn{3}{c}{Memory (MB)} &
+Success \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+  & Avg & Median & SD & Avg & Median & SD & (\%) \\
+\midrule
+BMC         & \textbf{171.63} & 23.76 & 277.89 & \textbf{1070.70} & 304.83  & \textbf{1892.30}     & 1.01 \\
+CEGAR\_EXPL & 232.52 & \textbf{11.53} & 351.92 & 1696.30 & \textbf{297.23}  & 2270.82     & 1.01 \\
+CEGAR\_PRED & 270.11 & 129.78& \textbf{259.44} & 4176.83 & 2990.98 & 3436.76     & \textbf{5.03} \\
+IMC         & 283.48 & 149.17& 267.46 & 3314.08 & 3085.55 & 3201.35     & 1.87 \\
+K-Induction & 187.27 & 49.03 & 268.60 & 2506.06 & 2686.79 & 2145.25     & 2.59 \\
+\bottomrule
+\end{tabular}
+\caption{Summary of CPU time, memory usage, and success rate for algorithms using C as input.}
+\label{tab:c_input_summary}
+\end{table}
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1\textwidth]{figures/comparison_fig_quantile_btor2_opt_no_opt.png}
+  \caption{Quantile plots comparing the CPU time (left) and memory usage (right) of different model checking algorithms. The plots display the cumulative number of solved instances (x-axis) against the resources consumed (logarithmic y-axis) for both optimized BTOR2CFA and unoptimized transformations. Algorithms include CEGAR (Predictive and Explicit), BMC, IMC, and K-Induction.}
+  \label{fig:performance_btor2_opt}
+\end{figure}
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1\textwidth]{figures/correlation_btor2_algos.png}
+  \caption{Feature correlation heatmaps for BTOR2 inputs. The subplots compare the internal dependencies of problem variables and their correlation with runtime and memory usage for BMC, CEGAR (Explicit/Predictive), IMC, and K-Induction configurations.}
+  \label{fig:corr_btor2}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1\textwidth]{figures/correlation_c_algos.png}
+  \caption{Feature correlation heatmaps for C inputs. The subplots compare the internal dependencies of problem variables and their correlation with runtime and memory usage for BMC, CEGAR (Explicit/Predictive), IMC, and K-Induction configurations.}
+  \label{fig:corr_c}
+\end{figure}
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1\textwidth]{figures/iterations_vs_output.png}
+  \caption{Analysis of the relationship between solver iterations and resource consumption. The scatter plots (top and bottom-left) display CPU time and memory usage against iteration counts, with a linear regression line (dashed red) indicating the trend. Data points are distinguished by verification result (False/pink vs. True/gold). The bottom-right panel shows the distribution of iterations required for Safe (True) versus Unsafe (False) outcomes.}
+  \label{fig:iter_ouput}
+\end{figure}
 
 \section{Detailed Answers to Research Questions}
 
 This section provides a detailed discussion of the experimental results by directly answering the research questions that guided this evaluation.
 
-\subsection{RQ1: How does the structural complexity differ between direct \textsc{Btor2}-to-CFA transformation and the Btor2C translation approach?}
+\subsection{RQ1: How does the structural complexity differ between direct BTOR2CFA transformation and the Btor2C translation approach?}
 
 \todo{write this section}
 
 
-\subsection{RQ2: How does the structural complexity differ between direct \textsc{Btor2}-to-CFA transformation and the Btor2C translation approach?}
+\subsection{RQ2: Which model checking algorithms perform best for hardware verification, and how does input type (\textsc{Btor2} vs C) affect performance?}
+
+\todo{write this section}
+
+\subsection{RQ3: How does the structural complexity of the CFAs impact verification efficiency?}
 
 \todo{write this section}
 
 
-\subsection{RQ3: How does optimization of BTOR2CFA transformations impact verification efficiency?}
+\subsection{RQ4: How does optimization of BTOR2CFA transformations impact verification efficiency?}
 
 \todo{write this section}

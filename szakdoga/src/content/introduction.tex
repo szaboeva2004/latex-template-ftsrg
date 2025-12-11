@@ -10,7 +10,7 @@ Typically, the design is represented by a formal model (e.g., a transition syste
 Recent research has shown that translating hardware models into software and verifying them with software model checkers can reveal bugs not found by even state-of-the-art hardware analyzers such as ABC or AVR~\cite{ABC-hardware, AVR, hw_verification_using_sw}. The creators of the original idea peformed a transformation from $Verilog$ to $C$.~\cite{hw_verification_using_sw} Their experimental results showed that by using software analyzers the model checking process could be more than an order of magnitude faster. 
 
 Ever since then, several approaches have aimed to translate hardware description languages into higher-level software representations, allowing existing software verifiers, such as \textsc{CPAChecker}~\cite{cpachecker} and \textsc{ESBMC}~\cite{esbmc}, to perform model checking indirectly. One notable effort is \textsc{Btor2C}~\cite{btor2c}, which converts \textsc{Btor2} circuits into C programs, enabling a wide range of software verification tools to analyze them.
-\textsc{Btor2} has become the de facto standard intermediate representation for hardware model checking, officially adopted as the input format of the Hardware Model Checking Competition (HWMCC)~\cite{hwmcc}. It provides fixed, unambiguous semantics and aligns closely with SMT-LIB~\cite{SMT-LIB}, also making it a robust intermediate format for bit-level languages such as AIGER and Verilog.
+\textsc{Btor2} has become the de facto standard intermediate representation for hardware model checking, officially adopted as the input format of the Hardware Model Checking Competition (HWMCC)~\cite{hwmcc}. It provides fixed, unambiguous semantics and aligns closely with SMT-LIB~\cite{SMT-LIB}, also making it a robust intermedbtor2iate format for bit-level languages such as AIGER and Verilog.
 
 \paragraph{Motivation} While \textsc{Btor2C} enables indirect verification, it introduces an additional translation step into C, which can reduce efficiency and increase the risk of transformation errors. Each intermediate step adds complexity and may hinder analysis performance due to redundant optimizations or semantic mismatches.
 Moreover, hardware and software differ fundamentally. For instance, \textsc{Btor2} supports arbitrary-width bit-vector types that have no direct C equivalent. Although empirically validated, \textsc{Btor2C}’s translation remains nontrivial and potentially error-prone.
@@ -20,7 +20,7 @@ To address these issues, this work implements a direct transformation from \text
 The objective of this thesis is to conduct a comparative analysis and assess whether a dedicated \textsc{Btor2} frontend offers superior efficiency compared to translation-based verification workflows.
 
 \paragraph{Contributions}
-The structure of this work is as follows:
+The outline of this work is as follows:
 \begin{itemize}
     \item In~\autoref{chapter:bg}, I provide an overview of the necessary background concepts, including formal verification techniques, the \textsc{Btor2} format, control-flow automata, and the \textsc{Theta} framework.
     \item In~\autoref{chapter:btor2cfa}, I present the implementation of the \textsc{Btor2}-to-CFA transformation within the \textsc{Theta} framework, providing a unified verification environment capable of analyzing both hardware and software systems.

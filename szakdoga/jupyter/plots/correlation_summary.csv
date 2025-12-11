@@ -1,0 +1,11 @@
+Algorithm,Count,Corr_with_Vars,Corr_with_Locs,Corr_with_Edges,Corr_with_Atomic_Stmts
+BMC_BTOR,50,,,,
+BMC_C,7,,,,
+CEGAR_EXPL_BTOR,25,,,,
+CEGAR_EXPL_C,7,,,,
+CEGAR_PRED_BTOR,116,,,,
+CEGAR_PRED_C,32,,,,
+IMC_BTOR,51,,,,
+IMC_C,13,,,,
+KIND_BTOR,61,,,,
+KIND_C,18,,,,

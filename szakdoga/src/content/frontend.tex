@@ -4,14 +4,14 @@ In~\autoref{sec:motivation}, I discuss the motivation behind this work. Next, ~\
 
 \section{Motivation}\label{sec:motivation}
 
-\paragraph{Btor2C.} As discussed in previous chapters, numerous approaches have been proposed to verify hardware circuits using software analyzers. One notable example is \textit{Btor2C}~\cite{btor2c}, a tool that translates hardware descriptions into equivalent C programs. This translation bridges the gap between hardware and software verification by enabling the use of existing C verification tools.
-In contrast, my work focuses on implementing a dedicated hardware frontend directly within an existing software model checker, eliminating the need for translation into C.
+\paragraph{Btor2C.} As discussed in previous chapters, numerous approaches have been proposed to verify hardware circuits using software analyzers. One notable example is \textit{Btor2C}~\cite{btor2c}, a tool originally conceived as a universal translator to convert hardware descriptions into C programs compatible with any standard software verifier. To achieve this universality while preserving precise hardware semantics, the generated C code often relies on abstract representations and indirections, particularly when modeling bitvector operations. This translation bridges the gap between hardware and software verification by enabling the use of existing C verification tools. In contrast, my work focuses on implementing a dedicated hardware frontend directly within an existing software model checker, eliminating the need for translation into C and its associated overhead.
 
-\paragraph{Problem statement.} Using C as an intermediate representation between \textsc{Btor2} and a formal model (in this case, a Control Flow Automaton, CFA) can introduce semantic discrepancies and reduce verification efficiency. This additional transformation layer may obscure the original hardware semantics and complicate the verification process.
+\paragraph{Problem statement.} Using C as an intermediate representation between \textsc{Btor2} and a formal model (in this case, a Control Flow Automaton, CFA) can introduce semantic discrepancies and reduce verification efficiency. This additional transformation layer may obscure the original hardware semantics and complicate the verification process. Furthermore there is no unified tool in which both the direct and indirect transformation approaches can be compared fairly.
+\autoref{fig:indirect} illustrates the difference between the two workflows. The indirect approach involves first translating the \textsc{Btor2} circuit into C code using \textsc{Btor2C}, followed by converting the C code into a CFA representation for verification. In contrast, the direct approach implemented in this work transforms the \textsc{Btor2} circuit directly into a CFA, bypassing the intermediate C representation entirely.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.75\textwidth]{figures/my_contribution.drawio.pdf}
+  \includegraphics[width=1\textwidth]{figures/my_contribution.drawio.pdf}
   \caption{Workflow of direct and indirect transformation in software verification.}
   \label{fig:indirect}
 \end{figure}
@@ -33,9 +33,9 @@ Control-Flow Automata (CFA) naturally represent sequential circuits through thei
 \begin{description}
   \item[Constants.] The transformation begins by adding all constant nodes defined in the \textsc{BTOR2} model (e.g., \verb|const|, \verb|zero|, \verb|one|, \verb|ones| etc.) to the initial CFA edge. These constants serve as fixed symbolic values throughout the verification process.
   \item[Initial states.] The \verb|init| keyword in \textsc{BTOR2} specifies initialization functions for state variables. In the CFA representation, these are defined on the subsequent edge, establishing the initial state configuration of the system.
-  \item[Havoc assignments] Nodes declared with the \verb|input| keyword, or state variables without an associated \verb|next| definition, are introduced after the initial state. These represent unconstrained inputs whose values may vary across different execution iterations.
+  \item[Havoc assignments.] Nodes declared with the \verb|input| keyword, or state variables without an associated \verb|next| definition, are introduced after the initial state. These represent unconstrained inputs whose values may vary across different execution iterations.
   \item[Operations.] Next, the transformation processes all operation nodes (\verb|add|, \verb|and|, \verb|eq|, etc.) in topological order, sequentially creating corresponding CFA edges and locations for each operation to preserve the computational dependencies of the circuit.
-  \item[Safety Properties.] After constructing all operations, the safety property is encoded. In this work, the \verb|bad| keyword is used to represent the reachability property under verification. If the \verb|bad| condition is satisfied, the CFA transitions to an error location; otherwise, execution continues.
+  \item[Safety Properties.]  The \verb|bad| keyword defines the reachability property for verification. The transformation models this as a conditional transition originating from the referenced operation node. If the \verb|bad| condition is satisfied, the CFA branches to an error location; otherwise, the control flow proceeds to the next state update.
   \item[Next states.] Finally, if the safety property is not violated, all state variables defined with the \verb|next| keyword are updated accordingly, completing one iteration of the transition system.
 \end{description}
 

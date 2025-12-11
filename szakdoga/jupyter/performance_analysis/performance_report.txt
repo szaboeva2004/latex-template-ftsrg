@@ -1,0 +1,70 @@
+======================================================================
+PERFORMANCE ANALYSIS REPORT: XCFA Statistics vs Resource Usage
+======================================================================
+
+Total runs analyzed: 274
+Number of algorithms: 10
+Number of benchmarks: 96
+
+SUMMARY STATISTICS:
+----------------------------------------
+CPU Time (seconds):
+  Mean: 153.91
+  Median: 42.63
+  Range: [4.63, 879.77]
+
+Memory Usage (MB):
+  Mean: 1219.69
+  Median: 692.62
+  Range: [135.64, 12784.20]
+
+TOP CORRELATIONS:
+----------------------------------------
+BMC_C: Atomic_Stmts vs Memory_MB: 0.999*** (p=0.0000)
+BMC_C: Vars vs Memory_MB: 0.999*** (p=0.0000)
+CEGAR_PRED_C: Atomic_Stmts vs CPU_Time_Seconds: 0.997*** (p=0.0002)
+CEGAR_PRED_C: Vars vs CPU_Time_Seconds: 0.997*** (p=0.0002)
+KIND_C: Atomic_Stmts vs Memory_MB: 0.996*** (p=0.0000)
+
+ALGORITHM PERFORMANCE SUMMARY:
+----------------------------------------
+
+BMC_BTOR:
+  CPU Time: 182.13 ± 254.91 s (n=50)
+  Memory: 696.40 ± 388.79 MB
+
+BMC_C:
+  CPU Time: 171.63 ± 300.16 s (n=7)
+  Memory: 1070.70 ± 2043.92 MB
+
+CEGAR_EXPL_BTOR:
+  CPU Time: 21.02 ± 13.75 s (n=23)
+  Memory: 508.13 ± 299.09 MB
+
+CEGAR_EXPL_C:
+  CPU Time: 321.54 ± 426.69 s (n=5)
+  Memory: 2267.75 ± 2755.90 MB
+
+CEGAR_PRED_BTOR:
+  CPU Time: 126.53 ± 181.56 s (n=85)
+  Memory: 1754.60 ± 2027.29 MB
+
+CEGAR_PRED_C:
+  CPU Time: 158.47 ± 279.76 s (n=5)
+  Memory: 1627.62 ± 2291.65 MB
+
+IMC_BTOR:
+  CPU Time: 133.53 ± 174.58 s (n=37)
+  Memory: 1064.24 ± 936.57 MB
+
+IMC_C:
+  CPU Time: 199.22 ± 261.14 s (n=5)
+  Memory: 4020.17 ± 5338.58 MB
+
+KIND_BTOR:
+  CPU Time: 214.28 ± 276.79 s (n=49)
+  Memory: 773.94 ± 450.60 MB
+
+KIND_C:
+  CPU Time: 223.60 ± 334.90 s (n=8)
+  Memory: 1771.94 ± 2660.78 MB
