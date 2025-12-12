@@ -1,6 +1,6 @@
 \chapter{Evaluation}\label{chapter:evaluation}
 
-This chapter presents a comprehensive evaluation of the BTOR2CFA transformation approach compared to the traditional translation-based workflow using Btor2C. The evaluation focuses on structural complexity, algorithm performance, and potential performance implications across multiple dimensions.
+This chapter presents a comprehensive evaluation of the \textsc{BTOR2CFA} transformation approach, contrasting it with the traditional translation-based workflow utilizing \textsc{Btor2C}. The experimental methodology and benchmark selection are detailed in \autoref{sec:experiment_design}. Subsequent sections analyze the structural complexity of the generated models (\autoref{sec:structural}) and evaluate the comparative performance of various model checking algorithms (\autoref{sec:algorithm}). Finally, \autoref{sec:rq_answers} synthesizes these findings to provide detailed answers to the research questions governing this study.
 
 \section{Experiment Design}\label{sec:experiment_design}
 
@@ -10,7 +10,7 @@ This section details the experimental methodology employed to ensure a rigorous 
 
 All experiments were conducted on virtual machines equipped with Intel Xeon (Skylake) processors, featuring between 2 and 32 cores operating at 2.2 GHz, and memory configurations ranging from 16 GB to 128 GB of RAM. The operating system used was Linux 6.8.0-60-generic, and all experiments were performed using \textsc{Theta} version 6.27.12. For SMT solving, I employed \textsc{MathSAT} version 5.6.10 \cite{Cimatti2013MathSAT5}.
 
-To ensure reliable and reproducible performance measurements, we utilized the \textsc{RunExec} tool from the \textsc{BenchExec} suite \cite{BLW19}, a state-of-the-art benchmarking framework also used in the \textsc{SV-COMP} competition. Each experiment was executed with a CPU time limit of 900 seconds, a memory limit of 15 GB, and restricted to two CPU cores.
+To ensure reliable and reproducible performance measurements, I utilized the \textsc{RunExec} tool from the \textsc{BenchExec}\footnote{\url{https://github.com/sosy-lab/benchexec}} suite \cite{BLW19}, a state-of-the-art benchmarking framework also used in the \textsc{SV-COMP} competition. Each experiment was executed with a CPU time limit of 900 seconds, a memory limit of 15 GB, and restricted to two CPU cores.
 
 \subsection{Research Questions}
 
@@ -75,7 +75,7 @@ Statements & 0.1782  & 0.1757 & 0.0153          \\ \bottomrule
 
 \paragraph{Complexity Overhead in C Parsing} ~\autoref{fig:structural_comp} demonstrates the relationship between the number of atomic instructions and variables across the two formats. The data points cluster well below the $x=y$ diagonal (where $x$ is C), indicating that the high-level C parsing generates a substantially larger number of atomic instructions. This is likely due to the introduction of intermediate auxiliary variables and the explicit unrolling of high-level constructs during the translation from C to the CFA intermediate language. Quantitative data presented in ~\autoref{table:metric_ratios_cfa} reveals that the direct transformation reduces the variable count to approximately one-third of that observed in the indirect approach. In contrast, the indirect transformation exhibits a six-fold increase in the number of atomic statements.
 
-As illustrated in \autoref{fig:structural_comp}, the edge and location counts exhibit a high degree of convergence between the two formats, resulting in negligible ratio differences. This structural similarity is a direct consequence of the optimization pass applied in both workflows—specifically Large-Block Encoding (LBE)~\cite{lbe}—which effectively compresses the Control-Flow Automata (CFA) into a concise graph representation. Consequently, edge and location counts lack discriminative power in this context and are therefore excluded from subsequent complexity analyses.
+As illustrated in \autoref{fig:structural_comp}, the edge and location counts exhibit a high degree of convergence between the two formats, resulting in negligible ratio differences. This structural similarity is a direct consequence of the optimization pass applied in both workflows -- specifically Large-Block Encoding (LBE)~\cite{lbe} -- which effectively compresses the Control-Flow Automata (CFA) into a concise graph representation. Consequently, edge and location counts lack discriminative power in this context and are therefore excluded from subsequent complexity analyses.
 
 The structural expansion within the C format can be attributed to the frontend's memory and scope management mechanisms. Whereas BTOR2CFA efficiently encodes state utilizing compact bit-vector arrays, the C frontend explicitly instantiates distinct variables for intermediate calculations and memory addressing. Consequently, the BTOR2 format provides a significantly more concise representation for verification tasks within this context.
 
@@ -205,7 +205,7 @@ This suggests that for the direct transformation, the verification complexity is
 \paragraph{Structural Dependency in Indirect Translation}
 In stark contrast, the correlation matrices for the C input (\autoref{fig:corr_c}) demonstrate a strong positive correlation between structural metrics and resource consumption across almost all algorithms.
 For the BMC algorithm, the correlation between \texttt{Variable Count} and \texttt{CPU Time} rises to $0.82$. Similarly, \texttt{CEGAR\_EXPL} shows a correlation of $0.82$ for the same metric.
-This indicates a strong coupling between structure and performance: the "structural expansion" introduced by the C frontend (discussed in \autoref{sec:structural}) creates a linear—and often prohibitive—performance penalty. Every additional auxiliary variable or split operation introduced during C parsing directly increases the burden on the solver.
+This indicates a strong coupling between structure and performance: the ``structural expansion'' introduced by the C frontend (discussed in \autoref{sec:structural}) creates a linear -- and often prohibitive -- performance penalty. Every additional auxiliary variable or split operation introduced during C parsing directly increases the burden on the solver.
 
 \begin{figure}[h!]
   \centering
@@ -219,7 +219,7 @@ The impact of this structural coupling is visible in the memory correlations. In
 
 \subsection{Impact of Optimization on Verification Efficiency}
 
-To address \textbf{RQ4}, we evaluated the performance impact of the optimization passes within the BTOR2CFA transformation pipeline. \autoref{fig:performance_btor2_opt} presents a comparative quantile plot of the \textsc{Btor2}-based workflow with and without optimization enabled.
+To address \textbf{RQ4}, I evaluated the performance impact of the optimization passes within the BTOR2CFA transformation pipeline. \autoref{fig:performance_btor2_opt} presents a comparative quantile plot of the \textsc{Btor2}-based workflow with and without optimization enabled.
 
 
 \begin{figure}
@@ -239,7 +239,7 @@ This massive performance gap suggests that the raw, direct translation from \tex
 
 \subsection{Relationship Between Solver Iterations and Resource Consumption}
 
-Finally, we analyzed the internal behavior of the verification algorithms by examining the relationship between the number of refinement iterations (loops in the algorithm) and the total resource consumption. \autoref{fig:iter_ouput} illustrates the scatter plots for iterations versus CPU time and memory, as well as the distribution of iterations based on the verification result.
+Finally, I analyzed the internal behavior of the verification algorithms by examining the relationship between the number of refinement iterations (loops in the algorithm) and the total resource consumption. \autoref{fig:iter_ouput} illustrates the scatter plots for iterations versus CPU time and memory, as well as the distribution of iterations based on the verification result.
 
 \begin{figure}[h!]
   \centering
@@ -248,17 +248,17 @@ Finally, we analyzed the internal behavior of the verification algorithms by exa
   \label{fig:iter_ouput}
 \end{figure}
 
-\paragraph{Decoupling of Iterations and Cost}
-A counter-intuitive finding from the scatter plots (top row) is the lack of a strong linear correlation between iteration count and resource usage. The linear regression lines (dashed red) are nearly horizontal for both CPU time and memory. This indicates that the computational cost is not uniformly distributed across iterations. A single, complex refinement step involving a difficult SMT query can consume more resources than dozens of trivial iterations. Consequently, iteration count is a poor predictor of total verification time.
+\paragraph{Decoupling of Iterations and Resources}
+While analyzing \autoref{fig:iter_ouput}, a counter-intuitive finding from the scatter plots (top row) is the lack of a strong linear correlation between iteration count and resource usage. The linear regression lines (dashed red) are nearly horizontal for both CPU time and memory. This indicates that the computational cost is not uniformly distributed across iterations. A single, complex refinement step involving a difficult SMT query can consume more resources than dozens of trivial iterations. Consequently, iteration count is a poor predictor of total verification time.
 
 \paragraph{Result-Dependent Complexity}
-The box plot analysis (bottom right) reveals a distinct behavioral difference based on the verification outcome. The distribution for \texttt{False} results (unsafe instances) is noticeably wider and has a higher median than that for \texttt{True} (safe) results. This suggests that finding a feasible counterexample often requires the algorithm to unroll the transition system deeper (more iterations) to reach the error state. Conversely, safety proofs often converge faster, likely because a suitable inductive invariant is discovered earlier in the abstraction-refinement loop.
+Furthermore in \autoref{fig:iter_ouput} the box plot analysis (bottom right) reveals a distinct behavioral difference based on the verification outcome. The distribution for \texttt{False} results (unsafe instances) is noticeably wider and has a higher median than that for \texttt{True} (safe) results. This suggests that finding a feasible counterexample often requires the algorithm to unroll the transition system deeper (more iterations) to reach the error state. Conversely, safety proofs often converge faster, likely because a suitable inductive invariant is discovered earlier in the abstraction-refinement loop.
 
 
 
 
 
-\section{Detailed Answers to Research Questions}
+\section{Detailed Answers to Research Questions}\label{sec:rq_answers}
 
 This section provides a detailed discussion of the experimental results by directly answering the research questions that guided this evaluation.
 
@@ -266,31 +266,32 @@ This section provides a detailed discussion of the experimental results by direc
 
 The experimental results demonstrate a fundamental structural disparity between the two approaches. The direct \textsc{Btor2}-to-CFA transformation generates a significantly more concise intermediate representation compared to the Btor2C translation. Quantitative analysis reveals that the indirect C-based workflow results in approximately a \textbf{three-fold increase in variable count} and a \textbf{six-fold increase in atomic statements}.
 
-This "structural expansion" in the C workflow is attributed to the semantic mismatch between the high-level C language and low-level hardware logic. The C frontend introduces numerous auxiliary variables and explicit operations to emulate memory addressing and scope, whereas the direct transformation effectively maps hardware bit-vectors to the CFA's internal representation without such overhead.
+This ``structural expansion'' in the C workflow is attributed to the semantic mismatch between the high-level C language and low-level hardware logic. The C frontend introduces numerous auxiliary variables and explicit operations to emulate memory addressing and scope, whereas the direct transformation effectively maps hardware bit-vectors to the CFA's internal representation without such overhead.
 
 \subsection{RQ2: Which model checking algorithms perform best for hardware verification, and how does input type (\textsc{Btor2} vs C) affect performance?}
 
-\textbf{Best Algorithm:} Counterexample-Guided Abstraction Refinement with Predicate Abstraction (\texttt{CEGAR\_PRED}) utilizing the direct \textsc{Btor2} input is unequivocally the most effective configuration. It achieved the highest success rate ($16.62\%$) and demonstrated the best scalability, solving approximately 115 instances while maintaining moderate resource consumption.
+\paragraph{Best Algorithm} Counterexample-Guided Abstraction Refinement with Predicate Abstraction (\texttt{CEGAR\_PRED}) utilizing the direct \textsc{Btor2} input is unequivocally the most effective configuration. It achieved the highest success rate ($16.62\%$) and demonstrated the best scalability, solving approximately 115 instances while maintaining moderate resource consumption.
 
-\textbf{Input Impact:} The choice of input format is a decisive factor in verification performance. The C-based input induces a severe performance penalty across all tested algorithms.
-\begin{itemize}
-    \item \textbf{Resource Exhaustion:} The "brick wall" effect observed in the quantile plots indicates that C-generated models cause rapid resource exhaustion. For \texttt{CEGAR\_PRED}, switching to C input quadrupled the median memory usage (from $\approx 860$ MB to $\approx 2990$ MB).
-    \item \textbf{Algorithmic degradation:} Explicit Value Analysis (\texttt{CEGAR\_EXPL}), which struggles generally with hardware logic, fails almost entirely when processing C inputs (1.01\% success rate), confirming that the added structural complexity exacerbates the weaknesses of less robust algorithms.
-\end{itemize}
+\paragraph{Transformation Impact} Based on my research, the choice of workflow is a decisive factor in verification performance. The C2CFA input induces a severe performance penalty across all tested algorithms.
+\begin{description}
+    \item [Resource Exhaustion.] The ``brick wall'' effect observed in the quantile plots indicates that C-generated models cause rapid resource exhaustion. For \texttt{CEGAR\_PRED}, switching to C input quadrupled the median memory usage (from $\approx 860$ MB to $\approx 2990$ MB).
+    \item [Algorithmic degradation.] Explicit Value Analysis (\texttt{CEGAR\_EXPL}), which struggles generally with hardware logic, fails almost entirely when processing C inputs (1.01\% success rate), confirming that the added structural complexity exacerbates the weaknesses of less robust algorithms.
+\end{description}
 
 \subsection{RQ3: How does the structural complexity of the CFAs impact verification efficiency?}
 
-Our correlation analysis reveals two distinct behaviors regarding structural complexity and efficiency:
-\begin{enumerate}
-    \item \textbf{Decoupling in Direct Transformation:} For the direct \textsc{Btor2} workflow, there is a negligible correlation (e.g., $r \approx -0.13$ for BMC) between the size of the model (variable count) and verification time. This indicates that the direct transformation preserves the logical semantics clearly enough that solvers can abstract away structural size, making performance dependent on \textit{logical} depth rather than \textit{structural} breadth.
-    \item \textbf{Strong Coupling in Indirect Translation:} Conversely, the C workflow exhibits a strong positive correlation ($r > 0.8$) between variable count and resource usage. The extraneous complexity introduced by the C frontend creates a burden that the solver cannot optimize away, leading to a linear dependency where "larger" CFAs invariably result in slower verification and higher memory footprints.
-\end{enumerate}
+My correlation analysis reveals two distinct behaviors regarding structural complexity and efficiency:
+\begin{description}
+    \item [Decoupling in Direct Transformation.] For the direct workflow, there is a negligible correlation (e.g., $r \approx -0.13$ for BMC) between the size of the model (variable count) and verification time. This indicates that the direct transformation preserves the logical semantics clearly enough that solvers can abstract away structural size, making performance dependent on \textit{logical} depth rather than \textit{structural} breadth.
+    \item [Strong Coupling in Indirect Translation.] Conversely, the C workflow exhibits a strong positive correlation ($r > 0.8$) between variable count and resource usage. The extraneous complexity introduced by the C frontend creates a burden that the solver cannot optimize away, leading to a linear dependency where ``larger'' CFAs invariably result in slower verification and higher memory footprints.
+\end{description}
 
 \subsection{RQ4: How does optimization of BTOR2CFA transformations impact verification efficiency?}
 
 Optimization is identified not merely as an enhancement, but as a \textbf{prerequisite for viability} in the \textsc{Btor2} verification pipeline. The comparative analysis shows a drastic divergence in performance:
-\begin{itemize}
-    \item \textbf{Unoptimized:} Without optimization passes (such as Large-Block Encoding), algorithms saturate rapidly, with the best configuration solving fewer than 30 instances. The raw CFA generation produces a state space too redundant for efficient traversal.
-    \item \textbf{Optimized:} Enabling optimizations allows the solver to handle significantly more complex designs, increasing the solved instance count from $\approx 25$ to $\approx 115$ for \texttt{CEGAR\_PRED}.
-\end{itemize}
+\begin{description}
+    \item [Unoptimized.] Without optimization passes (such as Large-Block Encoding), algorithms saturate rapidly, with the best configuration solving fewer than 30 instances. The raw CFA generation produces a state space too redundant for efficient traversal.
+    \item [Optimized.] Enabling optimizations allows the solver to handle significantly more complex designs, increasing the solved instance count from $\approx 25$ to $\approx 115$ for \texttt{CEGAR\_PRED}.
+\end{description}
 Therefore, structural reduction techniques are essential to bridge the gap between the raw translation of hardware circuits and the input requirements of efficient model checking algorithms.
+Notably, the unoptimized BTOR2CFA workflow exhibits performance characteristics that are remarkably similar to those of the C2CFA approach.

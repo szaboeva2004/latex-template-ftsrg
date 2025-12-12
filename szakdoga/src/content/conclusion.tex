@@ -4,12 +4,12 @@ This thesis detailed the design, implementation, and evaluation of a direct \tex
 
 The implemented BTOR2CFA frontend successfully demonstrates that a direct approach is not only feasible but also structurally and algorithmically superior. The evaluation conclusively shows that:
 
-\begin{itemize}
+\begin{enumerate}
     \item The direct transformation produces significantly more compact CFAs, reducing variable counts by two-thirds and statement counts by over 80\%.
     \item Verification performance is dramatically improved, with higher success rates, lower memory usage, and faster execution times across all tested algorithms.
     \item Optimization passes are essential for scalability, enabling the verification of complex circuits that would otherwise be intractable.
     \item The direct approach better preserves hardware semantics, enabling more accurate and efficient verification compared to indirect translation via C.
-\end{itemize}
+\end{enumerate}
 
 These findings validate the hypothesis that eliminating intermediate translation steps in hardware verification workflows can lead to substantial gains in both performance and semantic precision.
 

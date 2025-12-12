@@ -6,12 +6,12 @@ This work presented BTOR2CFA, a direct transformation from the \textsc{Btor2} ha
 
 The comparative evaluation yielded clear and significant results. The direct \textsc{Btor2}-to-CFA transformation consistently produced dramatically more compact and less complex models than the translation-based approach. Key findings include:
 
-\begin{itemize}
-    \item \textbf{Structural Superiority:} The direct transformation reduced variable counts by approximately 66\% and atomic statements by 82\% compared to the indirect C-based approach.
-    \item \textbf{Verification Efficiency:} Across all evaluated algorithms, the direct approach achieved a success rate of 98.71\%, significantly outperforming the indirect approach's 75.43\%. Resource consumption was also drastically lower, with median memory usage reduced from 984 MB to 316 MB.
-    \item \textbf{Algorithmic Performance:} CEGAR with predicate abstraction (CEGAR\_PRED) emerged as the most effective algorithm for \textsc{Btor2} verification, achieving a 16.62\% success rate on the direct transformation, compared to only 5.03\% on the indirect approach.
-    \item \textbf{Optimization Impact:} The optimization passes within BTOR2CFA were shown to be essential for verification viability, enabling the solution of over 115 instances compared to fewer than 30 without optimization.
-\end{itemize}
+\begin{description}
+  \item[Structural Superiority] \hfill \\ The direct transformation reduced variable counts by approximately 66\% and atomic statements by about 82\% compared to the indirect C-based approach.
+  \item[Verification Efficiency] \hfill \\ Across all evaluated algorithms, the direct approach achieved the highest success rate of 16.62\%, significantly outperforming the indirect approach's best 5.03\%. Resource consumption was also drastically lower, with median memory usage reduced from 984 MB to 316 MB.
+  \item[Algorithmic Performance] \hfill \\ CEGAR with predicate abstraction (CEGAR\_PRED) emerged as the most effective algorithm for \textsc{Btor2} verification, achieving a 16.62\% success rate on the direct transformation, compared to only 5.03\% on the indirect approach.
+  \item[Optimization Impact] \hfill \\ The optimization passes within BTOR2CFA were shown to be essential for verification viability, enabling the solution of over 115 instances compared to fewer than 30 without optimization.
+\end{description}
 
 These results demonstrate that eliminating the intermediate C translation step not only preserves hardware semantics more accurately but also enables significant performance gains in both scalability and resource efficiency.
 
@@ -23,7 +23,7 @@ Several factors could affect the internal validity of this study:
 
 \begin{itemize}
     \item \textbf{Benchmark Selection:} The evaluation focused on safety property benchmarks from HWMCC, excluding liveness and other property types. This may limit the generalizability of the results to other verification contexts.
-    \item \textbf{Tool Versioning:} The experiments were conducted with specific versions of Theta (6.27.12) and MathSAT (5.6.10). Changes in these tools could influence performance outcomes.
+    \item \textbf{Tool Versioning:} The experiments were conducted with specific versions of \textsc{Theta} (6.27.12) and \textsc{MathSAT} (5.6.10). Changes in these tools could influence performance outcomes.
     \item \textbf{Configuration Consistency:} While RunExec was used to ensure consistent execution environments, subtle differences in virtual machine allocation or background processes could introduce minor variations in timing and memory measurements.
 \end{itemize}
 
@@ -32,9 +32,9 @@ Several factors could affect the internal validity of this study:
 The external validity of the study is influenced by:
 
 \begin{itemize}
-    \item \textbf{Limited Operator Support:} The current implementation does not support all \textsc{Btor2} operators (e.g., overflow predicates, array operations). This restricts the evaluation to a subset of hardware circuits, potentially overlooking performance characteristics in more complex designs.
+    \item \textbf{Limited Operator Support:} The current implementation does not support all \textsc{Btor2} operators (e.g., reduce operations, overflow predicates, array operations). This restricts the evaluation to a subset of hardware circuits, potentially overlooking performance characteristics in more complex designs.
     \item \textbf{Hardware-Specific Benchmarks:} The study relied exclusively on HWMCC benchmarks, which may not fully represent industrial hardware verification scenarios or emerging circuit designs.
-    \item \textbf{Algorithm Scope:} Only a subset of Theta's verification algorithms was evaluated. Other algorithms or configurations might yield different performance trade-offs.
+    \item \textbf{Algorithm Scope:} Only a subset of Theta's verification algorithms was evaluated. Other algorithms or configurations might yield different performance trade-offs. It is important to acknowledge that \textsc{Theta} offers extensive configuration capabilities for each algorithm. Consequently, a comprehensive analysis of every possible parameter permutation would result in a combinatorial explosion, rendering such an exhaustive evaluation computationally infeasible.
 \end{itemize}
 
 \section{Implementation Considerations and Optimization Trade-offs}
@@ -63,7 +63,7 @@ In contrast, the \textsc{Btor2} frontend is designed with hardware semantics in 
 The current implementation has several limitations that affect its applicability and performance:
 
 \begin{itemize}
-    \item \textbf{Incomplete Language Support:} Missing operators (e.g., \texttt{saddo}, \texttt{uaddo}, array operations) restrict the range of verifiable circuits. This limits the frontend's utility in industrial settings where such features are common.
+    \item \textbf{Incomplete Language Support:} Missing operators (e.g., \texttt{saddo}, \texttt{uaddo}, array operations etc.) restrict the range of verifiable circuits. This limits the frontend's utility in industrial settings where such features are common.
     \item \textbf{No Witness Generation:} The inability to produce counterexamples or proofs hinders integration into formal verification competitions and industrial workflows that require actionable feedback.
     \item \textbf{Limited Property Types:} Support is currently limited to safety properties. Liveness and other temporal properties remain unhandled, narrowing the scope of verifiable specifications.
 \end{itemize}
