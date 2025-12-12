@@ -3,7 +3,7 @@
 %----------------------------------------------------------------------------
 Over the past decade, our understanding of and techniques for hardware verification have evolved significantly. Traditionally, hardware verification relied on simulation, where system behavior is tested against expected outcomes.~\cite{hardware_MC} While effective for small designs, simulation cannot guarantee full coverage and often fails to expose corner cases in complex circuits.
 
-To overcome these limitations, \textbf{formal verification} uses mathematical and logical techniques to prove or disprove the correctness of hardware designs. 
+To overcome these limitations, \emph{formal verification} uses mathematical and logical techniques to prove or disprove the correctness of hardware designs. 
 The main approaches are \emph{theorem proving}~\cite{theorem_proving1,theorem_proving2}, \emph{equivalence checking}~\cite{equivalence}, and \emph{model checking}~\cite{modelChecking,modelChecking2}. I will focus on model checking, which is widely adopted for sequential hardware. Model checking automatically determines whether a design satisfies its formal specification or produces a counterexample. 
 Typically, the design is represented by a formal model (e.g., a transition system), and invariant verification ensures that the given properties hold in all reachable states.
 

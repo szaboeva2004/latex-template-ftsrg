@@ -6,7 +6,8 @@ In~\autoref{sec:motivation}, I discuss the motivation behind this work. Next, ~\
 
 \paragraph{Btor2C.} As discussed in previous chapters, numerous approaches have been proposed to verify hardware circuits using software analyzers. One notable example is \textit{Btor2C}~\cite{btor2c}, a tool originally conceived as a universal translator to convert hardware descriptions into C programs compatible with any standard software verifier. To achieve this universality while preserving precise hardware semantics, the generated C code often relies on abstract representations and indirections, particularly when modeling bitvector operations. This translation bridges the gap between hardware and software verification by enabling the use of existing C verification tools. In contrast, my work focuses on implementing a dedicated hardware frontend directly within an existing software model checker, eliminating the need for translation into C and its associated overhead.
 
-\paragraph{Problem statement.} Using C as an intermediate representation between \textsc{Btor2} and a formal model (in this case, a Control Flow Automaton, CFA) can introduce semantic discrepancies and reduce verification efficiency. This additional transformation layer may obscure the original hardware semantics and complicate the verification process. Furthermore there is no unified tool in which both the direct and indirect transformation approaches can be compared fairly.
+\paragraph{Problem Statement.} Using C as an intermediate representation between \textsc{Btor2} and a formal model (in this case, a Control Flow Automaton, CFA) can introduce semantic discrepancies and reduce verification efficiency. This additional transformation layer may obscure the original hardware semantics and complicate the verification process. So far there was no unified tool in which both the direct and indirect transformation approaches can be compared fairly.
+
 \autoref{fig:indirect} illustrates the difference between the two workflows. The indirect approach involves first translating the \textsc{Btor2} circuit into C code using \textsc{Btor2C}, followed by converting the C code into a CFA representation for verification. In contrast, the direct approach implemented in this work transforms the \textsc{Btor2} circuit directly into a CFA, bypassing the intermediate C representation entirely.
 
 \begin{figure}
@@ -18,10 +19,10 @@ In~\autoref{sec:motivation}, I discuss the motivation behind this work. Next, ~\
 
 \paragraph{Proposed solution.} By implementing a \textsc{Btor2} frontend in \textsc{Theta}, a modular and extensible model checking framework, I aim to:
 \begin{enumerate}
-    \item Eliminate the intermediate C translation step
-    \item Preserve native \textsc{Btor2} semantics through direct mapping to SMT solver types
-    \item Enable \textsc{Btor2}-specific optimizations directly on the CFA representation
-    \item Provide a unified framework for both hardware and software verification
+    \item Eliminate the intermediate C translation step,
+    \item preserve native \textsc{Btor2} semantics through direct mapping to SMT solver types,
+    \item enable \textsc{Btor2}-specific optimizations directly on the CFA representation,
+    \item provide a unified framework for both hardware and software verification
 \end{enumerate}
 
 \section{Design and Implementation of the BTOR2 Frontend in Theta}\label{sec:implementation}

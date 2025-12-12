@@ -25,9 +25,9 @@ possible input combinations, making exhaustive exploration computationally infea
 
 \section{Control-Flow Automata}\label{sec:cfa}
 
-Many programming languages tend to have ambiguities and complex structures that may help the developers express themselves more concisely, but are hard to handle in low-level algorithms. For this purpose input programs must be transformed into a simplified formal representation that accurately captures their behaviour. Common high-level forms of these models include transition systems, which describe states and their possible transitions, and automata, which represent system behavior through states and input-driven transitions.
+Many programming languages tend to have ambiguities and complex structures that may help the developers express themselves more concisely, but are hard to handle in low-level algorithms. For this purpose, input programs must be transformed into an unambiguous formal representation that accurately captures their behaviour. Common forms of these formal models include transition systems, which describe states and their possible transitions, and automata, which represent system behavior through states and input-driven transitions.
 
-To perform this transformation, software model checking toolchains typically employ specialized frontends that translate the source code into these formal models, so the so called "backend" can analyze it and apply mathematical and algorithmic reasoning to system properties in a precise and efficient way.
+To perform this transformation, software model checking toolchains typically employ specialized frontends that translate the source code into these formal models, so the so called ``backend'' can analyze it and apply mathematical and algorithmic reasoning to system properties in a precise and efficient way.
 
 A widely used formalism is the \textbf{Control-Flow Automata (CFA)}~\cite{cfa}, which is formally defined as:
 
@@ -39,7 +39,7 @@ A control-flow automaton is a tuple
 where
 \begin{itemize}
   \item $V = \{v_1, v_2, \ldots, v_n\}$ is a set of variables with domains $D_{v_1}, D_{v_2}, \ldots, D_{v_n}$,
-  \item $L$ is a set of program \textit{locations} modeling the program counter,
+  \item $L$ is a set of program \textit{locations}, usually modeling the program counter,
   \item $l_0 \in L$ is the \textit{initial} program location (entry point),
   \item $E \subseteq L \times Ops \times L$ is a set of directed \textit{edges} representing the \textit{operations} that are executed when control flows from the source location to the target. $ Ops $ can either be \textit{assignments} or \textit{assumptions}. Assignments change a single variable -- there is a special case called \textit{havoc}, which is a nondeterministic assignement -- and assumptions check a condition.
 \end{itemize}
@@ -53,13 +53,13 @@ where
 
 Figure~\ref{fig:cfa} illustrates a simple control-flow automaton (CFA). The blue location $l_0$ denotes the \textit{initial state} of the program. It is important to distinguish between \textit{states} and \textit{locations} in the context of CFAs. In this example, there are two variables, $a$ and $b$, each assigned a value. Together, these values define a \textit{concrete data state}. If the variables instead represented sets of possible values determined by the program's constraints, they would form \textit{abstract states}.
 
-The red location represents the \textit{error location}, which corresponds to an unsafe program state. A \textit{counterexample} demonstrates a feasible path from an initial state to such an unsafe state, whereas a proof of safety ensures that no unsafe state is ever reachable. Although reachability queries can, in principle, treat any state as unsafe, it is common to restrict these to specific \textit{unsafe locations}, since program specifications are often expressed as assertions in the code.
+The red location represents the \textit{error location}, which corresponds to a unsafe program states. A \textit{counterexample} demonstrates a feasible path from an initial state to such an unsafe state, whereas a proof of safety ensures that no unsafe state is ever reachable. Although reachability queries can, in principle, treat any state as unsafe, it is common to restrict these to specific \textit{unsafe locations}, since program specifications are often expressed as assertions in the code.
 
 An execution of the program corresponds to a \textit{concrete trace}: a sequence of concrete states and transitions within the CFA's state space. These traces can be projected onto the graph defined by the CFA's locations and edges to form directed paths, which correspond to specific executions of the program. A trace that leads to an error location represents a counterexample, demonstrating how the property violation can occur.
 
 \section{The Hardware Model Checking Format BTOR2}\label{sec:btor2}
 
-Hardware model checking is a verification technique used to ensure that digital hardware designs behave correctly according to their specifications. It has been a long-established and highly successful application domain within formal methods, with early breakthroughs such as bounded model checking (BMC) \cite{boundedMC} demonstrating the practicality of applying SAT- and SMT-based reasoning to hardware verification problems.
+Hardware model checking is a verification technique used to ensure that digital hardware designs behave correctly according to their specifications. It has been a long-established and highly successful application domain within formal methods, with early breakthroughs, such as bounded model checking (BMC)~\cite{boundedMC}, demonstrating the practicality of applying SAT- and SMT-based reasoning to hardware verification problems.
 
 In this domain, the goal is to check whether a hardware model -- typically represented as a sequential circuit -- satisfies certain logical properties. A sequential circuit is a digital system composed of combinational logic (which determines outputs based solely on current inputs) and memory elements such as flip-flops or registers (which store the system's state across clock cycles). Verification then involves exploring the circuit's possible state transitions over time to ensure that unsafe or undesired (\verb|bad|) states are never reachable. In the context of model-checking that is called \textit{reachability safety}.
 
@@ -73,7 +73,7 @@ The \textsc{Btor2} language identifies 2 entities called \textit{sort} and \text
 
 A \emph{sort} can be one of two types: a bit-vector of arbitrary width~$w$, denoted by~$\mathcal{B}^w$, or an array type. An array type is expressed as~$\mathcal{A}^{I \to E}$, where~$I$ and~$E$ are bit-vector types representing the index and element sorts, respectively.
 
-A \emph{node} may correspond to an \emph{input}, a \emph{state}, or the \emph{result} of applying an operator to other nodes. Inputs represent external signals provided to the \textsc{Btor2} circuit, while states correspond to the circuit's memory elements. Typically, inputs have bit-vector types, whereas states may be either bit-vector or array types. In this report I will only focus on the bit-vector cases.
+A \emph{node} may correspond to an \emph{input}, a \emph{state}, or the \emph{result} of applying an operator to other nodes. Inputs represent external signals provided to the \textsc{Btor2} circuit, while states correspond to the circuit's memory elements. Typically, inputs have bit-vector types, whereas states may be either bit-vector or array types. In this report, I will focus only on the bit-vector cases.
 
 Operators serve as the fundamental building blocks of a \textsc{Btor2} circuit. Each operator takes arguments of specific types and produces a result of a well-defined type. The general syntax for defining a \textsc{Btor2} operator is:
 
@@ -83,7 +83,7 @@ Operators serve as the fundamental building blocks of a \textsc{Btor2} circuit. 
 
 This notation specifies that the node identified by \verb|nid| stores the result of applying the operator~\verb|op| to one, two, or three operands. The resulting node has type~\verb|sid| and can be referenced by its identifier.
 
-{BTOR} also includes constructs such as \texttt{init}, \texttt{next}, and \texttt{bad} for describing safety and reachability properties of sequential circuits. The \texttt{init} keyword defines initial states, while \texttt{bad} identifies unsafe or error states. The \texttt{next} construct specifies state transitions between consecutive time steps.
+{BTOR2} also includes constructs such as \texttt{init}, \texttt{next}, and \texttt{bad} for describing safety and reachability properties of sequential circuits. The \texttt{init} keyword defines initial states, while \texttt{bad} identifies unsafe or error states. The \texttt{next} construct specifies state transitions between consecutive time steps.
 
 \subsubsection{Count2 Example}
 
@@ -128,9 +128,9 @@ In \autoref{list:btor2} is a \textsc{Btor2} circuit that defines a simple finite
 The example circuit in~\autoref{list:btor2} has the following elements:
 
 \begin{description}
-  \item[Sorts (Types).] At the beginning of the circuit, node 1 declares a bit-vector of width 3 \verb|sort bitvec 3|, which serves as the type for all 3-bit values used throughout the circuit. This will have a sort id or \verb|sid| of '1' which will be used to declare registers and operations.
+  \item[Sorts (Types).] At the beginning of the circuit, node 1 declares a bit-vector of width 3 \verb|sort bitvec 3|, which serves as the type for all 3-bit values used throughout the circuit. This will have a sort id or \verb|sid| of \texttt{1} which will be used to declare registers and operations.
   \item[Constants.] Node 2 defines a constant zero \verb|zero 1|, which produces the bit-vector \verb|000|. Following this, node 3 introduces a state variable of sort 1 (3 bits), representing the main state of the circuit.
-  \item[States.] The initial value of state '3' is specified in node 4, which uses the \verb|init| keyword to bind state 3 to start at constant 2, which is the \verb|000| bit-vector. The next input is defined in node 5 using \verb|one 1|, which denotes the constant \verb|001|.
+  \item[States.] The initial value of state \texttt{3} is specified in node 4, which uses the \verb|init| keyword to bind state 3 to start at constant 2, which is the \verb|000| bit-vector. The next input is defined in node 5 using \verb|one 1|, which denotes the constant \verb|001|.
   \item[Operations.] Node 6 defines an addition operation that adds 1 to the main state, resulting in node 6, the next value of the counter. This operation wraps around on overflow due to the fixed 3-bit width. Line 7 then uses the \verb|next| keyword to specify that in the next state, the counter should take the value of node 6, i.e., the incremented result.
   \item[Safety Properties.] To define a property of interest, node 8 declares another constant: \verb|ones 1|, which represents the maximum value a 3-bit counter can hold, in this case \verb|111|. Node 9 introduces a new sort of width 1, which is used for boolean-like signals such as equality checks.
   \item[Comparison.] Node 10 defines a comparison between the current counter value and the maximum value \verb|111| using the \verb|eq| operator. This operation returns a 1-bit result: true (1) if the counter is at maximum, false (0) otherwise. Finally, node 11 marks this equality result as a bad state, which is a safety property violation. Hence, the circuit asserts that reaching the value 111 is undesirable or erroneous. 
@@ -140,9 +140,9 @@ In summary, this \textsc{Btor2} circuit models a 3-bit counter that increments w
 
 \section{Bridging the Gap: Software Verification Algorithms in Hardware Flows}\label{sec:bridge}
 
-To leverage the advanced capabilities of modern software verification tools, hardware verification often employs an \emph{indirect transformation} strategy. In this workflow, hardware descriptions (such as \textsc{Btor2}) are translated into a software language, typically C, enabling the use of a wide array of software analyzers~\cite{btor2c}. The primary motivation for this approach is that the software verification domain has evolved techniques not always available in hardware solvers. Research has demonstrated that by translating hardware models to software, software model checkers can reveal bugs that elude even state-of-the-art hardware analyzers (such as ABC or AVR) and, in some instances, perform more than an order of magnitude faster.~\cite{hw_verification_using_sw}
+To leverage the advanced capabilities of modern software verification tools, hardware verification often employs an \emph{indirect transformation} strategy. In this workflow, hardware descriptions (such as \textsc{Btor2}) are translated into a software language, typically C, enabling the use of a broad array of software analyzers~\cite{btor2c}. The primary motivation for this approach is that the software verification domain has evolved techniques not always available in hardware solvers. Research has demonstrated that by translating hardware models to software, software model checkers can reveal bugs that elude even state-of-the-art hardware analyzers (such as ABC or AVR) and, in some instances, perform more than an order of magnitude faster.~\cite{hw_verification_using_sw}
 
-\autoref{fig:hw_sw} illustrates the distinction between these verification toolchains. In traditional hardware flows (left), high-level hardware description languages like Verilog -- which can contain ambiguities -- are lowered into precise, bit-level intermediate representations (IRs) such as AIGER or \textsc{Btor2}. These IRs are then fed into specialized hardware analyzers. 
+\autoref{fig:hw_sw} illustrates the distinction between these verification toolchains. In traditional hardware flows (left), design-level hardware description languages like Verilog -- which can contain ambiguities -- are transformed into intermediate representations (IRs) such as AIGER or \textsc{Btor2}, supported by more verification tools. These IRs are then fed into hardware analyzers. 
 
 In contrast, the software-centric approach (right) introduces an additional translation step to C. This creates a dichotomy in verification methodologies:
 \begin{description}
@@ -157,8 +157,6 @@ In contrast, the software-centric approach (right) introduces an additional tran
   \label{fig:hw_sw}
 \end{figure}
 
-
-
 \section{The Theta Framework and C Verification}\label{sec:theta}
 
-The Theta framework~\cite{theta,cTheta} serves as the foundation for this work, providing a modular, extensible platform for model checking. Theta employs abstraction-refinement-based reachability analysis and supports multiple formalisms through its frontend architecture. The framework's existing C frontend (c2CFA) transforms C programs into a Control-Flow Automaton (CFA), which extends the traditional CFA model with additional constructs such as function calls, thread creation, and synchronization primitives. This richer representation enables the analysis of more complex program behaviors while preserving a unified intermediate form on which different verification algorithms can operate. Theta’s support for CEGAR (Counterexample-Guided Abstraction Refinement)~\cite{cegar} and configurable abstract domains makes it particularly suitable for adapting to various verification domains.
+The Theta framework~\cite{theta,cTheta} serves as the foundation for this work, providing a modular, extensible platform for model checking. Theta employs abstraction-refinement-based reachability analysis and supports multiple formalisms through its frontend architecture. The framework's existing C frontend, to which we will refer as c2CFA in this work, transforms C programs into a Control-Flow Automaton (CFA), which extends the traditional CFA model with additional constructs such as function calls, thread creation, and synchronization primitives. This richer representation enables the analysis of more complex program behaviors while preserving a unified intermediate form on which different verification algorithms can operate. Theta's support for CEGAR (Counterexample-Guided Abstraction Refinement)~\cite{cegar} and configurable abstract domains makes it particularly suitable for adapting to various verification domains.
