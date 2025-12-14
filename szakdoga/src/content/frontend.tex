@@ -1,6 +1,6 @@
 \chapter{BTOR2CFA: Implementation of a Direct BTOR2-to-CFA Translation for Verification}\label{chapter:btor2cfa}
 
-In~\autoref{sec:motivation}, I discuss the motivation behind this work. Next, ~\autoref{sec:implementation} describes in detail the transformation implemented within Theta and presents illustrative examples. Finally, ~\autoref{sec:cFrontend} explains the approach used to compare the direct and indirect transformations.
+In~\autoref{sec:motivation}, I discuss the motivation behind this work. Next, ~\autoref{sec:implementation} describes in detail the transformation implemented within Theta and presents illustrative examples. Finally, ~\autoref{sec:comparison_direct_indirect} explains the approach used to compare the direct and indirect transformations.
 
 \section{Motivation}\label{sec:motivation}
 
@@ -12,7 +12,7 @@ In~\autoref{sec:motivation}, I discuss the motivation behind this work. Next, ~\
 
 \begin{figure}
   \centering
-  \includegraphics[width=1\textwidth]{figures/my_contribution.drawio.pdf}
+  \includegraphics[width=1\textwidth]{figures/my_contribution.drawio.png}
   \caption{Workflow of direct and indirect transformation in software verification.}
   \label{fig:indirect}
 \end{figure}
@@ -70,22 +70,103 @@ The transformation process maps:
 
 The resulting CFA naturally captures the cyclic behavior of the hardware circuit as a graph loop, enabling efficient reachability analysis using Theta's verification algorithms.
 
-\section{Comparison between direct and indirect transformation}\label{sec:cFrontend}
+\section{Comparison between Direct and Indirect Transformations}\label{sec:comparison_direct_indirect}
 
-Implementing both the direct and indirect transformation approaches within the same verification framework provides a solid foundation for a fair and consistent evaluation of their efficiency. By integrating both workflows into a single tool, differences in performance or accuracy can be attributed primarily to the transformation methodology itself, rather than to unrelated implementation factors.
+This section contrasts the direct \textsc{Btor2}-to-CFA transformation developed in this thesis against the traditional indirect workflow (via C). Implementing both approaches within the same verification framework (\textsc{Theta}) provides a solid foundation for a fair and consistent evaluation. By integrating both workflows into a single tool, differences in performance or accuracy can be attributed primarily to the transformation methodology itself, rather than to unrelated factors such as solver configurations or tool-specific heuristics.
 
-This unified setup ensures that both transformations share the same underlying model checking infrastructure, solver configurations, and optimization mechanisms. As a result, any observed variation in verification time, memory consumption, or precision directly reflects the impact of the transformation strategy, rather than tool-specific behavior.
+\subsection{Conceptual Differences}
 
-In contrast, comparing two separate tools -- each with distinct architectures, heuristics, and optimization strategies -- introduces uncontrolled variables that may obscure the true effect of the transformation approach. Therefore, having both the direct and indirect transformations within the same environment enables a more reliable, controlled, and meaningful comparison of their respective trade-offs in verification performance and semantic fidelity.
+The fundamental distinction between the two approaches lies in their semantic fidelity to the original hardware description.
 
-During the implementation phase, I leveraged the foundational concepts already established within the \textsc{Theta} framework, specifically those that align with standard SMT-LIB semantics. By utilizing \textsc{Theta}'s existing type system and expression hierarchy, I ensured that the transformation adheres to rigorous formal verification standards while maintaining compatibility with downstream SMT solvers. Furthermore, this project provided valuable experience in contributing to a mature, robust software ecosystem. working within such an extensive framework required navigating complex architectural dependencies and adhering to established design patterns, thereby significantly enhancing my proficiency in modular software development.
+\paragraph{Direct Transformation (BTOR2CFA)}
+The direct transformation approach establishes a one-to-one mapping from hardware circuits to formal verification models. Its primary goal is to preserve the native semantics of the hardware description without introducing unnecessary abstractions. By eliminating intermediate translation steps, this method maintains the structural integrity of the original circuit design and enables the exploitation of hardware-specific patterns -- such as bit-level logic and synchronous state updates -- that might otherwise be obscured.
 
-% My work introduces a direct transformation methodology from \textsc{BTOR2} to Control-Flow Automata (CFA), as opposed to conventional indirect transformation workflows. This distinction has significant implications for both semantic fidelity and verification efficiency.
+\paragraph{Indirect Transformation (C2CFA)}
+In contrast, indirect transformation approaches introduce additional abstraction layers. Translating hardware into software-oriented representations (like C) often results in conceptual mismatches, such as the disparity between hardware cycles and software loops. These discrepancies accumulate through successive translation steps, introducing artifacts that complicate the verification process.
 
-% The direct transformation approach establishes a one-to-one mapping from hardware circuits to formal verification models, aiming to preserve the native semantics of the hardware description more faithfully. By eliminating intermediate translation steps, this method maintains the structural integrity of the original circuit design and enables the exploitation of hardware-specific patterns that might otherwise be lost in translation-based workflows.
+To concretely illustrate these artifacts, \autoref{fig:btor2c_code} presents a snippet of C code generated by \textsc{Btor2C} for a simple counter circuit. Even for this trivial example, the translation introduces explicit type definitions, bit-masks (e.g., \texttt{mask\_SORT\_1}), and numerous auxiliary variables (e.g., \texttt{var\_10\_arg\_0}) to emulate bit-vector semantics. This visually demonstrates how the indirect approach inflates structural complexity compared to the concise original hardware description.
 
-% In contrast, indirect transformation approaches introduce additional abstraction layers that can obscure the original hardware semantics. Translating hardware into software-oriented representations may result in conceptual mismatches -- such as between hardware cycles and software loops, arbitrary-width bit-vectors and fixed-width data types, or synchronous hardware timing and sequential software execution. These discrepancies may accumulate through successive translation steps, introducing artifacts that complicate the verification process.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/btor2c_prog.png}
+    \caption{\texttt{count2.btor2} example translated to C by \textsc{Btor2C} (simplified version), illustrating the introduction of auxiliary masks and variables.}
+    \label{fig:btor2c_code}
+\end{figure}
 
-% The choice of transformation pathway can also influence the resulting model's complexity and performance. A direct transformation tends to yield more compact and semantically accurate representations, closely reflecting the inherent structure of the hardware. In comparison, indirect approaches may produce more verbose models that require additional control-flow constructs to emulate hardware behavior within software paradigms.
+\autoref{tab:btor2_vs_c_conceptual} summarizes these structural and semantic differences.
 
-% This comparative perspective forms the foundation for evaluating whether direct transformation methodologies can address the inefficiencies and semantic distortions of translation-based workflows, thereby providing deeper insight into how transformation strategies impact the accuracy and efficiency of hardware verification.
+\begin{table}[h!]
+\centering
+\caption{Conceptual comparison of BTOR2 (Simple) and C (Complex) frontends}
+\label{tab:btor2_vs_c_conceptual}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabular}{@{}p{3.5cm}p{5.5cm}p{5.5cm}@{}}
+\toprule
+\textbf{Category} & \textbf{BTOR2CFA (Direct)} & \textbf{C2CFA (Indirect)} \\
+\midrule
+\textbf{Variable dependencies} & 
+Straightforward variable relations mirroring the netlist. & 
+Introduction of numerous auxiliary variables for function calls and scope management. \\ \addlinespace
+
+\textbf{Temporary variables} & 
+Minimal use of temporary variables. & 
+Extensive use of temporary variables for parameter passing and value copying. \\ \addlinespace
+
+\textbf{State handling} & 
+State is updated directly via next-state logic. & 
+State is modified indirectly through function calls, pointers, and parameters. \\ \addlinespace
+
+\textbf{Bit-level operations} & 
+Bit-widths are handled natively and automatically. & 
+Bit-widths must be enforced manually using explicit masking operations. \\ \addlinespace
+
+\textbf{Control Structure} & 
+Encapsulated in a single, simple procedure. & 
+Fragmented across several procedures, incurring call overhead. \\ \addlinespace
+
+\textbf{Instrumentation} & 
+Minimal additional logic required. & 
+Complex logic introduced to enforce C semantics and assertion checks. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Implementation Considerations and Optimization Trade-offs}
+
+The choice of transformation pathway significantly influences the resulting model's complexity and the subsequent performance of the model checker.
+
+\subsection{Theta's C Frontend: A Mature but Complex Infrastructure}
+
+\textsc{Theta}'s existing C frontend is a highly optimized and robust component, refined over years to handle the complexities of software verification with high efficiency. It excels at processing standard C programs, accurately modeling memory safety, pointer arithmetic, and control flow.
+
+However, when applied to hardware verification via the Btor2C workflow, its performance is impacted not by its own design, but by the nature of the input it receives:
+\begin{itemize}
+    \item \textbf{Inherited Structural Complexity:} The structural overhead observed in the C workflow is primarily an artifact of the \textsc{Btor2C} translation tool, not the frontend itself. To simulate hardware parallelism and bit-vector semantics within the sequential C language, \textsc{Btor2C} must generate explicit bit-masks, temporary variables, and auxiliary assignments. The C frontend faithfully models this verbose input, resulting in a bloated CFA that accurately reflects the C code but obscures the original, concise hardware logic.
+    \item \textbf{Semantic Mismatch:} The C frontend is designed to analyze software idioms. When hardware logic is emulated using C constructs (e.g., modeling cyclic state updates via function calls or loops), the frontend processes them as standard software control flow. This emulation acts as an optimization barrier, as the underlying solver must reason about the complex emulation logic rather than the simple bit-vector transitions of the original circuit.
+\end{itemize}
+
+\subsection{BTOR2 Frontend: Minimalist and Domain-Specific}
+
+In contrast, the \textsc{Btor2} frontend was implemented to leverage the foundational concepts of the \textsc{Theta} framework while adhering strictly to standard SMT-LIB semantics. By utilizing \textsc{Theta}'s existing type system and expression hierarchy, the direct transformation ensures rigorous formal verification standards and compatibility with downstream SMT solvers.
+
+Key design advantages include:
+\begin{itemize}
+    \item \textbf{Direct Mapping:} Bit-vector types map directly to SMT solver types, preserving precise semantics without intermediate representation.
+    \item \textbf{Graph-Based Loops:} Cyclic behavior is naturally expressed as CFA loops, avoiding the need for the explicit unrolling or simulation constructs often found in C translations.
+    \item \textbf{Targeted Optimizations:} Domain-specific optimizations, such as Large-Block Encoding and variable elimination, can be applied directly to the CFA. This reduces redundancy and improves solver performance by presenting a cleaner state space.
+\end{itemize}
+
+\section{Limitations of the Current Implementation}
+
+While the direct transformation offers significant advantages, the current implementation has specific limitations regarding applicability and feature support:
+
+\begin{itemize}
+    \item \textbf{Incomplete Language Support:} The frontend currently limits the scope of verifiable circuits due to two primary gaps in the \textsc{Btor2} specification coverage:
+    \begin{itemize}
+        \item \textit{Missing Operators:} Specific arithmetic and bit-manipulation operators, such as overflow predicates (e.g., \texttt{saddo}, \texttt{uaddo}) and reduction operations (e.g., \texttt{redand}, \texttt{redor}), are not yet implemented.
+        \item \textit{Lack of Array Support:} The tool currently provides no support for the \textsc{Btor2} array sort or associated array operations (e.g., \texttt{read}, \texttt{write}), preventing the verification of designs that rely on memory modeling.
+    \end{itemize}
+    \item \textbf{No Witness Generation:} The tool does not yet generate counterexamples or witness files. This hinders integration into formal verification competitions (like SV-COMP) and industrial workflows that require actionable feedback for debugging.
+    \item \textbf{Limited Property Scope:} Verification is currently restricted to safety properties (\texttt{bad} states). Liveness properties (e.g., \texttt{justice}, \texttt{fairness}) and other temporal specifications remain unsupported.
+\end{itemize}

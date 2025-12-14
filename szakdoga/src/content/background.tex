@@ -13,15 +13,15 @@ The challenge of verifying programs without executing or deploying them has been
 
 Among formal verification techniques, \textit{model checking}~\cite{modelChecking, modelChecking2} has become one of the most widely used and practically applicable methods. Given a software or hardware system, model checking systematically and exhaustively explores all possible executions for every possible input to determine whether specified properties hold. Unlike testing or simulation, which inspects only a limited subset of behaviors, model checking offers \textbf{exhaustive verification} -- meaning if a property is satisfied, it holds for all possible executions of the model; if it is violated, the model checker produces a \textbf{counterexample} that reflects an actual execution leading to an error state.
 
-Model checking provides an automated means of verifying concurrent, finite-state systems by performing an efficient symbolic or explicit traversal of the system's \textbf{state space}. Each state represents a possible configuration of the system's variables, and transitions between states correspond to execution steps. The model checker evaluates whether temporal logic properties, such as safety and liveness constraints, hold over this state graph.~\cite{hardware_MC}
+Model checking provides an automated framework for verifying systems, including concurrent and finite-state models, by performing an efficient symbolic or explicit traversal of the system's \textbf{state space}. Each state represents a unique configuration of the system's variables, while transitions correspond to execution steps. The model checker systematically determines whether safety and liveness constraints hold within this state graph~\cite{hardware_MC}.
 
-Typical properties include detecting \textit{assertion violations}, \textit{out-of-bounds indexing}, and \textit{arithmetic overflows}. In this work, the focus is primarily on the \textbf{reachability property}, which concerns determining whether a given “bad” or error state is reachable from the initial configuration of the system. Demonstrating that no such state can be reached constitutes a proof of safety for the given model.
+Typical properties include detecting \textit{assertion violations}, \textit{out-of-bounds indexing}, and \textit{arithmetic overflows}. In this work, the focus is primarily on the \textbf{reachability property}, which concerns determining whether a given ``bad'' or error state is reachable from the initial configuration of the system. Demonstrating that no such state can be reached constitutes a proof of safety for the given model.
 
 While model checking is powerful, it suffers from the well-known \textbf{state-space explosion problem}~\cite{statespaceexplosionproblem}. The number of possible states grows exponentially with the number of variables in the system. For example, a program with three 32-bit input variables already has
 \[
 2^{32} \cdot 2^{32} \cdot 2^{32} = 2^{96}
 \]
-possible input combinations, making exhaustive exploration computationally infeasible for large-scale systems. This challenge has motivated extensive research into more scalable techniques, such as symbolic model checking~\cite{symbolicMC}, abstraction and refinement methods\cite{boundedMC}, and SAT-based~\cite{SMT-LIB} approaches.
+possible input combinations, making exhaustive exploration computationally infeasible for large-scale systems. This challenge has motivated extensive research into more scalable techniques, such as symbolic model checking~\cite{symbolicMC}, abstraction and refinement methods~\cite{boundedMC}, and SAT-based~\cite{SMT-LIB} approaches.
 
 \section{Control-Flow Automata}\label{sec:cfa}
 
@@ -152,11 +152,14 @@ In contrast, the software-centric approach (right) introduces an additional tran
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.75\textwidth]{figures/hw_sw_analyzers.drawio.pdf}
+  \includegraphics[width=1\textwidth]{figures/btortrafok.drawio.png}
   \caption{Comparison of hardware and software model checking toolchains, distinguishing between direct hardware analysis and indirect translation to C.}
   \label{fig:hw_sw}
 \end{figure}
 
+The ecosystem surrounding these transformations relies on several specialized tools shown in \autoref{fig:hw_sw}. \textbf{Yosys}~\cite{yosys} serves as a fundamental open-source framework for hardware synthesis, often responsible for generating the initial intermediate representations. Tools such as \textbf{v2c}~\cite{v2c} and \textbf{Btor2Aiger}~\cite{btor2} facilitate the translation between various hardware formats (like Verilog and AIGER). Most critical to the software-centric workflow described in this thesis is \textbf{Btor2C}~\cite{btor2c}, which translates \textsc{Btor2} circuits into sequential C programs, thereby unlocking the potential of software model checking for hardware verification.
+
+
 \section{The Theta Framework and C Verification}\label{sec:theta}
 
-The Theta framework~\cite{theta,cTheta} serves as the foundation for this work, providing a modular, extensible platform for model checking. Theta employs abstraction-refinement-based reachability analysis and supports multiple formalisms through its frontend architecture. The framework's existing C frontend, to which we will refer as c2CFA in this work, transforms C programs into a Control-Flow Automaton (CFA), which extends the traditional CFA model with additional constructs such as function calls, thread creation, and synchronization primitives. This richer representation enables the analysis of more complex program behaviors while preserving a unified intermediate form on which different verification algorithms can operate. Theta's support for CEGAR (Counterexample-Guided Abstraction Refinement)~\cite{cegar} and configurable abstract domains makes it particularly suitable for adapting to various verification domains.
+The Theta framework~\cite{theta,cTheta} serves as the foundation for this work, providing a modular, extensible platform for model checking. Theta employs abstraction-refinement-based reachability analysis and supports multiple formalisms through its frontend architecture. The framework's existing C frontend, to which we will refer as C2CFA in this work, transforms C programs into a Control-Flow Automaton (CFA), which extends the traditional CFA model with additional constructs such as function calls, thread creation, and synchronization primitives. This richer representation enables the analysis of more complex program behaviors while preserving a unified intermediate form on which different verification algorithms can operate. Theta's support for CEGAR (Counterexample-Guided Abstraction Refinement)~\cite{cegar} and configurable abstract domains makes it particularly suitable for adapting to various verification domains.
