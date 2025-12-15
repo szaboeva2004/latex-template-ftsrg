@@ -136,7 +136,7 @@ This section evaluates which model checking algorithms perform best for hardware
 
 The quantile plots presented in~\autoref{fig:performance_btor2_c} provide a comprehensive overview of the performance differences between the two transformation workflows. In these plots, the x-axis represents the cumulative number of solved instances, while the y-axis (logarithmic scale) indicates the resource consumption (CPU time and memory) required to solve the $n$-th instance.
 
-\begin{figure}[h!]
+\begin{figure}
   \centering
   \includegraphics[width=1\textwidth]{figures/comparison_fig_quantile_c_btor2.png}
   \caption{Quantile plots comparing the CPU time (left) and memory usage (right) of different model checking algorithms. The plots display the cumulative number of solved instances (x-axis) against the resources consumed (logarithmic y-axis) for both BTOR2 and C benchmark sets. Algorithms include CEGAR (Predictive and Explicit), BMC, IMC, and $k$-Induction.}
@@ -162,7 +162,7 @@ Comparing~\autoref{tab:btor2_input_summary} and~\autoref{tab:c_input_summary} re
 \paragraph{The Explicit Value Anomaly}
 The \texttt{CEGAR\_EXPL} (Explicit Value Analysis) configuration presents a notable statistical anomaly. As shown in both tables, it reports the lowest average CPU times (e.g., 19.92 s for \textsc{Btor2}) and memory footprints. However, this should not be interpreted as efficiency. With the lowest success rates in the suite (3.58\% for \textsc{Btor2} and a negligible 1.01\% for C), these low resource metrics indicate that the algorithm fails rapidly on non-trivial instances, managing to solve only the simplest benchmarks before quickly exhausting its search capabilities or timing out.
 
-\begin{table}[ht]
+\begin{table}
 \centering
 \small
 \caption{Summary of CPU time, memory usage, and success rate for algorithms using \textsc{Btor2} as input.}
@@ -185,7 +185,7 @@ $k$-Induction & 178.39 & 56.57 & 256.25 & 777.55  & 673.83 &  502.48    & 8.74 \
 \end{tabular}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}
 \centering
 \small
 \caption{Summary of CPU time, memory usage, and success rate for algorithms using C as input.}
@@ -212,7 +212,7 @@ $k$-Induction & 187.27 & 49.03 & 268.60 & 2506.06 & 2686.79 & 2145.25     & 2.59
 
 Finally, I analyzed the internal behavior of the verification algorithms by examining the relationship between the number of refinement iterations (loops in the algorithm) and the total resource consumption.~\autoref{fig:iter_ouput} illustrates the scatter plots for iterations versus CPU time and memory, as well as the distribution of iterations based on the verification result.
 
-\begin{figure}[h!]
+\begin{figure}
   \centering
   \includegraphics[width=1\textwidth]{figures/iterations_vs_output.png}
   \caption{Analysis of the relationship between solver iterations and resource consumption. The scatter plots (top and bottom-left) display CPU time and memory usage against iteration counts, with a linear regression line (dashed red) indicating the trend. Data points are distinguished by verification result (False/pink vs. True/gold). The bottom-right panel shows the distribution of iterations required for Safe (True) versus Unsafe (False) outcomes.}
@@ -231,7 +231,7 @@ Furthermore in~\autoref{fig:iter_ouput} the box plot analysis (bottom right) rev
 
 \paragraph{Transformation Impact} Based on my research, the choice of workflow is a decisive factor in verification performance. The C2CFA input induces a severe performance penalty across all tested algorithms.
 \begin{description}
-    \item [Resource Exhaustion.] The ``brick wall'' effect observed in the quantile plots indicates that C-generated models cause rapid resource exhaustion. For \texttt{CEGAR\_PRED}, switching to C input quadrupled the median memory usage (from $\approx 860$ MB to $\approx 2990$ MB).
+    \item [Resource Exhaustion.] The ``brick wall'' effect observed in the quantile plots (\autoref{fig:performance_btor2_c}) indicates that C-generated models cause rapid resource exhaustion. For \texttt{CEGAR\_PRED}, switching to C input quadrupled the median memory usage (from $\approx 860$ MB to $\approx 2990$ MB).
     \item [Algorithmic degradation.] Explicit Value Analysis (\texttt{CEGAR\_EXPL}), which struggles generally with hardware logic, fails almost entirely when processing C inputs (1.01\% success rate), confirming that the added structural complexity exacerbates the weaknesses of less robust algorithms.
 \end{description}
 
@@ -249,7 +249,7 @@ The correlation matrices for the \textsc{Btor2} input (\autoref{fig:corr_btor2})
 For instance, in the \texttt{CEGAR\_PRED} configuration, the correlation between \texttt{Variable Count} and \texttt{CPU Time} is only $0.27$. Even more notably, for Bounded Model Checking (BMC), this correlation drops to $-0.13$.
 This suggests that for the direct transformation, the verification complexity is driven primarily by the logical depth and semantic properties of the circuit, rather than the raw size of the state space representation. The solver is effectively able to abstract away the structural components.
 
-\begin{figure}[h!]
+\begin{figure}
   \centering
   \includegraphics[width=1\textwidth]{figures/correlation_btor2_algos.png}
   \caption{Feature correlation heatmaps for BTOR2 inputs. The subplots compare the internal dependencies of problem variables and their correlation with runtime and memory usage for BMC, CEGAR (Explicit/Predictive), IMC, and $k$-Induction configurations.}
@@ -261,7 +261,7 @@ In stark contrast, the correlation matrices for the C input (\autoref{fig:corr_c
 For the BMC algorithm, the correlation between \texttt{Variable Count} and \texttt{CPU Time} rises to $0.82$. Similarly, \texttt{CEGAR\_EXPL} shows a correlation of $0.82$ for the same metric.
 This indicates a strong coupling between structure and performance: the ``structural expansion'' introduced by the C frontend (discussed in~\autoref{sec:structural}) creates a linear -- and often prohibitive -- performance penalty. Every additional auxiliary variable or split operation introduced during C parsing directly increases the burden on the solver.
 
-\begin{figure}[h!]
+\begin{figure}
   \centering
   \includegraphics[width=1\textwidth]{figures/correlation_c_algos.png}
   \caption{Feature correlation heatmaps for C inputs. The subplots compare the internal dependencies of problem variables and their correlation with runtime and memory usage for BMC, CEGAR (Explicit/Predictive), IMC, and $k$-Induction configurations.}
@@ -337,6 +337,8 @@ The comparative evaluation yielded clear and significant results. The direct \te
 These results demonstrate that eliminating the intermediate C translation step not only preserves hardware semantics more accurately but also enables significant performance gains in both scalability and resource efficiency.
 
 \subsection{Threats to Validity}
+
+This section outlines potential limitations that may influence the interpretation and reliability of the experimental results. These threats are categorized into internal validity, regarding the integrity of the study's design, and external validity, concerning the generalizability of the findings.
 
 \subsubsection{Internal Validity}
 
