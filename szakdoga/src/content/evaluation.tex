@@ -210,7 +210,7 @@ $k$-Induction & 187.27 & 49.03 & 268.60 & 2506.06 & 2686.79 & 2145.25     & 2.59
 
 \subsection{Relationship Between Solver Iterations and Resource Consumption}
 
-Finally, I analyzed the internal behavior of the verification algorithms by examining the relationship between the number of refinement iterations (loops in the algorithm) and the total resource consumption.\autoref{fig:iter_ouput} illustrates the scatter plots for iterations versus CPU time and memory, as well as the distribution of iterations based on the verification result.
+Finally, I analyzed the internal behavior of the verification algorithms by examining the relationship between the number of refinement iterations (loops in the algorithm) and the total resource consumption.~\autoref{fig:iter_ouput} illustrates the scatter plots for iterations versus CPU time and memory, as well as the distribution of iterations based on the verification result.
 
 \begin{figure}[h!]
   \centering
@@ -220,12 +220,12 @@ Finally, I analyzed the internal behavior of the verification algorithms by exam
 \end{figure}
 
 \paragraph{Decoupling of Iterations and Resources}
-While analyzing\autoref{fig:iter_ouput}, a counter-intuitive finding from the scatter plots (top row) is the lack of a strong linear correlation between iteration count and resource usage. The linear regression lines (dashed red) are nearly horizontal for both CPU time and memory. This indicates that the computational cost is not uniformly distributed across iterations. A single, complex refinement step involving a difficult SMT query can consume more resources than dozens of trivial iterations. Consequently, iteration count is a poor predictor of total verification time.
+While analyzing~\autoref{fig:iter_ouput}, a counter-intuitive finding from the scatter plots (top row) is the lack of a strong linear correlation between iteration count and resource usage. The linear regression lines (dashed red) are nearly horizontal for both CPU time and memory. This indicates that the computational cost is not uniformly distributed across iterations. A single, complex refinement step involving a difficult SMT query can consume more resources than dozens of trivial iterations. Consequently, iteration count is a poor predictor of total verification time.
 
 \paragraph{Result-Dependent Complexity}
-Furthermore in\autoref{fig:iter_ouput} the box plot analysis (bottom right) reveals a distinct behavioral difference based on the verification outcome. The distribution for \texttt{False} results (unsafe instances) is noticeably wider and has a higher median than that for \texttt{True} (safe) results. This suggests that finding a feasible counterexample often requires the algorithm to unroll the transition system deeper (more iterations) to reach the error state. Conversely, safety proofs often converge faster, likely because a suitable inductive invariant is discovered earlier in the abstraction-refinement loop.
+Furthermore in~\autoref{fig:iter_ouput} the box plot analysis (bottom right) reveals a distinct behavioral difference based on the verification outcome. The distribution for \texttt{False} results (unsafe instances) is noticeably wider and has a higher median than that for \texttt{True} (safe) results. This suggests that finding a feasible counterexample often requires the algorithm to unroll the transition system deeper (more iterations) to reach the error state. Conversely, safety proofs often converge faster, likely because a suitable inductive invariant is discovered earlier in the abstraction-refinement loop.
 
-\subsection{RQ2: Which model checking algorithms perform best for hardware verification, and how does input type (\textsc{Btor2} vs C) affect performance?}
+\subsection{RQ2: Which model checking algorithms perform best for hardware verification, and how does input type (\textsc{Btor2} vs C) affect performance?}\label{subsection:rq2}
 
 \paragraph{Best Algorithm} Counterexample-Guided Abstraction Refinement with Predicate Abstraction (\texttt{CEGAR\_PRED}) utilizing the direct \textsc{Btor2} input is unequivocally the most effective configuration. It achieved the highest success rate ($16.62\%$) and demonstrated the best scalability, solving approximately 115 instances while maintaining moderate resource consumption.
 
